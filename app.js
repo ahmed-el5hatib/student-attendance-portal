@@ -33,16 +33,16 @@
     localStorage.setItem(BONUS_RESET_KEY, 'done');
   }
 
-  // تحميل جلسات الحضور الأولية (حضور الأسبوع الأول والثاني لسكشن OS S15)
+  // تحميل وتحديث جلسات الحضور للأسبوعين الأول والثاني (OS S15 ومجموعات Data Communication)
   let storedSessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
   const initialSessions = (window.INITIAL_DATA && window.INITIAL_DATA.sessions) ? window.INITIAL_DATA.sessions : {};
-  const OS_PRESET_KEY = 'ATTENDANCE_OS_PRESET_V2';
-  if (localStorage.getItem(OS_PRESET_KEY) !== 'done' || !storedSessions['operating_systems_S15_w1']) {
+  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_PRESET_V1';
+  if (localStorage.getItem(FULL_PRESET_KEY) !== 'done') {
     Object.keys(initialSessions).forEach(key => {
       storedSessions[key] = initialSessions[key];
     });
     localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
-    localStorage.setItem(OS_PRESET_KEY, 'done');
+    localStorage.setItem(FULL_PRESET_KEY, 'done');
   }
 
   let state = {

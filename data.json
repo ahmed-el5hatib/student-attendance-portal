@@ -3472,6 +3472,3940 @@
         }
       },
       "updatedAt": "2026-10-08T10:00:00.000Z"
+    },
+    "data_communication_GA_w1": {
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "1",
+      "date": "2026-09-23",
+      "records": {
+        "25010242": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010243": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010244": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010247": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010249": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010250": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010253": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010254": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010259": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010261": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010264": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010269": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010234": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010236": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010237": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010238": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010239": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010272": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010273": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010275": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010282": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010283": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010286": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010288": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010290": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010291": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010292": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010293": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010294": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010295": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010296": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010300": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010301": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010302": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010303": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010304": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010307": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010309": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010310": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010313": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010321": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010322": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010327": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010328": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010329": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010332": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010336": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010345": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010348": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010350": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010353": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010359": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010362": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010364": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010366": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010367": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010370": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010371": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010373": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010374": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010377": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010378": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010381": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010385": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010386": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010387": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010388": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010391": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010393": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010394": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010399": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010400": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010401": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010402": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010403": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010409": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010410": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010411": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010412": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010416": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010420": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010422": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010427": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010428": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010434": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010437": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010439": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010442": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010443": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010451": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010452": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010453": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010457": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010462": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010467": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010471": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010473": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010476": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010480": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010483": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010484": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010487": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010489": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010492": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010498": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010499": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010502": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010504": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010510": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010515": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010516": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010526": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010528": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010531": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010535": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010537": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010003": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010009": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010014": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010021": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010023": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010031": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010032": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010033": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010034": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010035": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010002": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010045": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010049": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010051": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010052": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010053": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010054": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010058": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010060": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010063": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010067": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010078": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010079": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010097": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010103": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010106": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010112": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010121": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010124": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010129": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010137": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010138": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010147": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010152": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010156": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010170": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010178": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010179": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010481": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010190": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010191": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010192": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010195": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010196": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010198": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010217": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010223": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010225": {
+          "status": "present",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-09-23T12:00:00.000Z"
+    },
+    "data_communication_GA_w2": {
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "2",
+      "date": "2026-09-30",
+      "records": {
+        "25010242": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010243": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010244": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010247": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010249": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010250": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010253": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010254": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010259": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010261": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010264": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010269": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010234": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010236": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010237": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010238": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010239": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010272": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010273": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010275": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010282": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010283": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010286": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010288": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010290": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010291": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010292": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010293": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010294": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010295": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010296": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010300": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010301": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010302": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010303": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010304": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010307": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010309": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010310": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010313": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010321": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010322": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010327": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010328": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010329": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010332": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010336": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010345": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010348": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010350": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010353": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010359": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010362": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010364": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010366": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010367": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010370": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010371": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010373": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010374": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010377": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010378": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010381": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010385": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010386": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010387": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010388": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010391": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010393": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010394": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010399": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010400": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010401": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010402": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010403": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010409": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010410": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010411": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010412": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010416": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010420": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010422": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010427": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010428": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010434": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010437": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010439": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010442": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010443": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010451": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010452": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010453": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010457": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010462": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010467": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010471": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010473": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010476": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010480": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010483": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010484": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010487": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010489": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010492": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010498": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010499": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010502": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010504": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010510": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010515": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010516": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010526": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010528": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010531": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010535": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010537": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010003": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010009": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010014": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010021": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010023": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010031": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010032": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010033": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010034": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010035": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010002": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010045": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010049": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010051": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010052": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010053": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010054": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010058": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010060": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010063": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010067": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010078": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010079": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010097": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010103": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010106": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010112": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010121": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010124": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010129": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010137": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010138": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010147": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010152": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010156": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010170": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010178": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010179": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010481": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010190": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010191": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010192": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010195": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010196": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010198": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010217": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010223": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010225": {
+          "status": "present",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-09-30T12:00:00.000Z"
+    },
+    "data_communication_GB_w1": {
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "1",
+      "date": "2026-09-23",
+      "records": {
+        "25010246": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010248": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010251": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010263": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010267": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010276": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010281": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010284": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010285": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010308": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010317": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010323": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010325": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010334": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010338": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010339": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010342": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010349": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010351": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010354": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010356": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010357": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010358": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010360": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010363": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010100": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010368": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010541": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010379": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010380": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010383": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010384": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010389": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010395": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010398": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010404": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010405": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010406": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010408": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010414": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010415": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010418": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010421": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010424": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010430": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010431": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010435": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010436": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010440": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010441": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010444": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010445": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010446": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010447": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010448": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010454": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010455": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010459": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010542": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010469": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010479": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010491": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010500": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010501": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010505": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010507": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010508": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010509": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010513": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010514": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010517": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010527": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010530": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010532": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010533": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010534": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010538": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010539": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010540": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010004": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010008": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010010": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010012": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010016": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010018": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010019": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010026": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010029": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010038": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010277": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010043": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010046": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010047": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010055": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010057": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010059": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010061": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010065": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010070": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010080": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010081": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010082": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010084": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010095": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010096": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010107": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010110": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010113": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010114": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010130": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010141": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010144": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010145": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010146": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010148": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010150": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010153": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010155": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010158": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010160": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010161": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010162": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010168": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010172": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010173": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010174": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010177": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010180": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010187": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010188": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010189": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010193": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010199": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010201": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010202": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010218": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010220": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010221": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010222": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010228": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010229": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010233": {
+          "status": "present",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-09-23T12:00:00.000Z"
+    },
+    "data_communication_GB_w2": {
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "2",
+      "date": "2026-09-30",
+      "records": {
+        "25010246": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010248": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010251": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010263": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010267": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010276": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010281": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010284": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010285": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010308": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010317": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010323": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010325": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010334": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010338": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010339": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010342": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010349": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010351": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010354": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010356": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010357": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010358": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010360": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010363": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010100": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010368": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010541": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010379": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010380": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010383": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010384": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010389": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010395": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010398": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010404": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010405": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010406": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010408": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010414": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010415": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010418": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010421": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010424": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010430": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010431": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010435": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010436": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010440": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010441": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010444": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010445": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010446": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010447": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010448": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010454": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010455": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010459": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010542": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010469": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010479": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010491": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010500": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010501": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010505": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010507": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010508": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010509": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010513": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010514": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010517": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010527": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010530": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010532": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010533": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010534": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010538": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010539": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010540": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010004": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010008": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010010": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010012": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010016": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010018": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010019": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010026": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010029": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010038": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010277": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010043": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010046": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010047": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010055": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010057": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010059": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010061": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010065": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010070": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010080": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010081": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010082": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010084": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010095": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010096": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010107": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010110": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010113": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010114": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010130": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010141": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010144": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010145": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010146": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010148": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010150": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010153": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010155": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010158": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010160": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010161": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010162": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010168": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010172": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010173": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010174": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010177": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010180": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010187": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010188": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010189": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010193": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010199": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010201": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010202": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010218": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010220": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010221": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010222": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010228": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010229": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010233": {
+          "status": "present",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-09-30T12:00:00.000Z"
+    },
+    "data_communication_GC_w1": {
+      "courseId": "data_communication",
+      "groupId": "GC",
+      "week": "1",
+      "date": "2026-09-23",
+      "records": {
+        "25010245": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010255": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010256": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010258": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010265": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010266": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010268": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010270": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010271": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010274": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010278": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010279": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010280": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010287": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010289": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010298": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010299": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010305": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010306": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010311": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010312": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010315": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010318": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010319": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010320": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010324": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010326": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010330": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010331": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010335": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010337": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010340": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010341": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010343": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010344": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010346": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010347": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010352": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010355": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010365": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010372": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010376": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010392": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010396": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010397": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010407": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010413": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010417": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010419": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010423": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010426": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010429": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010432": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010433": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010438": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010449": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010450": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010456": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010458": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010460": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010464": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010466": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010468": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010472": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010474": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010478": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010485": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010486": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010488": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010493": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010494": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010495": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010496": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010497": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010503": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010506": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010512": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010518": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010521": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010522": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010523": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010524": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010525": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010529": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010536": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010005": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010006": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010007": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010011": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010013": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010020": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010024": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010025": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010027": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010036": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010001": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010039": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010040": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010042": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010044": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010048": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010056": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010062": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010064": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010066": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010068": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010069": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010071": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010073": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010075": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010076": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010077": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010087": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010091": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010092": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010094": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010101": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010102": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010104": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010109": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010108": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010115": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010116": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010117": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010118": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010119": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010122": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010127": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010128": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010131": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010132": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010133": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010135": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010142": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010154": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010159": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010163": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010164": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010165": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010167": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010169": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010171": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010175": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010182": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010184": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010185": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010482": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010186": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010194": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010197": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010200": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010203": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010204": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010205": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010207": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010209": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010211": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010213": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010216": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010219": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010231": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010232": {
+          "status": "absent",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-09-23T12:00:00.000Z"
+    },
+    "data_communication_GC_w2": {
+      "courseId": "data_communication",
+      "groupId": "GC",
+      "week": "2",
+      "date": "2026-09-30",
+      "records": {
+        "25010245": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010255": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010256": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010258": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010265": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010266": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010268": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010270": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010271": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010274": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010278": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010279": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010280": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010287": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010289": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010298": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010299": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010305": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010306": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010311": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010312": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010315": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010318": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010319": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010320": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010324": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010326": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010330": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010331": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010335": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010337": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010340": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010341": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010343": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010344": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010346": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010347": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010352": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010355": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010365": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010372": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010376": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010392": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010396": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010397": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010407": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010413": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010417": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010419": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010423": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010426": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010429": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010432": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010433": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010438": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010449": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010450": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010456": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010458": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010460": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010464": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010466": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010468": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010472": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010474": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010478": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010485": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010486": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010488": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010493": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010494": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010495": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010496": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010497": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010503": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010506": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010512": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010518": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010521": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010522": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010523": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010524": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010525": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010529": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010536": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010005": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010006": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010007": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010011": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010013": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010020": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010024": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010025": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010027": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010036": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010001": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010039": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010040": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010042": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010044": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010048": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010056": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010062": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010064": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010066": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010068": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010069": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010071": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010073": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010075": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010076": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010077": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010087": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010091": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010092": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010094": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010101": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010102": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010104": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010109": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010108": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010115": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010116": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010117": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010118": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010119": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010122": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010127": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010128": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010131": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010132": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010133": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010135": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010142": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010154": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010159": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010163": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010164": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010165": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010167": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010169": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010171": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010175": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010182": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010184": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010185": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010482": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010186": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010194": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010197": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010200": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010203": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010204": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010205": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010207": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010209": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010211": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010213": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010216": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010219": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010231": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010232": {
+          "status": "absent",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-09-30T12:00:00.000Z"
     }
   }
 }
