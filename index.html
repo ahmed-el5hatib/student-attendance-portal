@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام إدارة الحضور والبونص | م. أحمد الخطيب</title>
+  
+  <!-- Meta tags for PWA and SEO -->
+  <meta name="description" content="منظومة أخذ الغياب ورصد البونص واستخراج التقارير للطلاب - إشراف المهندس أحمد الخطيب">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  
+  <!-- Google Fonts: Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-dark">
+  <!-- Top Navbar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-icon">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-info">
+          <h1 class="brand-title">منظومة الحضور والبونص الذكية</h1>
+          <p class="brand-subtitle">
+            إشراف: <span class="instructor-highlight">م. أحمد الخطيب (Eng. Ahmed El-khatib)</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- View Mode Switcher -->
+        <div class="mode-switcher">
+          <button id="btnStudentView" class="mode-btn active" title="عرض بوابة الطلاب">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>بوابة الطلاب</span>
+          </button>
+          <button id="btnAdminView" class="mode-btn" title="لوحة تحكم المعيد (م. أحمد)">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>لوحة المعيد</span>
+          </button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="btnThemeToggle" class="icon-btn" title="تبديل المظهر (ليلي / نهاري)">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Container -->
+  <main class="main-content">
+    
+    <!-- ============================================== -->
+    <!-- VIEW 1: STUDENT LIVE PORTAL (Public View)       -->
+    <!-- ============================================== -->
+    <section id="studentPortalView" class="view-section active">
+      <div class="hero-banner">
+        <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> بوابة الاستعلام المباشر للطلاب</div>
+        <h2 class="hero-title">تابع نسبة حضورك ودرجات البونص أولاً بأول</h2>
+        <p class="hero-desc">اختر مقررك ومجموعتك الدراسية ثم أدخل كودك الجامعي أو اسمك لمعرفة سجلك الكامل</p>
+      </div>
+
+      <div class="search-box-card">
+        <div class="search-filters-grid">
+          <div class="form-group">
+            <label for="studentCourseSelect"><i class="fa-solid fa-book"></i> المقرر الدراسي:</label>
+            <select id="studentCourseSelect" class="form-control">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="studentGroupSelect"><i class="fa-solid fa-users"></i> المجموعة / السكشن:</label>
+            <select id="studentGroupSelect" class="form-control">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+
+          <div class="form-group span-2">
+            <label for="studentSearchInput"><i class="fa-solid fa-magnifying-glass"></i> ابحث بكود الطالب أو الاسم:</label>
+            <div class="search-input-wrapper">
+              <input type="text" id="studentSearchInput" class="form-control" placeholder="اكتب كودك الجامعي (مثلاً 25010258) أو اسمك..." autocomplete="off">
+              <div id="studentSearchResultsDropdown" class="search-dropdown hidden"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Record Display Card -->
+      <div id="studentRecordCard" class="student-result-container hidden">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+      <!-- Quick Guidance Box for Students -->
+      <div class="student-guidance-card">
+        <div class="guidance-icon"><i class="fa-solid fa-circle-info"></i></div>
+        <div class="guidance-content">
+          <h4>تعليمات وضوابط الحضور:</h4>
+          <ul>
+            <li>الغياب يتطلب تقديم عذر رسمي معتمد في موعد أقصاه أسبوع من تاريخ الغياب.</li>
+            <li>الطلاب الحاصلون على إنذار بالغياب (أكثر من غيابين) معرضون للحرمان وفق لوائح الكلية.</li>
+            <li>تضاف نقاط البونص إلى أعمال السنة للتميز والتفاعل أثناء السكاشن وإنجاز المهام العملية.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- VIEW 2: INSTRUCTOR DASHBOARD (Eng. Ahmed)      -->
+    <!-- ============================================== -->
+    <section id="adminDashboardView" class="view-section">
+      <!-- Admin Sub-Navigation Tabs -->
+      <div class="admin-tabs-nav">
+        <button class="admin-tab-btn active" data-tab="tabAttendance">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <span>أخذ ورصد الغياب</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabBonus">
+          <i class="fa-solid fa-award"></i>
+          <span>سجل البونص</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabReports">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>التقارير وطباعة PDF</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabCumulative">
+          <i class="fa-solid fa-table-cells"></i>
+          <span>الكشف التراكمي للترم</span>
+        </button>
+        <button class="admin-tab-btn" data-tab="tabSettings">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>المزامنة والنسخ الاحتياطي</span>
+        </button>
+      </div>
+
+      <!-- -------------------------------------------- -->
+      <!-- TAB 1: ATTENDANCE TRACKING                   -->
+      <!-- -------------------------------------------- -->
+      <div id="tabAttendance" class="admin-tab-pane active">
+        <!-- Control Bar -->
+        <div class="control-panel-card">
+          <div class="control-grid">
+            <div class="form-group">
+              <label for="adminCourseSelect"><i class="fa-solid fa-book-bookmark"></i> المقرر:</label>
+              <select id="adminCourseSelect" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="adminGroupSelect"><i class="fa-solid fa-users-viewfinder"></i> المجموعة / السكشن:</label>
+              <select id="adminGroupSelect" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="adminWeekSelect"><i class="fa-solid fa-calendar-week"></i> رقم الأسبوع:</label>
+              <select id="adminWeekSelect" class="form-control">
+                <option value="1">الأسبوع 1</option>
+                <option value="2">الأسبوع 2</option>
+                <option value="3">الأسبوع 3</option>
+                <option value="4">الأسبوع 4</option>
+                <option value="5">الأسبوع 5</option>
+                <option value="6">الأسبوع 6</option>
+                <option value="7">الأسبوع 7</option>
+                <option value="8">الأسبوع 8</option>
+                <option value="9">الأسبوع 9</option>
+                <option value="10">الأسبوع 10</option>
+                <option value="11">الأسبوع 11</option>
+                <option value="12">الأسبوع 12</option>
+                <option value="13">الأسبوع 13</option>
+                <option value="14">الأسبوع 14</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="adminSessionDate"><i class="fa-solid fa-calendar-day"></i> تاريخ السكشن:</label>
+              <input type="date" id="adminSessionDate" class="form-control">
+            </div>
+          </div>
+
+          <!-- Quick Actions & Search -->
+          <div class="actions-toolbar">
+            <div class="quick-buttons">
+              <button id="btnMarkAllPresent" class="btn btn-success" title="تحضير جميع طلاب السكشن كحاضرين بنقرة واحدة">
+                <i class="fa-solid fa-check-double"></i> تحضير الكل حاضرين
+              </button>
+              <button id="btnResetCurrentSession" class="btn btn-outline" title="إعادة تعيين الحالة للجميع">
+                <i class="fa-solid fa-rotate-left"></i> تفريغ
+              </button>
+              <button id="btnSaveAttendance" class="btn btn-primary" title="حفظ جلسة الغياب">
+                <i class="fa-solid fa-floppy-disk"></i> حفظ الجلسة
+              </button>
+              <button id="btnSyncCurrentSession" class="btn btn-accent" title="مزامنة فورية مع Google Sheets">
+                <i class="fa-solid fa-cloud-arrow-up"></i> رفع لجوجل شيت
+              </button>
+            </div>
+
+            <div class="search-filter-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="adminStudentFilter" class="form-control search-input" placeholder="تصفية بالاسم أو الكود...">
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Statistics Counter -->
+        <div class="stats-counter-strip">
+          <div class="stat-pill total">
+            <span class="label">إجمالي الطلاب:</span>
+            <span id="statTotalStudents" class="value">0</span>
+          </div>
+          <div class="stat-pill present">
+            <i class="fa-solid fa-circle-check"></i>
+            <span class="label">حاضر:</span>
+            <span id="statPresentCount" class="value">0</span>
+          </div>
+          <div class="stat-pill absent">
+            <i class="fa-solid fa-circle-xmark"></i>
+            <span class="label">غائب:</span>
+            <span id="statAbsentCount" class="value">0</span>
+          </div>
+          <div class="stat-pill late">
+            <i class="fa-solid fa-clock"></i>
+            <span class="label">متأخر:</span>
+            <span id="statLateCount" class="value">0</span>
+          </div>
+          <div class="stat-pill excused">
+            <i class="fa-solid fa-file-medical"></i>
+            <span class="label">بعذر:</span>
+            <span id="statExcusedCount" class="value">0</span>
+          </div>
+          <div class="stat-pill rate">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span class="label">نسبة الحضور:</span>
+            <span id="statAttendancePercent" class="value">0%</span>
+          </div>
+        </div>
+
+        <!-- Students Attendance Table / List -->
+        <div class="students-table-card">
+          <div class="table-responsive">
+            <table class="data-table" id="attendanceTable">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">#</th>
+                  <th style="width: 110px;">كود الطالب</th>
+                  <th>اسم الطالب رباعي</th>
+                  <th style="width: 130px;">البرنامج</th>
+                  <th style="width: 270px; text-align: center;">حالة الحضور</th>
+                  <th style="width: 140px; text-align: center;">البونص</th>
+                  <th style="width: 180px;">ملاحظات</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceTableBody">
+                <!-- Dynamically populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- -------------------------------------------- -->
+      <!-- TAB 2: BONUS HUB                             -->
+      <!-- -------------------------------------------- -->
+      <div id="tabBonus" class="admin-tab-pane">
+        <div class="bonus-dashboard-grid">
+          <!-- Add Bonus Form Card -->
+          <div class="card add-bonus-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-award text-gold"></i> إضافة بونص جديد</h3>
+              <p>منح درجات بونص لطالب معين مع توثيق السبب والأسبوع</p>
+            </div>
+            <div class="card-body">
+              <form id="addBonusForm">
+                <div class="form-group">
+                  <label for="bonusCourseSelect">المقرر والمجموعة:</label>
+                  <select id="bonusCourseGroupSelect" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                  <label for="bonusStudentSelect">اختر الطالب:</label>
+                  <select id="bonusStudentSelect" class="form-control select2-like">
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bonusPointsInput">الدرجات (+):</label>
+                    <div class="quick-points-chips">
+                      <button type="button" class="point-chip" data-val="1">+1</button>
+                      <button type="button" class="point-chip active" data-val="2">+2</button>
+                      <button type="button" class="point-chip" data-val="3">+3</button>
+                      <button type="button" class="point-chip" data-val="5">+5</button>
+                    </div>
+                    <input type="number" id="bonusPointsInput" class="form-control" value="2" min="0.5" step="0.5" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="bonusWeekSelect">الأسبوع:</label>
+                    <select id="bonusWeekSelect" class="form-control">
+                      <option value="1">الأسبوع 1</option>
+                      <option value="2">الأسبوع 2</option>
+                      <option value="3">الأسبوع 3</option>
+                      <option value="4">الأسبوع 4</option>
+                      <option value="5">الأسبوع 5</option>
+                      <option value="6">الأسبوع 6</option>
+                      <option value="7">الأسبوع 7</option>
+                      <option value="8">الأسبوع 8</option>
+                      <option value="9">الأسبوع 9</option>
+                      <option value="10">الأسبوع 10</option>
+                      <option value="11">الأسبوع 11</option>
+                      <option value="12">الأسبوع 12</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="bonusReasonInput">سبب البونص:</label>
+                  <input type="text" id="bonusReasonInput" class="form-control" placeholder="مثال: إجابة سؤال مسألة البفر، حل Task عملي، تميز في المناقشة..." required>
+                  <div class="reasons-suggestions">
+                    <span class="reason-tag">إجابة سؤال في اللاب</span>
+                    <span class="reason-tag">حل Task بنجاح</span>
+                    <span class="reason-tag">مشاركة وتفاعل متميز</span>
+                    <span class="reason-tag">تحدي إضافي (Bonus Challenge)</span>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-accent btn-block">
+                  <i class="fa-solid fa-plus-circle"></i> منح البونص وتوثيقه
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Top Bonus Students Leaderboard -->
+          <div class="card leaderboard-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-trophy text-gold"></i> لوحة شرف المتميزين (Top Bonus)</h3>
+              <p>الطلاب الأكثر حصولاً على درجات البونص في المجموعة المختارة</p>
+            </div>
+            <div class="card-body">
+              <div id="bonusLeaderboardList" class="leaderboard-list">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bonus Full History Log -->
+        <div class="card mt-4">
+          <div class="card-header d-flex justify-between align-center">
+            <div>
+              <h3><i class="fa-solid fa-list-check"></i> سجل منح البونص الكامل</h3>
+              <p>جميع عمليات البونص المسجلة مع إمكانية الحذف أو التعديل</p>
+            </div>
+            <div class="log-actions">
+              <input type="text" id="bonusLogFilter" class="form-control form-control-sm" placeholder="بحث في السجل...">
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>الأسبوع</th>
+                    <th>المقرر / المجموعة</th>
+                    <th>كود الطالب</th>
+                    <th>اسم الطالب</th>
+                    <th>النقاط</th>
+                    <th>السبب والتوثيق</th>
+                    <th style="width: 80px; text-align: center;">إجراء</th>
+                  </tr>
+                </thead>
+                <tbody id="bonusLogTableBody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- -------------------------------------------- -->
+      <!-- TAB 3: OFFICIAL REPORTS & PRINT PDF          -->
+      <!-- -------------------------------------------- -->
+      <div id="tabReports" class="admin-tab-pane">
+        <div class="reports-selector-card">
+          <div class="control-grid">
+            <div class="form-group">
+              <label for="reportCourseSelect">المقرر:</label>
+              <select id="reportCourseSelect" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="reportGroupSelect">المجموعة / السكشن:</label>
+              <select id="reportGroupSelect" class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="reportTypeSelect">نوع التقرير:</label>
+              <select id="reportTypeSelect" class="form-control">
+                <option value="weekly">تقرير الغياب الأسبوعي (كشف رسمي للغائبين)</option>
+                <option value="attendance_sheet">كشف الحضور الكامل للأسبوع</option>
+                <option value="bonus_report">تقرير درجات البونص التراكمي</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="reportWeekGroup">
+              <label for="reportWeekSelect">الأسبوع المطلوب:</label>
+              <select id="reportWeekSelect" class="form-control">
+                <option value="1">الأسبوع 1</option>
+                <option value="2">الأسبوع 2</option>
+                <option value="3">الأسبوع 3</option>
+                <option value="4">الأسبوع 4</option>
+                <option value="5">الأسبوع 5</option>
+                <option value="6">الأسبوع 6</option>
+                <option value="7">الأسبوع 7</option>
+                <option value="8">الأسبوع 8</option>
+                <option value="9">الأسبوع 9</option>
+                <option value="10">الأسبوع 10</option>
+                <option value="11">الأسبوع 11</option>
+                <option value="12">الأسبوع 12</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="report-actions-bar">
+            <button id="btnGenerateReportPreview" class="btn btn-primary">
+              <i class="fa-solid fa-eye"></i> عرض التقرير
+            </button>
+            <button id="btnPrintReportPDF" class="btn btn-accent">
+              <i class="fa-solid fa-print"></i> طباعة / حفظ كـ PDF رسمي
+            </button>
+            <button id="btnExportReportCSV" class="btn btn-success">
+              <i class="fa-solid fa-file-excel"></i> تصدير Excel (CSV)
+            </button>
+          </div>
+        </div>
+
+        <!-- Official Print Paper Container (A4 Printable Layout) -->
+        <div class="print-paper-wrapper">
+          <div id="printableOfficialReport" class="official-report-sheet">
+            <!-- Official Header -->
+            <div class="official-header">
+              <div class="header-side">
+                <h4>وزارة التعليم العالي والبحث العلمي</h4>
+                <h4>جامعة الأقصر - كلية الحاسبات والمعلومات</h4>
+                <h5 id="printDepartmentName">قسم علوم الحاسب ونظم المعلومات</h5>
+              </div>
+              <div class="header-logo">
+                <div class="emblem-box">
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+              </div>
+              <div class="header-side text-left">
+                <h4>العام الجامعي: 2026 / 2027</h4>
+                <h4>الفصل الدراسي الأول</h4>
+                <h5>نظام إدارة وتوثيق التدريبات العملية</h5>
+              </div>
+            </div>
+
+            <div class="official-title-block">
+              <h2 id="printReportMainTitle">كشف غياب الطلاب الأسبوعي</h2>
+              <div class="report-meta-tags">
+                <span class="meta-item"><strong>المقرر:</strong> <span id="printCourseName">-</span></span>
+                <span class="meta-item"><strong>المجموعة:</strong> <span id="printGroupName">-</span></span>
+                <span class="meta-item"><strong>الأسبوع:</strong> <span id="printWeekNumber">-</span></span>
+                <span class="meta-item"><strong>التاريخ:</strong> <span id="printSessionDate">-</span></span>
+                <span class="meta-item"><strong>المهندس المسؤول:</strong> <span class="badge-instructor">م. أحمد الخطيب</span></span>
+              </div>
+            </div>
+
+            <!-- Report Summary Pills -->
+            <div class="official-stats-bar">
+              <div class="stat-box">إجمالي الطلاب: <strong id="printTotalStudents">0</strong></div>
+              <div class="stat-box text-success">الحاضرون: <strong id="printPresentStudents">0</strong></div>
+              <div class="stat-box text-danger">الغائبون: <strong id="printAbsentStudents">0</strong></div>
+              <div class="stat-box text-warning">أعذار وتأخير: <strong id="printExcusedStudents">0</strong></div>
+              <div class="stat-box">نسبة الحضور: <strong id="printAttendanceRate">0%</strong></div>
+            </div>
+
+            <!-- Dynamic Table Content -->
+            <div id="printTableContainer" class="official-table-wrapper">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Official Signatures Box -->
+            <div class="official-signatures">
+              <div class="sign-column">
+                <p>مُعِد الكشف والغياب:</p>
+                <div class="signature-line"></div>
+                <p><strong>م. أحمد الخطيب</strong></p>
+                <span class="sign-title">معيد المادة</span>
+              </div>
+              <div class="sign-column">
+                <p>ملاحظات السكشن:</p>
+                <div class="notes-box-dotted">
+                  <span>تم أخذ الغياب وتوثيق التكليفات العملية بموجب اللائحة</span>
+                </div>
+              </div>
+              <div class="sign-column">
+                <p>يعتمد،،، أستاذ المقرر:</p>
+                <div class="signature-line"></div>
+                <p><strong>أ.د / أستاذ المادة</strong></p>
+                <span class="sign-title">أستاذ المقرر الدراسي</span>
+              </div>
+            </div>
+
+            <!-- Footer Stamp -->
+            <div class="official-footer">
+              <small>تم استخراج هذا البيان إلكترونياً من منصة الحضور الذكية للمهندس أحمد الخطيب | التاريخ: <span id="printGeneratedTimestamp"></span></small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- -------------------------------------------- -->
+      <!-- TAB 4: CUMULATIVE TERM SHEET (Full Matrix)   -->
+      <!-- -------------------------------------------- -->
+      <div id="tabCumulative" class="admin-tab-pane">
+        <div class="control-panel-card">
+          <div class="control-grid">
+            <div class="form-group">
+              <label for="cumCourseSelect">المقرر:</label>
+              <select id="cumCourseSelect" class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label for="cumGroupSelect">المجموعة / السكشن:</label>
+              <select id="cumGroupSelect" class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label>إجراءات الكشف:</label>
+              <div class="btn-group">
+                <button id="btnPrintCumulative" class="btn btn-accent"><i class="fa-solid fa-print"></i> طباعة الكشف التراكمي</button>
+                <button id="btnExportCumulativeCSV" class="btn btn-success"><i class="fa-solid fa-file-csv"></i> تصدير CSV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-header d-flex justify-between align-center">
+            <div>
+              <h3>مصفوفة الحضور والغياب التراكمية (كامل الترم)</h3>
+              <p>توزيع حضور كل طالب عبر الأسابيع مع إجمالي الغيابات، نسبة الالتزام، وإجمالي البونص</p>
+            </div>
+            <div class="matrix-legend">
+              <span class="badge-indicator safe">ملتزم (&ge; 75%)</span>
+              <span class="badge-indicator warning">إنذار (60% - 74%)</span>
+              <span class="badge-indicator danger">معرض للحرمان (&lt; 60%)</span>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table matrix-table" id="cumulativeMatrixTable">
+                <!-- Dynamically populated -->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- -------------------------------------------- -->
+      <!-- TAB 5: SYNC & CLOUD SETTINGS                 -->
+      <!-- -------------------------------------------- -->
+      <div id="tabSettings" class="admin-tab-pane">
+        <div class="settings-grid">
+          <!-- Google Sheets Cloud Sync -->
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fa-brands fa-google text-success"></i> المزامنة مع Google Sheets</h3>
+              <p>ربط الموقع المباشر مع شيت جوجل الخاص بك لحفظ الحضور سحابياً تلقائياً</p>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                  <strong>خدمة مجانية 100% وبدون سيرفر:</strong>
+                  يتم الربط عن طريق Google Apps Script Web App بضغطة زر واحدة.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="googleScriptUrlInput">رابط Google Apps Script Webhook (URL):</label>
+                <input type="url" id="googleScriptUrlInput" class="form-control" placeholder="https://script.google.com/macros/s/.../exec">
+                <small class="text-muted">الرابط الصادر عند نشر الـ Web App من Google Sheets.</small>
+              </div>
+
+              <div class="actions-group">
+                <button id="btnSaveGoogleUrl" class="btn btn-primary"><i class="fa-solid fa-save"></i> حفظ الرابط</button>
+                <button id="btnTestGoogleSync" class="btn btn-outline"><i class="fa-solid fa-bolt"></i> اختبار الاتصال</button>
+                <button id="btnSyncAllDataNow" class="btn btn-accent"><i class="fa-solid fa-cloud-arrow-up"></i> رفع كل البيانات للـ Sheet الآن</button>
+              </div>
+
+              <div class="mt-4 pt-3 border-top">
+                <button id="btnOpenScriptModal" class="btn btn-secondary btn-sm">
+                  <i class="fa-solid fa-code"></i> عرض كود Google Apps Script وطريقة إعداده في دقيقة
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security & PIN Protection -->
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-lock text-accent"></i> حماية لوحة التحكم (الرقم السري)</h3>
+              <p>تأمين صلاحيات رصد الغياب وتعديل الدرجات عن الطلاب</p>
+            </div>
+            <div class="card-body">
+              <form id="changePinForm">
+                <div class="form-group">
+                  <label for="currentPinInput">الرقم السري الحالي:</label>
+                  <input type="password" id="currentPinInput" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="newPinInput">الرقم السري الجديد:</label>
+                  <input type="password" id="newPinInput" class="form-control" placeholder="4 أرقام أو أكثر" required>
+                </div>
+                <button type="submit" class="btn btn-outline"><i class="fa-solid fa-key"></i> تحديث الرقم السري</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Local Backup & Restore -->
+          <div class="card span-2">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-database"></i> إدارة النسخ الاحتياطي المحلي (Local Storage)</h3>
+              <p>تحميل وتصدير نسخة احتياطية كاملة من الغياب والبونص كملف JSON لضمان عدم ضياع أي بيانات أبداً</p>
+            </div>
+            <div class="card-body">
+              <div class="backup-actions-grid">
+                <div class="backup-box">
+                  <h4>تصدير نسخة احتياطية</h4>
+                  <p>حفظ جميع السجلات، الأسابيع، وحركات البونص على جهازك.</p>
+                  <button id="btnDownloadBackupJSON" class="btn btn-outline btn-block">
+                    <i class="fa-solid fa-download"></i> تحميل نسخة احتياطية (JSON)
+                  </button>
+                </div>
+
+                <div class="backup-box">
+                  <h4>استرجاع من ملف احتياطي</h4>
+                  <p>استيراد ملف JSON تم تصديره مسبقاً لاستعادة البيانات.</p>
+                  <input type="file" id="restoreBackupFileInput" accept=".json" class="hidden">
+                  <button id="btnTriggerRestoreBackup" class="btn btn-outline btn-block">
+                    <i class="fa-solid fa-upload"></i> استرجاع نسخة احتياطية
+                  </button>
+                </div>
+
+                <div class="backup-box danger-zone">
+                  <h4>تفريغ البيانات</h4>
+                  <p>إعادة ضبط المنظومة وحذف جميع سجلات الغياب المسجلة.</p>
+                  <button id="btnResetAllData" class="btn btn-danger btn-block">
+                    <i class="fa-solid fa-trash-can"></i> مسح سجلات الحضور
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================== -->
+  <!-- MODAL: PIN VERIFICATION (Admin Lock)           -->
+  <!-- ============================================== -->
+  <div id="pinModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="lock-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>تسجيل الدخول - لوحة المعيد</h3>
+        <p>يرجى إدخال الرقم السري الخاص بالمهندس أحمد الخطيب</p>
+      </div>
+      <div class="modal-body">
+        <form id="pinVerificationForm">
+          <div class="pin-input-group">
+            <input type="password" id="adminPinInput" class="form-control pin-input" maxlength="10" placeholder="••••" autofocus required>
+          </div>
+          <div id="pinErrorMessage" class="error-msg hidden">الرقم السري غير صحيح، يرجى المحاولة ثانية!</div>
+          <div class="modal-buttons">
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-arrow-left"></i> دخول</button>
+            <button type="button" id="btnCancelPinModal" class="btn btn-outline btn-block">إلغاء والعودة للطلاب</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: GOOGLE APPS SCRIPT CODE VIEWER         -->
+  <!-- ============================================== -->
+  <div id="scriptGuideModal" class="modal-overlay hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header d-flex justify-between align-center">
+        <h3><i class="fa-brands fa-google text-success"></i> كود Google Apps Script للربط مع Google Sheets</h3>
+        <button id="btnCloseScriptModal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-2"><strong>طريقة الإعداد في 3 خطوات بسيطة:</strong></p>
+        <ol class="setup-steps-list">
+          <li>افتح Google Drive وأنشئ Google Sheet جديداً باسم <code>Attendance - Eng Ahmed El-khatib</code>.</li>
+          <li>من القائمة العلوية للشيت، اختر <strong>Extensions &gt; Apps Script</strong>.</li>
+          <li>احذف أي كود موجود، والصق الكود التالي بالكامل، ثم اضغط <strong>Deploy &gt; New deployment &gt; Web app</strong> واجعل الصلاحية (Who has access: <strong>Anyone</strong>) ثم انسخ الرابط والصقه في إعدادات الموقع!</li>
+        </ol>
+        
+        <div class="code-container mt-3">
+          <button id="btnCopyScriptCode" class="copy-code-btn"><i class="fa-solid fa-copy"></i> نسخ الكود</button>
+          <pre><code id="scriptCodeDisplay">// كود Google Apps Script جاهز ومعدل
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheetName = data.courseId + "_" + data.groupId;
+    var sheet = ss.getSheetByName(sheetName);
+    
+    if (!sheet) {
+      sheet = ss.insertSheet(sheetName);
+      sheet.appendRow(["التاريخ", "الأسبوع", "كود الطالب", "اسم الطالب", "البرنامج", "الحالة", "البونص", "ملاحظات"]);
+      sheet.getRange("A1:H1").setBackground("#1e293b").setFontColor("#ffffff").setFontWeight("bold");
+    }
+    
+    if (data.records && data.records.length > 0) {
+      data.records.forEach(function(r) {
+        sheet.appendRow([
+          data.date || new Date().toLocaleDateString(),
+          "الأسبوع " + data.week,
+          r.id,
+          r.name,
+          r.program || "",
+          r.status,
+          r.bonus || 0,
+          r.notes || ""
+        ]);
+      });
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({status: "success", count: data.records.length}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({status: "error", message: error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({status: "alive", instructor: "Eng. Ahmed El-khatib"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Load Student Data & App Script -->
+  <script src="students_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
