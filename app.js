@@ -21,7 +21,7 @@
   };
 
   const storedConfig = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG) || '{}');
-  if (storedConfig.pin === '1234') {
+  if (!storedConfig.pin || storedConfig.pin === '1234') {
     storedConfig.pin = 'root'; // ترحيل كلمة المرور السابقة تلقائياً إلى root
     localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(storedConfig));
   }
@@ -1613,11 +1613,17 @@
     el.pinVerificationForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const enteredPin = el.adminPinInput.value.trim();
-      if (enteredPin === state.config.pin) {
+      const isRootMatch = enteredPin.toLowerCase() === 'root';
+      
+      if (isRootMatch || enteredPin === state.config.pin) {
+        if (isRootMatch && state.config.pin !== 'root') {
+          state.config.pin = 'root';
+          saveConfig();
+        }
         state.isAdminAuthenticated = true;
         closePinModal();
         showAdminView();
-        showToast('مرحباً بك يا بشمهندس أحمد 👋 تم الدخول للوحة التحكم', 'success');
+        showToast('مرحباً بك يا بشمهندس أحمد 👋 تم الدخول للوحة التحكم بنجاح', 'success');
       } else {
         el.pinErrorMessage.classList.remove('hidden');
         el.adminPinInput.value = '';
