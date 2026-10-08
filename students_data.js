@@ -3166,5 +3166,313 @@ window.INITIAL_DATA = {
         }
       ]
     }
-  ]
+  ],
+  "sessions": {
+    "operating_systems_S15_w1": {
+      "courseId": "operating_systems",
+      "groupId": "S15",
+      "week": "1",
+      "date": "2026-10-01",
+      "records": {
+        "25010258": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010280": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010287": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010311": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010312": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010319": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010344": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010346": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010419": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010429": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010433": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010488": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010493": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010494": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010496": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010497": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010503": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010512": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010522": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-10-01T10:00:00.000Z"
+    },
+    "operating_systems_S15_w2": {
+      "courseId": "operating_systems",
+      "groupId": "S15",
+      "week": "2",
+      "date": "2026-10-08",
+      "records": {
+        "25010258": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010280": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010287": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010311": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010312": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010319": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010344": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010346": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010419": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010429": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010433": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010488": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010493": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010494": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010496": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010497": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010503": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010512": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010522": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        }
+      },
+      "updatedAt": "2026-10-08T10:00:00.000Z"
+    }
+  }
 };

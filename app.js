@@ -33,10 +33,22 @@
     localStorage.setItem(BONUS_RESET_KEY, 'done');
   }
 
+  // تحميل جلسات الحضور الأولية (حضور الأسبوع الأول والثاني لسكشن OS S15)
+  let storedSessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
+  const initialSessions = (window.INITIAL_DATA && window.INITIAL_DATA.sessions) ? window.INITIAL_DATA.sessions : {};
+  const OS_PRESET_KEY = 'ATTENDANCE_OS_PRESET_V2';
+  if (localStorage.getItem(OS_PRESET_KEY) !== 'done' || !storedSessions['operating_systems_S15_w1']) {
+    Object.keys(initialSessions).forEach(key => {
+      storedSessions[key] = initialSessions[key];
+    });
+    localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
+    localStorage.setItem(OS_PRESET_KEY, 'done');
+  }
+
   let state = {
     isAdminAuthenticated: false,
     courses: window.INITIAL_DATA ? window.INITIAL_DATA.courses : [],
-    sessions: JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}'),
+    sessions: storedSessions,
     bonuses: JSON.parse(localStorage.getItem(STORAGE_KEYS.BONUSES) || '[]'),
     config: Object.assign({}, DEFAULT_CONFIG, storedConfig),
     activeAdminTab: 'tabAttendance',
@@ -217,8 +229,8 @@
     let excused = 0;
     let timeline = [];
 
-    // Check all weeks 1 to 14
-    for (let w = 1; w <= 14; w++) {
+    // Check all weeks 1 to 12
+    for (let w = 1; w <= 12; w++) {
       const key = getSessionKey(courseId, groupId, w);
       const session = state.sessions[key];
       if (session && session.records && session.records[studentId]) {
@@ -555,7 +567,7 @@
 
       <!-- Timeline & Bonus Cards -->
       <div class="attendance-timeline-card mb-4">
-        <h4><i class="fa-solid fa-calendar-days text-accent"></i> سجل الحضور أسبوعياً (1 - 14):</h4>
+        <h4><i class="fa-solid fa-calendar-days text-accent"></i> سجل الحضور أسبوعياً (1 - 12):</h4>
         <div class="timeline-grid">
           ${timelineChips}
         </div>
