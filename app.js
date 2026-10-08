@@ -15,17 +15,23 @@
   };
 
   const DEFAULT_CONFIG = {
-    pin: '1234',
+    pin: 'root',
     googleScriptUrl: '',
     department: 'قسم علوم الحاسب ونظم المعلومات'
   };
+
+  const storedConfig = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG) || '{}');
+  if (storedConfig.pin === '1234') {
+    storedConfig.pin = 'root'; // ترحيل كلمة المرور السابقة تلقائياً إلى root
+    localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(storedConfig));
+  }
 
   let state = {
     isAdminAuthenticated: false,
     courses: window.INITIAL_DATA ? window.INITIAL_DATA.courses : [],
     sessions: JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}'),
     bonuses: JSON.parse(localStorage.getItem(STORAGE_KEYS.BONUSES) || '[]'),
-    config: Object.assign({}, DEFAULT_CONFIG, JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG) || '{}')),
+    config: Object.assign({}, DEFAULT_CONFIG, storedConfig),
     activeAdminTab: 'tabAttendance',
     currentAdminSession: {
       courseId: '',
@@ -1572,14 +1578,14 @@
     el.changePinForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (el.currentPinInput.value !== state.config.pin) {
-        showToast('الرقم السري الحالي غير صحيح!', 'error');
+        showToast('كلمة المرور الحالية غير صحيحة!', 'error');
         return;
       }
       state.config.pin = el.newPinInput.value;
       saveConfig();
       el.currentPinInput.value = '';
       el.newPinInput.value = '';
-      showToast('تم تحديث الرقم السري للوحة التحكم بنجاح! 🔒', 'success');
+      showToast('تم تحديث كلمة المرور للوحة التحكم بنجاح! 🔒', 'success');
     });
 
     el.btnDownloadBackupJSON.addEventListener('click', downloadFullBackupJSON);

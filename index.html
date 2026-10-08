@@ -620,14 +620,14 @@
             <div class="card-body">
               <form id="changePinForm">
                 <div class="form-group">
-                  <label for="currentPinInput">الرقم السري الحالي:</label>
+                  <label for="currentPinInput">كلمة المرور الحالية:</label>
                   <input type="password" id="currentPinInput" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="newPinInput">الرقم السري الجديد:</label>
-                  <input type="password" id="newPinInput" class="form-control" placeholder="4 أرقام أو أكثر" required>
+                  <label for="newPinInput">كلمة المرور الجديدة:</label>
+                  <input type="password" id="newPinInput" class="form-control" placeholder="أدخل كلمة المرور الجديدة" required>
                 </div>
-                <button type="submit" class="btn btn-outline"><i class="fa-solid fa-key"></i> تحديث الرقم السري</button>
+                <button type="submit" class="btn btn-outline"><i class="fa-solid fa-key"></i> تحديث كلمة المرور</button>
               </form>
             </div>
           </div>
@@ -680,14 +680,14 @@
       <div class="modal-header">
         <div class="lock-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <h3>تسجيل الدخول - لوحة المعيد</h3>
-        <p>يرجى إدخال الرقم السري الخاص بالمهندس أحمد الخطيب</p>
+        <p>يرجى إدخال كلمة المرور الخاصة بالمهندس أحمد الخطيب</p>
       </div>
       <div class="modal-body">
         <form id="pinVerificationForm">
           <div class="pin-input-group">
-            <input type="password" id="adminPinInput" class="form-control pin-input" maxlength="10" placeholder="••••" autofocus required>
+            <input type="password" id="adminPinInput" class="form-control pin-input" maxlength="30" placeholder="أدخل كلمة المرور..." autofocus required>
           </div>
-          <div id="pinErrorMessage" class="error-msg hidden">الرقم السري غير صحيح، يرجى المحاولة ثانية!</div>
+          <div id="pinErrorMessage" class="error-msg hidden">كلمة المرور غير صحيحة، يرجى المحاولة ثانية!</div>
           <div class="modal-buttons">
             <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-arrow-left"></i> دخول</button>
             <button type="button" id="btnCancelPinModal" class="btn btn-outline btn-block">إلغاء والعودة للطلاب</button>

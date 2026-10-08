@@ -5,7 +5,7 @@ window.INITIAL_DATA = {
     {
       "id": "data_communication",
       "name": "Data Communication",
-      "nameAr": "اتصالات البيانات",
+      "nameAr": "تراسل البيانات",
       "groups": [
         {
           "id": "GA",
