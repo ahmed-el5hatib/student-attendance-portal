@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -295,14 +295,17 @@
 
                 <div class="form-row">
                   <div class="form-group">
-                    <label for="bonusPointsInput">الدرجات (+):</label>
+                    <label for="bonusPointsInput">الدرجات (بونص أو خصم/ماينص):</label>
                     <div class="quick-points-chips">
                       <button type="button" class="point-chip" data-val="1">+1</button>
                       <button type="button" class="point-chip active" data-val="2">+2</button>
                       <button type="button" class="point-chip" data-val="3">+3</button>
                       <button type="button" class="point-chip" data-val="5">+5</button>
+                      <button type="button" class="point-chip minus" data-val="-1">-1</button>
+                      <button type="button" class="point-chip minus" data-val="-2">-2</button>
+                      <button type="button" class="point-chip minus" data-val="-3">-3</button>
                     </div>
-                    <input type="number" id="bonusPointsInput" class="form-control" value="2" min="0.5" step="0.5" required>
+                    <input type="number" id="bonusPointsInput" class="form-control" value="2" step="0.5" required>
                   </div>
 
                   <div class="form-group">
@@ -325,18 +328,20 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="bonusReasonInput">سبب البونص:</label>
-                  <input type="text" id="bonusReasonInput" class="form-control" placeholder="مثال: إجابة سؤال مسألة البفر، حل Task عملي، تميز في المناقشة..." required>
+                  <label for="bonusReasonInput">سبب البونص أو الخصم:</label>
+                  <input type="text" id="bonusReasonInput" class="form-control" placeholder="مثال: إجابة سؤال مسألة، تميز في المناقشة، أو خصم لتأخير..." required>
                   <div class="reasons-suggestions">
                     <span class="reason-tag">إجابة سؤال في اللاب</span>
                     <span class="reason-tag">حل Task بنجاح</span>
                     <span class="reason-tag">مشاركة وتفاعل متميز</span>
                     <span class="reason-tag">تحدي إضافي (Bonus Challenge)</span>
+                    <span class="reason-tag">خصم: تشتيت أو تأخير عن اللاب</span>
+                    <span class="reason-tag">خصم: Task ناقص أو عدم إحضار اللاب</span>
                   </div>
                 </div>
 
                 <button type="submit" class="btn btn-accent btn-block">
-                  <i class="fa-solid fa-plus-circle"></i> منح البونص وتوثيقه
+                  <i class="fa-solid fa-check-double"></i> تسجيل وتوثيق الدرجة (بونص / ماينص)
                 </button>
               </form>
             </div>
@@ -766,7 +771,7 @@ function doGet(e) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=2.1"></script>
-  <script src="app.js?v=2.1"></script>
+  <script src="students_data.js?v=2.2"></script>
+  <script src="app.js?v=2.2"></script>
 </body>
 </html>

@@ -26,6 +26,13 @@
     localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(storedConfig));
   }
 
+  // تصفير أي بونص سابق لجميع الطلاب بحيث يبدأ الجميع من 0
+  const BONUS_RESET_KEY = 'ATTENDANCE_ZERO_RESET_V2';
+  if (localStorage.getItem(BONUS_RESET_KEY) !== 'done') {
+    localStorage.setItem(STORAGE_KEYS.BONUSES, '[]');
+    localStorage.setItem(BONUS_RESET_KEY, 'done');
+  }
+
   let state = {
     isAdminAuthenticated: false,
     courses: window.INITIAL_DATA ? window.INITIAL_DATA.courses : [],
@@ -667,7 +674,10 @@
           </td>
           <td style="text-align: center;">
             <div class="bonus-cell-wrapper">
-              <span class="bonus-badge-val" id="bonusVal_${s.id}">${totalBonus > 0 ? '+' + totalBonus : '0'}</span>
+              <button class="btn-mini-minus" data-action="quick-minus" data-id="${s.id}" data-name="${s.name}" title="خصم / ماينص (-1)">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <span class="bonus-badge-val ${totalBonus > 0 ? 'positive' : (totalBonus < 0 ? 'negative' : '')}" id="bonusVal_${s.id}">${totalBonus > 0 ? '+' + totalBonus : totalBonus}</span>
               <button class="btn-mini-bonus" data-action="quick-bonus" data-id="${s.id}" data-name="${s.name}" title="إضافة بونص سريع (+1)">
                 <i class="fa-solid fa-plus"></i>
               </button>
@@ -718,6 +728,15 @@
         const studentId = btn.getAttribute('data-id');
         const studentName = btn.getAttribute('data-name');
         addQuickBonus(studentId, studentName);
+      });
+    });
+
+    // Quick Minus Handler
+    el.attendanceTableBody.querySelectorAll('[data-action="quick-minus"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const studentId = btn.getAttribute('data-id');
+        const studentName = btn.getAttribute('data-name');
+        addQuickMinus(studentId, studentName);
       });
     });
   }
@@ -808,7 +827,7 @@
     showToast(`تم حفظ غياب الأسبوع ${week} بنجاح في الذاكرة المحلية! 💾`, 'success');
   }
 
-  // --- 7. Bonus Engine ---
+  // --- 7. Bonus & Minus Engine ---
   function addQuickBonus(studentId, studentName) {
     const courseId = state.currentAdminSession.courseId;
     const groupId = state.currentAdminSession.groupId;
@@ -829,16 +848,48 @@
     state.bonuses.push(bonusObj);
     saveBonuses();
 
-    // Update UI badge
-    const badge = document.getElementById(`bonusVal_${studentId}`);
-    if (badge) {
-      const current = Number(badge.textContent.replace('+', '')) || 0;
-      badge.textContent = `+${current + 1}`;
-    }
-
+    updateStudentBonusBadge(studentId, courseId, groupId);
     renderBonusLeaderboard();
     renderBonusLogTable();
     showToast(`تمت إضافة +1 درجات بونص للطالب: ${studentName} ⭐`, 'success');
+  }
+
+  function addQuickMinus(studentId, studentName) {
+    const courseId = state.currentAdminSession.courseId;
+    const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
+
+    const bonusObj = {
+      id: 'minus_' + Date.now(),
+      studentId,
+      studentName,
+      courseId,
+      groupId,
+      week,
+      points: -1,
+      reason: 'خصم / ماينص في السكشن',
+      date: new Date().toLocaleDateString('ar-EG')
+    };
+
+    state.bonuses.push(bonusObj);
+    saveBonuses();
+
+    updateStudentBonusBadge(studentId, courseId, groupId);
+    renderBonusLeaderboard();
+    renderBonusLogTable();
+    showToast(`تم خصم -1 (ماينص) للطالب: ${studentName} ⚠️`, 'error');
+  }
+
+  function updateStudentBonusBadge(studentId, courseId, groupId) {
+    const studentBonuses = state.bonuses.filter(b => 
+      b.courseId === courseId && b.groupId === groupId && b.studentId === studentId
+    );
+    const totalBonus = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
+    const badge = document.getElementById(`bonusVal_${studentId}`);
+    if (badge) {
+      badge.textContent = totalBonus > 0 ? `+${totalBonus}` : totalBonus;
+      badge.className = `bonus-badge-val ${totalBonus > 0 ? 'positive' : (totalBonus < 0 ? 'negative' : '')}`;
+    }
   }
 
   function handleAddBonusFormSubmit(e) {
@@ -853,13 +904,13 @@
     const week = el.bonusWeekSelect.value;
     const reason = el.bonusReasonInput.value.trim();
 
-    if (!points || !reason) {
-      showToast('يرجى تحديد الدرجات وكتابة سبب البونص', 'error');
+    if (points === 0 || isNaN(points) || !reason) {
+      showToast('يرجى تحديد الدرجات وكتابة سبب البونص أو الخصم', 'error');
       return;
     }
 
     const bonusObj = {
-      id: 'bonus_' + Date.now(),
+      id: (points < 0 ? 'minus_' : 'bonus_') + Date.now(),
       studentId,
       studentName: student.name,
       courseId,
@@ -878,7 +929,11 @@
     renderBonusLogTable();
     loadCurrentAdminAttendanceSession(); // refresh badges
 
-    showToast(`تم توثيق +${points} درجات بونص للطالب ${student.name} بنجاح! 🏆`, 'success');
+    if (points > 0) {
+      showToast(`تم توثيق +${points} درجات بونص للطالب ${student.name} بنجاح! 🏆`, 'success');
+    } else {
+      showToast(`تم توثيق ${points} (ماينص) للطالب ${student.name} بنجاح! ⚠️`, 'warning');
+    }
   }
 
   function renderBonusLeaderboard() {
@@ -924,7 +979,7 @@
               <div><small class="text-muted">${item.student.id}</small></div>
             </div>
           </div>
-          <span class="bonus-badge-val" style="font-size: 1.1rem; padding: 4px 10px;">+${item.points} نقطة</span>
+          <span class="bonus-badge-val positive" style="font-size: 1.1rem; padding: 4px 10px;">+${item.points} نقطة</span>
         </div>
       `;
     }).join('');
@@ -940,7 +995,7 @@
     );
 
     if (sortedBonuses.length === 0) {
-      el.bonusLogTableBody.innerHTML = `<tr><td colspan="8" class="text-muted text-center" style="padding: 2rem;">لا توجد سجلات بونص مطابقة</td></tr>`;
+      el.bonusLogTableBody.innerHTML = `<tr><td colspan="8" class="text-muted text-center" style="padding: 2rem;">لا توجد سجلات بونص أو خصم مطابقة</td></tr>`;
       return;
     }
 
@@ -949,6 +1004,7 @@
       const group = getGroup(b.courseId, b.groupId);
       const groupName = group ? group.name : b.groupId;
       const courseName = course ? course.name : b.courseId;
+      const isPositive = Number(b.points) > 0;
 
       return `
         <tr>
@@ -957,7 +1013,7 @@
           <td><small>${courseName} - ${groupName}</small></td>
           <td><span class="meta-pill id-pill">${b.studentId}</span></td>
           <td><strong>${b.studentName}</strong></td>
-          <td><strong class="text-gold">+${b.points}</strong></td>
+          <td><strong class="${isPositive ? 'text-gold' : 'text-danger'}">${isPositive ? '+' + b.points : b.points}</strong></td>
           <td>${b.reason}</td>
           <td style="text-align: center;">
             <button class="btn btn-outline btn-sm text-danger" onclick="window.__deleteBonus('${b.id}')" title="حذف">
