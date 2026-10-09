@@ -61,6 +61,25 @@
     localStorage.setItem(FULL_PRESET_KEY, 'done');
   }
 
+  // مزامنة فورية قطعية: دمج سجلات الحضور الرسمية من INITIAL_DATA لضمان عدم بقاء أي طالب بحالة غياب بسبب كاش قديم بالمتصفح
+  if (initialSessions) {
+    Object.keys(initialSessions).forEach(key => {
+      const initSess = initialSessions[key];
+      if (!storedSessions[key]) {
+        storedSessions[key] = JSON.parse(JSON.stringify(initSess));
+      } else if (initSess && initSess.records) {
+        if (!storedSessions[key].records) storedSessions[key].records = {};
+        Object.keys(initSess.records).forEach(sId => {
+          const rec = initSess.records[sId];
+          if (rec && rec.status === 'present') {
+            storedSessions[key].records[sId] = rec;
+          }
+        });
+      }
+    });
+    localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
+  }
+
   // ترحيل وتعديل غياب الطلاب الذين أبلغوا عن حضورهم في تراسل البيانات (الدفعة الأولى 17 طالباً)
   const ATTENDANCE_CORRECTIONS_KEY = 'ATTENDANCE_CORRECTIONS_STUDENTS_V1';
   if (localStorage.getItem(ATTENDANCE_CORRECTIONS_KEY) !== 'done') {
@@ -221,6 +240,7 @@
     studentPortalView: document.getElementById('studentPortalView'),
     adminDashboardView: document.getElementById('adminDashboardView'),
     btnThemeToggle: document.getElementById('btnThemeToggle'),
+    btnForceRefreshData: document.getElementById('btnForceRefreshData'),
     
     // Student Portal
     studentCourseSelect: document.getElementById('studentCourseSelect'),
@@ -483,9 +503,65 @@
     // Register Event Handlers
     setupEventHandlers();
 
-    // Register Service Worker for PWA
+    // Register Service Worker for PWA with auto-update
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        reg.update();
+      }).catch(() => {});
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!window._swReloading) {
+          window._swReloading = true;
+          window.location.reload();
+        }
+      });
+    }
+
+    // Live background sync from data.json to ensure zero stale client state
+    syncLatestDataFromServer();
+  }
+
+  async function syncLatestDataFromServer(forceNotification = false) {
+    try {
+      const res = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
+      if (res.ok) {
+        const liveData = await res.json();
+        if (liveData && liveData.sessions) {
+          let updated = false;
+          Object.keys(liveData.sessions).forEach(k => {
+            const liveS = liveData.sessions[k];
+            if (!state.sessions[k]) {
+              state.sessions[k] = liveS;
+              updated = true;
+            } else if (liveS && liveS.records) {
+              if (!state.sessions[k].records) state.sessions[k].records = {};
+              Object.keys(liveS.records).forEach(sId => {
+                const liveRec = liveS.records[sId];
+                const curRec = state.sessions[k].records[sId];
+                if (!curRec || curRec.status !== liveRec.status || curRec.notes !== liveRec.notes) {
+                  state.sessions[k].records[sId] = liveRec;
+                  updated = true;
+                }
+              });
+            }
+          });
+          if (updated) {
+            saveSessions();
+            if (state.selectedStudentId) {
+              selectStudentAndRenderCard(state.selectedStudentId);
+            }
+            if (forceNotification) {
+              showToast('تم تحديث كافة السجلات من الخادم مباشرة!', 'success');
+            }
+          } else if (forceNotification) {
+            showToast('البيانات محدثة بالفعل إلى آخر إصدار.', 'info');
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('Sync warning:', err);
+      if (forceNotification) {
+        showToast('تعذر الاتصال بالخادم، تعمل المنظومة بالبيانات المخزنة.', 'warning');
+      }
     }
   }
 
@@ -2014,6 +2090,18 @@
       localStorage.setItem(STORAGE_KEYS.THEME, newTheme);
       updateThemeIcon(newTheme);
     });
+
+    // Force Refresh Button
+    if (el.btnForceRefreshData) {
+      el.btnForceRefreshData.addEventListener('click', async () => {
+        const icon = el.btnForceRefreshData.querySelector('i');
+        if (icon) icon.classList.add('fa-spin');
+        await syncLatestDataFromServer(true);
+        setTimeout(() => {
+          if (icon) icon.classList.remove('fa-spin');
+        }, 600);
+      });
+    }
 
     // Student Portal Search
     el.studentCourseSelect.addEventListener('change', updateStudentGroupOptions);

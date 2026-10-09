@@ -8,6 +8,9 @@
   <!-- Meta tags for PWA and SEO -->
   <meta name="description" content="منظومة أخذ الغياب ورصد البونص واستخراج التقارير للطلاب - إشراف المهندس أحمد الخطيب">
   <meta name="theme-color" content="#1e293b">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
   
@@ -20,7 +23,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.7">
+  <link rel="stylesheet" href="style.css?v=2.8">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -50,6 +53,11 @@
             <span>لوحة المعيد</span>
           </button>
         </div>
+
+        <!-- Force Refresh Live Data -->
+        <button id="btnForceRefreshData" class="icon-btn" title="تحديث السجلات مباشرة ومسح الكاش">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
 
         <!-- Theme Toggle -->
         <button id="btnThemeToggle" class="icon-btn" title="تبديل المظهر (ليلي / نهاري)">
@@ -770,7 +778,7 @@ function doGet(e) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=3.1"></script>
-  <script src="app.js?v=3.1"></script>
+  <script src="students_data.js?v=3.2"></script>
+  <script src="app.js?v=3.2"></script>
 </body>
 </html>
