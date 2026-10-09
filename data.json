@@ -3932,8 +3932,8 @@
           "notes": ""
         },
         "25010388": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010391": {
           "status": "absent",
@@ -4040,8 +4040,8 @@
           "notes": ""
         },
         "25010462": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010467": {
           "status": "present",
@@ -4161,8 +4161,8 @@
           "notes": ""
         },
         "25010021": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010023": {
           "status": "absent",
@@ -4705,8 +4705,8 @@
           "notes": ""
         },
         "25010462": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010467": {
           "status": "present",
@@ -5014,8 +5014,8 @@
           "notes": ""
         },
         "25010189": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010193": {
           "status": "present",
@@ -6020,8 +6020,8 @@
           "notes": ""
         },
         "25010044": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010048": {
           "status": "present",
@@ -7432,7 +7432,7 @@
         },
         "25010021": {
           "status": "present",
-          "notes": ""
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010023": {
           "status": "present",
