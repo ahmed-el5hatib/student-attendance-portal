@@ -22,8 +22,12 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- QR Code Generator & HTML5 QR Scanner -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.8">
+  <link rel="stylesheet" href="style.css?v=2.9">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -78,6 +82,20 @@
         <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> بوابة الاستعلام المباشر للطلاب</div>
         <h2 class="hero-title">تابع نسبة حضورك ودرجات البونص أولاً بأول</h2>
         <p class="hero-desc">اختر مقررك ومجموعتك الدراسية ثم أدخل كودك الجامعي أو اسمك لمعرفة سجلك الكامل</p>
+      </div>
+
+      <!-- Quick Self-Service Attendance Check-in Banner -->
+      <div class="qr-student-banner">
+        <div class="qr-banner-icon">
+          <i class="fa-solid fa-qrcode"></i>
+        </div>
+        <div class="qr-banner-content">
+          <h3><i class="fa-solid fa-bolt text-accent"></i> تسجيل الحضور الفوري في السكشن</h3>
+          <p>امسح رمز QR المعروض على شاشة العرض (البروجيكتور) أو أدخل رمز الجلسة (PIN) لتأكيد حضورك فوراً</p>
+        </div>
+        <button id="btnOpenStudentCheckin" class="btn btn-primary qr-banner-btn">
+          <i class="fa-solid fa-camera"></i> تسجيل الحضور الآن
+        </button>
       </div>
 
       <div class="search-box-card">
@@ -147,6 +165,11 @@
           <i class="fa-solid fa-table-cells"></i>
           <span>الكشف التراكمي للترم</span>
         </button>
+        <button class="admin-tab-btn" data-tab="tabAppeals">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <span>طلبات المراجعة</span>
+          <span id="appealsBadge" class="nav-badge hidden">0</span>
+        </button>
         <button class="admin-tab-btn" data-tab="tabSettings">
           <i class="fa-solid fa-cloud-arrow-up"></i>
           <span>المزامنة والنسخ الاحتياطي</span>
@@ -197,8 +220,17 @@
           <!-- Quick Actions & Search -->
           <div class="actions-toolbar">
             <div class="quick-buttons">
+              <button id="btnOpenLiveQR" class="btn btn-warning" title="عرض كود QR المتجدد وشاشة البروجيكتور للجلسة الحالية">
+                <i class="fa-solid fa-qrcode"></i> عرض QR الحضور
+              </button>
+              <button id="btnOpenFlashCall" class="btn btn-info" title="وضع النداء السريع بالكيبورد (Flash Roll Call)">
+                <i class="fa-solid fa-bolt"></i> نداء سريع (Flash)
+              </button>
+              <button id="btnOpenGuestModal" class="btn btn-outline" title="تحضير طالب مستضاف من سكشن آخر">
+                <i class="fa-solid fa-user-plus"></i> طالب مستضاف
+              </button>
               <button id="btnMarkAllPresent" class="btn btn-success" title="تحضير جميع طلاب السكشن كحاضرين بنقرة واحدة">
-                <i class="fa-solid fa-check-double"></i> تحضير الكل حاضرين
+                <i class="fa-solid fa-check-double"></i> تحضير الكل
               </button>
               <button id="btnResetCurrentSession" class="btn btn-outline" title="إعادة تعيين الحالة للجميع">
                 <i class="fa-solid fa-rotate-left"></i> تفريغ
@@ -457,6 +489,9 @@
             <button id="btnExportReportCSV" class="btn btn-success">
               <i class="fa-solid fa-file-excel"></i> تصدير Excel (CSV)
             </button>
+            <button id="btnOpenWarningsCenter" class="btn btn-warning">
+              <i class="fa-solid fa-triangle-exclamation"></i> مركز الإنذارات والواتساب
+            </button>
           </div>
         </div>
 
@@ -577,6 +612,48 @@
             <div class="table-responsive">
               <table class="data-table matrix-table" id="cumulativeMatrixTable">
                 <!-- Dynamically populated -->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- -------------------------------------------- -->
+      <!-- TAB: ATTENDANCE APPEALS MANAGEMENT          -->
+      <!-- -------------------------------------------- -->
+      <div id="tabAppeals" class="admin-tab-pane">
+        <div class="card">
+          <div class="card-header d-flex justify-between align-center">
+            <div>
+              <h3><i class="fa-solid fa-envelope-open-text text-accent"></i> صندوق طلبات مراجعة وتظلمات الطلاب</h3>
+              <p>مراجعة طلبات تصحيح الغياب المقدمة ذاتياً من الطلاب مع إمكانية القبول والاعتماد الفوري</p>
+            </div>
+            <div class="appeals-filter-group btn-group">
+              <button class="btn btn-sm btn-outline active appeal-filter-btn" data-filter="all">الكل (<span id="countAppealsAll">0</span>)</button>
+              <button class="btn btn-sm btn-outline appeal-filter-btn" data-filter="pending">معلقة (<span id="countAppealsPending">0</span>)</button>
+              <button class="btn btn-sm btn-outline appeal-filter-btn" data-filter="approved">مقبولة (<span id="countAppealsApproved">0</span>)</button>
+              <button class="btn btn-sm btn-outline appeal-filter-btn" data-filter="rejected">مرفوضة (<span id="countAppealsRejected">0</span>)</button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 110px;">التاريخ</th>
+                    <th style="width: 100px;">كود الطالب</th>
+                    <th>اسم الطالب</th>
+                    <th style="width: 120px;">المقرر / المجموعة</th>
+                    <th style="width: 80px; text-align: center;">الأسبوع</th>
+                    <th style="width: 170px;">سبب التظلم</th>
+                    <th>ملاحظات وتوضيح الطالب</th>
+                    <th style="width: 100px; text-align: center;">الحالة</th>
+                    <th style="width: 150px; text-align: center;">إجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="appealsTableBody">
+                  <!-- Dynamically populated -->
+                </tbody>
               </table>
             </div>
           </div>
@@ -774,11 +851,308 @@ function doGet(e) {
     </div>
   </div>
 
+  <!-- ============================================== -->
+  <!-- MODAL: LIVE QR PROJECTOR ATTENDANCE          -->
+  <!-- ============================================== -->
+  <div id="qrProjectorModal" class="modal-overlay hidden">
+    <div class="modal-card modal-qr-projector">
+      <div class="projector-header">
+        <div class="projector-meta">
+          <div class="live-pill"><span class="pulse-dot"></span> جلسة حضور مباشرة</div>
+          <h2 id="qrProjectorTitle">تراسل البيانات - Group A (الأسبوع 1)</h2>
+          <p id="qrProjectorSub">المشرف الأكاديمي: <span class="text-accent">م. أحمد الخطيب</span> | التاريخ: <span id="qrProjectorDate"></span></p>
+        </div>
+        <div class="projector-actions">
+          <button id="btnToggleFullscreen" class="icon-btn" title="ملء الشاشة للبروجيكتور"><i class="fa-solid fa-expand"></i></button>
+          <button id="btnToggleQrPause" class="icon-btn" title="إيقاف مؤقت / استئناف"><i class="fa-solid fa-pause"></i></button>
+          <button id="btnCloseQrProjector" class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="projector-body">
+        <div class="qr-code-zone">
+          <div class="qr-frame-glow">
+            <div id="qrCanvasContainer"></div>
+          </div>
+          <div class="qr-timer-wrapper">
+            <div class="qr-timer-bar">
+              <div id="qrTimerProgress" class="qr-timer-fill"></div>
+            </div>
+            <span id="qrTimerSeconds" class="qr-timer-text">يتجدد الكود تلقائياً كل 15 ثانية لمنع تصويره</span>
+          </div>
+        </div>
+
+        <div class="projector-info-zone">
+          <!-- Fallback PIN Box -->
+          <div class="pin-display-box">
+            <span class="pin-label"><i class="fa-solid fa-key"></i> رمز الجلسة المؤقت (PIN):</span>
+            <div id="qrPinDisplay" class="pin-code-large">----</div>
+            <small class="pin-hint">للطلاب الذين يتعذر عليهم فتح الكاميرا بالمتصفح</small>
+          </div>
+
+          <!-- Live Attendees Counter & Stream -->
+          <div class="live-attendees-box">
+            <div class="attendees-header">
+              <span class="title"><i class="fa-solid fa-users-check"></i> المسجلون حالياً بالجلسة:</span>
+              <span id="qrAttendeesCount" class="count-pill">0</span>
+            </div>
+            <div id="qrRecentAttendeesList" class="recent-attendees-stream">
+              <div class="stream-empty">بانتظار مسح أول طالب للكود...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="projector-footer">
+        <div class="footer-tips">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>يفتح الطلاب الموقع ويضغطون زر "تسجيل الحضور الفوري" من هواتفهم.</span>
+        </div>
+        <div class="footer-buttons">
+          <button id="btnRefreshQrNow" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrows-rotate"></i> تجديد الكود الآن</button>
+          <button id="btnFinishQrSession" class="btn btn-success btn-sm"><i class="fa-solid fa-check-double"></i> إنهاء واعتماد الجلسة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: STUDENT ATTENDANCE SCANNER & PIN CHECKIN -->
+  <!-- ============================================== -->
+  <div id="studentAttendanceModal" class="modal-overlay hidden">
+    <div class="modal-card modal-student-checkin">
+      <div class="modal-header d-flex justify-between align-center">
+        <div>
+          <h3><i class="fa-solid fa-camera text-accent"></i> تسجيل الحضور الفوري</h3>
+          <p>أكد حضورك في السكشن بمسح الـ QR أو إدخال الـ PIN</p>
+        </div>
+        <button id="btnCloseStudentCheckin" class="close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Step 1: Student Identity -->
+        <div class="student-id-step mb-3">
+          <label for="studentCheckinIdInput"><i class="fa-solid fa-id-card"></i> كود الطالب الجامعي:</label>
+          <div class="input-with-action">
+            <input type="text" id="studentCheckinIdInput" class="form-control" placeholder="أدخل كودك (مثال: 25010258)">
+            <button id="btnLookupStudentCheckin" class="btn btn-secondary btn-sm">تحقق</button>
+          </div>
+          <div id="studentCheckinLookupResult" class="lookup-result-box hidden">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Verification Method Tabs -->
+        <div class="checkin-tabs-nav mb-3">
+          <button id="tabBtnScanCamera" class="checkin-tab-btn active"><i class="fa-solid fa-camera"></i> مسح QR بالكاميرا</button>
+          <button id="tabBtnManualPin" class="checkin-tab-btn"><i class="fa-solid fa-keyboard"></i> إدخال رمز PIN (4 أرقام)</button>
+        </div>
+
+        <!-- Tab 1: Camera Scanner -->
+        <div id="tabContentScanCamera" class="checkin-tab-pane active">
+          <div id="studentQrReader" class="qr-camera-viewport"></div>
+          <p class="scan-instructions"><i class="fa-solid fa-qrcode"></i> وجّه الكاميرا نحو كود الـ QR المعروض على شاشة المعيد</p>
+        </div>
+
+        <!-- Tab 2: Manual PIN -->
+        <div id="tabContentManualPin" class="checkin-tab-pane hidden">
+          <div class="manual-pin-form">
+            <label>أدخل رمز الجلسة (4 أرقام) المعروض على شاشة المعيد:</label>
+            <input type="text" id="studentSessionPinInput" class="form-control text-center session-pin-input" maxlength="6" placeholder="0000" autocomplete="off">
+            <button id="btnSubmitSessionPin" class="btn btn-primary btn-block mt-3"><i class="fa-solid fa-check"></i> تأكيد الحضور بالرمز</button>
+          </div>
+        </div>
+
+        <!-- Success Animation Card -->
+        <div id="studentCheckinSuccessCard" class="checkin-success-card hidden">
+          <div class="success-animation-circle">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <h3 id="checkinSuccessTitle">تم تسجيل حضورك بنجاح!</h3>
+          <p id="checkinSuccessDetails"></p>
+          <button id="btnCloseCheckinSuccess" class="btn btn-success btn-block mt-3">تم، إغلاق</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: FLASH ROLL CALL (Keyboard Accelerated) -->
+  <!-- ============================================== -->
+  <div id="flashCallModal" class="modal-overlay hidden">
+    <div class="modal-card modal-flash-call">
+      <div class="flash-header">
+        <div class="flash-meta">
+          <div class="flash-badge"><i class="fa-solid fa-bolt"></i> وضع النداء السريع (Flash Mode)</div>
+          <h3 id="flashSessionTitle">تراسل البيانات - المجموعة A (الأسبوع 1)</h3>
+        </div>
+        <div class="flash-counter">
+          <span id="flashCurrentIndex">1</span> / <span id="flashTotalCount">0</span>
+        </div>
+        <button id="btnCloseFlashCall" class="close-btn">&times;</button>
+      </div>
+
+      <div class="flash-progress-bar">
+        <div id="flashProgressBarFill" class="flash-progress-fill"></div>
+      </div>
+
+      <div class="flash-body">
+        <div class="flash-student-card">
+          <div class="flash-student-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+          <div id="flashStudentName" class="flash-student-name">اسم الطالب الرباعي</div>
+          <div class="flash-student-sub">
+            <span id="flashStudentId" class="flash-pill">25010000</span>
+            <span id="flashStudentProgram" class="flash-pill">البرنامج</span>
+            <span id="flashCurrentStatusBadge" class="flash-status-badge">لم يُسجل</span>
+          </div>
+        </div>
+
+        <div class="flash-actions-grid">
+          <button id="btnFlashPresent" class="flash-btn flash-present" data-key="Space">
+            <span class="key-hint">Space / 1</span>
+            <i class="fa-solid fa-check"></i>
+            <span>حاضر</span>
+          </button>
+          <button id="btnFlashAbsent" class="flash-btn flash-absent" data-key="Enter">
+            <span class="key-hint">Enter / 2</span>
+            <i class="fa-solid fa-xmark"></i>
+            <span>غائب</span>
+          </button>
+          <button id="btnFlashLate" class="flash-btn flash-late" data-key="L">
+            <span class="key-hint">L / 3</span>
+            <i class="fa-solid fa-clock"></i>
+            <span>متأخر</span>
+          </button>
+          <button id="btnFlashExcused" class="flash-btn flash-excused" data-key="E">
+            <span class="key-hint">E / 4</span>
+            <i class="fa-solid fa-file-medical"></i>
+            <span>بعذر</span>
+          </button>
+        </div>
+
+        <div class="flash-navigation-bar">
+          <button id="btnFlashPrev" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-right"></i> السابق (→)</button>
+          <button id="btnFlashBonus" class="btn btn-warning btn-sm"><i class="fa-solid fa-award"></i> +5 بونص (B)</button>
+          <button id="btnFlashNext" class="btn btn-outline btn-sm">التالي (←) <i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: ATTENDANCE APPEAL SUBMISSION            -->
+  <!-- ============================================== -->
+  <div id="appealModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header d-flex justify-between align-center">
+        <div>
+          <h3><i class="fa-solid fa-envelope-open-text text-warning"></i> تقديم طلب مراجعة غياب / تظلم</h3>
+          <p>إرسال طلب رسمي لتصحيح حالة الحضور للمهندس أحمد الخطيب</p>
+        </div>
+        <button id="btnCloseAppealModal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="appealForm">
+          <div class="form-group mb-2">
+            <label>بيانات الطالب:</label>
+            <div id="appealStudentSummary" class="p-2 bg-glass rounded text-sm"></div>
+          </div>
+          <div class="form-group mb-2">
+            <label for="appealWeekSelect">الأسبوع المطلوب مراجعته:</label>
+            <select id="appealWeekSelect" class="form-control" required></select>
+          </div>
+          <div class="form-group mb-2">
+            <label for="appealReasonSelect">سبب التظلم / المراجعة:</label>
+            <select id="appealReasonSelect" class="form-control" required>
+              <option value="حضور في سكشن بديل / مستضاف">كنت حاضراً في سكشن بديل / مستضاف</option>
+              <option value="تم رصد الغياب بالخطأ">تم رصد الغياب بالخطأ أثناء النداء</option>
+              <option value="عذر طبي أو جامعي معتمد">لدي عذر طبي أو جامعي معتمد</option>
+              <option value="مشكلة في تسجيل الـ QR">واجهت مشكلة تقنية في تسجيل كود الـ QR</option>
+              <option value="أخرى">أخرى (موضح في التفاصيل)</option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="appealNotesInput">تفاصيل إضافية أو اسم السكشن البديل:</label>
+            <textarea id="appealNotesInput" class="form-control" rows="3" placeholder="اكتب أي توضيح مثل: حضرت مع سكشن B يوم الثلاثاء..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-warning btn-block"><i class="fa-solid fa-paper-plane"></i> إرسال طلب المراجعة</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: CROSS-GROUP GUEST STUDENT ATTENDANCE    -->
+  <!-- ============================================== -->
+  <div id="guestStudentModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header d-flex justify-between align-center">
+        <div>
+          <h3><i class="fa-solid fa-user-plus text-primary"></i> تحضير طالب مستضاف (سكشن بديل)</h3>
+          <p>تسجيل حضور طالب من مجموعة أخرى في جلسة اليوم دون تغيير مجموعته الأصلية</p>
+        </div>
+        <button id="btnCloseGuestModal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group mb-3">
+          <label for="guestSearchInput"><i class="fa-solid fa-magnifying-glass"></i> ابحث عن الطالب (بالكود أو الاسم):</label>
+          <input type="text" id="guestSearchInput" class="form-control" placeholder="اكتب كود أو اسم الطالب من أي مجموعة...">
+          <div id="guestSearchResults" class="search-dropdown hidden"></div>
+        </div>
+        <div id="guestSelectedPreview" class="p-3 bg-glass rounded mb-3 hidden"></div>
+        <div class="form-group mb-3">
+          <label for="guestAttendanceNote">ملاحظة الحضور البديل:</label>
+          <input type="text" id="guestAttendanceNote" class="form-control" value="طالب مستضاف (سكشن بديل)">
+        </div>
+        <button id="btnConfirmGuestAttendance" class="btn btn-success btn-block" disabled><i class="fa-solid fa-check"></i> تأكيد تحضير الطالب المستضاف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: WARNINGS & WHATSAPP ALERT CENTER        -->
+  <!-- ============================================== -->
+  <div id="whatsappWarningModal" class="modal-overlay hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header d-flex justify-between align-center">
+        <div>
+          <h3><i class="fa-solid fa-triangle-exclamation text-warning"></i> مركز رصد الغياب وتنبيهات الواتساب الرسمية</h3>
+          <p>متابعة الطلاب المنذرين والمعرضين للحرمان مع قوالب تنبيه احترافية موحدة</p>
+        </div>
+        <button id="btnCloseWarningModal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="warnings-summary-grid mb-3">
+          <div class="stat-pill warning"><i class="fa-solid fa-triangle-exclamation"></i> إنذار أول (2 غياب): <span id="warnCountFirst">0</span></div>
+          <div class="stat-pill danger"><i class="fa-solid fa-ban"></i> خطر حرمان (3+ غياب): <span id="warnCountDanger">0</span></div>
+        </div>
+        <div class="table-responsive" style="max-height: 380px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>كود الطالب</th>
+                <th>اسم الطالب</th>
+                <th>المجموعة</th>
+                <th>عدد الغيابات</th>
+                <th>نسبة الحضور</th>
+                <th>الحالة</th>
+                <th style="width: 170px; text-align: center;">إجراءات التنبيه</th>
+              </tr>
+            </thead>
+            <tbody id="warningsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=3.2"></script>
-  <script src="app.js?v=3.2"></script>
+  <script src="students_data.js?v=4.0"></script>
+  <script src="app.js?v=4.0"></script>
 </body>
 </html>

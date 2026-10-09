@@ -11,7 +11,8 @@
     SESSIONS: 'ATTENDANCE_SESSIONS_V1',
     BONUSES: 'ATTENDANCE_BONUSES_V1',
     CONFIG: 'ATTENDANCE_CONFIG_V1',
-    THEME: 'ATTENDANCE_THEME'
+    THEME: 'ATTENDANCE_THEME',
+    APPEALS: 'ATTENDANCE_APPEALS_V1'
   };
 
   const DEFAULT_CONFIG = {
@@ -220,9 +221,30 @@
     courses: window.INITIAL_DATA ? window.INITIAL_DATA.courses : [],
     sessions: storedSessions,
     bonuses: JSON.parse(localStorage.getItem(STORAGE_KEYS.BONUSES) || '[]'),
+    appeals: JSON.parse(localStorage.getItem(STORAGE_KEYS.APPEALS) || '[]'),
     config: Object.assign({}, DEFAULT_CONFIG, storedConfig),
     activeAdminTab: 'tabAttendance',
     selectedStudentId: null,
+    appealsFilter: 'all',
+    activeQrSession: {
+      active: false,
+      isPaused: false,
+      courseId: '',
+      groupId: '',
+      week: '1',
+      currentPin: '',
+      token: '',
+      exp: 0,
+      timer: null,
+      countdownRemaining: 15,
+      attendees: []
+    },
+    flashCallState: {
+      active: false,
+      students: [],
+      currentIndex: 0
+    },
+    html5QrScannerInstance: null,
     currentAdminSession: {
       courseId: '',
       groupId: '',
@@ -338,6 +360,101 @@
     btnCopyScriptCode: document.getElementById('btnCopyScriptCode'),
     scriptCodeDisplay: document.getElementById('scriptCodeDisplay'),
 
+    // QR & Action Buttons
+    btnOpenStudentCheckin: document.getElementById('btnOpenStudentCheckin'),
+    btnOpenLiveQR: document.getElementById('btnOpenLiveQR'),
+    btnOpenFlashCall: document.getElementById('btnOpenFlashCall'),
+    btnOpenGuestModal: document.getElementById('btnOpenGuestModal'),
+    btnOpenWarningsCenter: document.getElementById('btnOpenWarningsCenter'),
+
+    // Appeals Admin Pane
+    appealsBadge: document.getElementById('appealsBadge'),
+    appealsTableBody: document.getElementById('appealsTableBody'),
+    countAppealsAll: document.getElementById('countAppealsAll'),
+    countAppealsPending: document.getElementById('countAppealsPending'),
+    countAppealsApproved: document.getElementById('countAppealsApproved'),
+    countAppealsRejected: document.getElementById('countAppealsRejected'),
+    appealFilterBtns: document.querySelectorAll('.appeal-filter-btn'),
+
+    // QR Projector Modal
+    qrProjectorModal: document.getElementById('qrProjectorModal'),
+    qrProjectorTitle: document.getElementById('qrProjectorTitle'),
+    qrProjectorSub: document.getElementById('qrProjectorSub'),
+    qrProjectorDate: document.getElementById('qrProjectorDate'),
+    btnToggleFullscreen: document.getElementById('btnToggleFullscreen'),
+    btnToggleQrPause: document.getElementById('btnToggleQrPause'),
+    btnCloseQrProjector: document.getElementById('btnCloseQrProjector'),
+    qrCanvasContainer: document.getElementById('qrCanvasContainer'),
+    qrTimerProgress: document.getElementById('qrTimerProgress'),
+    qrTimerSeconds: document.getElementById('qrTimerSeconds'),
+    qrPinDisplay: document.getElementById('qrPinDisplay'),
+    qrAttendeesCount: document.getElementById('qrAttendeesCount'),
+    qrRecentAttendeesList: document.getElementById('qrRecentAttendeesList'),
+    btnRefreshQrNow: document.getElementById('btnRefreshQrNow'),
+    btnFinishQrSession: document.getElementById('btnFinishQrSession'),
+
+    // Student Checkin Modal
+    studentAttendanceModal: document.getElementById('studentAttendanceModal'),
+    btnCloseStudentCheckin: document.getElementById('btnCloseStudentCheckin'),
+    studentCheckinIdInput: document.getElementById('studentCheckinIdInput'),
+    btnLookupStudentCheckin: document.getElementById('btnLookupStudentCheckin'),
+    studentCheckinLookupResult: document.getElementById('studentCheckinLookupResult'),
+    tabBtnScanCamera: document.getElementById('tabBtnScanCamera'),
+    tabBtnManualPin: document.getElementById('tabBtnManualPin'),
+    tabContentScanCamera: document.getElementById('tabContentScanCamera'),
+    tabContentManualPin: document.getElementById('tabContentManualPin'),
+    studentQrReader: document.getElementById('studentQrReader'),
+    studentSessionPinInput: document.getElementById('studentSessionPinInput'),
+    btnSubmitSessionPin: document.getElementById('btnSubmitSessionPin'),
+    studentCheckinSuccessCard: document.getElementById('studentCheckinSuccessCard'),
+    checkinSuccessTitle: document.getElementById('checkinSuccessTitle'),
+    checkinSuccessDetails: document.getElementById('checkinSuccessDetails'),
+    btnCloseCheckinSuccess: document.getElementById('btnCloseCheckinSuccess'),
+
+    // Flash Call Modal
+    flashCallModal: document.getElementById('flashCallModal'),
+    flashSessionTitle: document.getElementById('flashSessionTitle'),
+    flashCurrentIndex: document.getElementById('flashCurrentIndex'),
+    flashTotalCount: document.getElementById('flashTotalCount'),
+    btnCloseFlashCall: document.getElementById('btnCloseFlashCall'),
+    flashProgressBarFill: document.getElementById('flashProgressBarFill'),
+    flashStudentName: document.getElementById('flashStudentName'),
+    flashStudentId: document.getElementById('flashStudentId'),
+    flashStudentProgram: document.getElementById('flashStudentProgram'),
+    flashCurrentStatusBadge: document.getElementById('flashCurrentStatusBadge'),
+    btnFlashPresent: document.getElementById('btnFlashPresent'),
+    btnFlashAbsent: document.getElementById('btnFlashAbsent'),
+    btnFlashLate: document.getElementById('btnFlashLate'),
+    btnFlashExcused: document.getElementById('btnFlashExcused'),
+    btnFlashPrev: document.getElementById('btnFlashPrev'),
+    btnFlashBonus: document.getElementById('btnFlashBonus'),
+    btnFlashNext: document.getElementById('btnFlashNext'),
+
+    // Appeal Modal
+    appealModal: document.getElementById('appealModal'),
+    btnCloseAppealModal: document.getElementById('btnCloseAppealModal'),
+    appealForm: document.getElementById('appealForm'),
+    appealStudentSummary: document.getElementById('appealStudentSummary'),
+    appealWeekSelect: document.getElementById('appealWeekSelect'),
+    appealReasonSelect: document.getElementById('appealReasonSelect'),
+    appealNotesInput: document.getElementById('appealNotesInput'),
+
+    // Guest Modal
+    guestStudentModal: document.getElementById('guestStudentModal'),
+    btnCloseGuestModal: document.getElementById('btnCloseGuestModal'),
+    guestSearchInput: document.getElementById('guestSearchInput'),
+    guestSearchResults: document.getElementById('guestSearchResults'),
+    guestSelectedPreview: document.getElementById('guestSelectedPreview'),
+    guestAttendanceNote: document.getElementById('guestAttendanceNote'),
+    btnConfirmGuestAttendance: document.getElementById('btnConfirmGuestAttendance'),
+
+    // Warnings Modal
+    whatsappWarningModal: document.getElementById('whatsappWarningModal'),
+    btnCloseWarningModal: document.getElementById('btnCloseWarningModal'),
+    warnCountFirst: document.getElementById('warnCountFirst'),
+    warnCountDanger: document.getElementById('warnCountDanger'),
+    warningsTableBody: document.getElementById('warningsTableBody'),
+
     // Toast
     toastContainer: document.getElementById('toastContainer')
   };
@@ -387,6 +504,74 @@
 
   function saveConfig() {
     localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(state.config));
+  }
+
+  function saveAppeals() {
+    localStorage.setItem(STORAGE_KEYS.APPEALS, JSON.stringify(state.appeals));
+    updateAppealsBadge();
+  }
+
+  function updateAppealsBadge() {
+    const pendingCount = state.appeals.filter(a => a.status === 'pending').length;
+    if (el.appealsBadge) {
+      el.appealsBadge.textContent = pendingCount;
+      if (pendingCount > 0) {
+        el.appealsBadge.classList.remove('hidden');
+      } else {
+        el.appealsBadge.classList.add('hidden');
+      }
+    }
+  }
+
+  function findStudentAcrossAllGroups(studentId) {
+    if (!studentId) return null;
+    const cleanId = String(studentId).trim();
+    for (const c of state.courses) {
+      for (const g of c.groups) {
+        const found = g.students.find(s => String(s.id).trim() === cleanId);
+        if (found) {
+          return {
+            student: found,
+            course: c,
+            group: g
+          };
+        }
+      }
+    }
+    return null;
+  }
+
+  function playBeep(type = 'success') {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'success') {
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, ctx.currentTime + 0.08); // A5
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.28);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.28);
+      } else if (type === 'beep') {
+        osc.frequency.setValueAtTime(493.88, ctx.currentTime); // B4
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.12);
+      } else if (type === 'warning') {
+        osc.frequency.setValueAtTime(329.63, ctx.currentTime); // E4
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.2);
+      }
+    } catch (e) {}
   }
 
   function getSessionKey(courseId, groupId, week) {
@@ -496,6 +681,7 @@
     // Render Bonus Leaderboard & Log
     renderBonusLeaderboard();
     renderBonusLogTable();
+    updateAppealsBadge();
 
     // Load Settings
     el.googleScriptUrlInput.value = state.config.googleScriptUrl || '';
@@ -852,9 +1038,29 @@
           ${bonusListHtml}
         </div>
       </div>
+
+      <!-- Self-Service Appeal Card -->
+      <div class="card mt-3">
+        <div class="card-header d-flex justify-between align-center">
+          <div>
+            <h4><i class="fa-solid fa-envelope-open-text text-warning"></i> طلب مراجعة وتصحيح الغياب</h4>
+            <small class="text-secondary">إذا كنت حاضراً في سكشن بديل أو واجهت مشكلة في رصد الغياب</small>
+          </div>
+          <button id="btnOpenAppealFromRecord" class="btn btn-warning btn-sm">
+            <i class="fa-solid fa-paper-plane"></i> تقديم طلب تظلم
+          </button>
+        </div>
+      </div>
     `;
 
     el.studentRecordCard.classList.remove('hidden');
+
+    const btnAppeal = document.getElementById('btnOpenAppealFromRecord');
+    if (btnAppeal) {
+      btnAppeal.addEventListener('click', () => {
+        openAppealModalForStudent(student, courseId, groupId, stats);
+      });
+    }
   }
 
   // --- 6. Admin Attendance Engine ---
@@ -896,6 +1102,24 @@
       !filterText || s.id.toLowerCase().includes(filterText) || s.name.toLowerCase().includes(filterText)
     );
 
+    // Also include any guest students recorded in this session
+    const nativeIds = new Set(group.students.map(s => s.id));
+    const allTableStudents = [...students];
+
+    Object.keys(state.currentAdminSession.records).forEach(sid => {
+      if (!nativeIds.has(sid)) {
+        const found = findStudentAcrossAllGroups(sid);
+        if (found) {
+          if (!filterText || sid.toLowerCase().includes(filterText) || found.student.name.toLowerCase().includes(filterText)) {
+            allTableStudents.push(Object.assign({}, found.student, {
+              isGuest: true,
+              homeGroupName: found.group.name
+            }));
+          }
+        }
+      }
+    });
+
     // Calculate live counters
     let countPresent = 0;
     let countAbsent = 0;
@@ -911,7 +1135,17 @@
       else if (status === 'excused') countExcused++;
     });
 
-    const total = group.students.length;
+    // Also count guest students
+    allTableStudents.filter(s => s.isGuest).forEach(s => {
+      const rec = state.currentAdminSession.records[s.id];
+      const status = rec ? rec.status : 'present';
+      if (status === 'present') countPresent++;
+      else if (status === 'absent') countAbsent++;
+      else if (status === 'late') countLate++;
+      else if (status === 'excused') countExcused++;
+    });
+
+    const total = group.students.length + allTableStudents.filter(s => s.isGuest).length;
     el.statTotalStudents.textContent = total;
     el.statPresentCount.textContent = countPresent;
     el.statAbsentCount.textContent = countAbsent;
@@ -923,13 +1157,13 @@
     el.statAttendancePercent.textContent = `${rate}%`;
 
     // Render Table Rows
-    el.attendanceTableBody.innerHTML = students.map((s, index) => {
+    el.attendanceTableBody.innerHTML = allTableStudents.map((s, index) => {
       const rec = state.currentAdminSession.records[s.id] || { status: 'present', notes: '' };
       const status = rec.status || 'present';
 
       // Total bonus for this student
       const studentBonuses = state.bonuses.filter(b => 
-        b.courseId === courseId && b.groupId === groupId && b.studentId === s.id
+        b.studentId === s.id
       );
       const totalBonus = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
 
@@ -937,7 +1171,10 @@
         <tr data-student-id="${s.id}">
           <td style="color: var(--text-muted); font-weight: bold;">${index + 1}</td>
           <td><span class="meta-pill id-pill">${s.id}</span></td>
-          <td><strong>${s.name}</strong></td>
+          <td>
+            <strong>${s.name}</strong>
+            ${s.isGuest ? `<span class="badge-indicator warning" style="margin-right: 6px; font-size: 0.75rem;"><i class="fa-solid fa-plane-arrival"></i> مستضاف من ${s.homeGroupName}</span>` : ''}
+          </td>
           <td><small class="meta-pill">${s.program}</small></td>
           <td style="text-align: center;">
             <div class="status-btn-group">
@@ -2062,6 +2299,8 @@
       renderBonusLogTable();
     } else if (tabId === 'tabReports') {
       generateOfficialReportPreview();
+    } else if (tabId === 'tabAppeals') {
+      renderAppealsTable();
     }
   }
 
@@ -2074,6 +2313,1029 @@
 
   function closePinModal() {
     el.pinModal.classList.add('hidden');
+  }
+
+  // ============================================================
+  // --- 14. Live Dynamic QR Code & Projector Engine ---
+  // ============================================================
+  function startQrProjectorSession() {
+    const courseId = el.adminCourseSelect.value;
+    const groupId = el.adminGroupSelect.value;
+    const week = el.adminWeekSelect.value;
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+    if (!course || !group) {
+      showToast('يرجى اختيار المقرر والمجموعة أولاً', 'error');
+      return;
+    }
+
+    const sessionKey = getSessionKey(courseId, groupId, week);
+    state.activeQrSession = {
+      active: true,
+      isPaused: false,
+      courseId,
+      groupId,
+      week,
+      sessionKey,
+      currentPin: '',
+      token: '',
+      exp: 0,
+      countdownRemaining: 15,
+      timer: null
+    };
+
+    if (el.qrProjectorTitle) el.qrProjectorTitle.textContent = `${course.name} - ${group.name} (الأسبوع ${week})`;
+    if (el.qrProjectorDate) el.qrProjectorDate.textContent = el.adminSessionDate.value || new Date().toISOString().split('T')[0];
+    if (el.qrProjectorModal) el.qrProjectorModal.classList.remove('hidden');
+
+    updateQrAttendeesDisplay();
+    generateNewQrCode();
+
+    if (state.activeQrSession.timer) clearInterval(state.activeQrSession.timer);
+    state.activeQrSession.timer = setInterval(() => {
+      if (!state.activeQrSession.active || state.activeQrSession.isPaused) return;
+
+      state.activeQrSession.countdownRemaining--;
+      const pct = Math.max(0, (state.activeQrSession.countdownRemaining / 15) * 100);
+      if (el.qrTimerProgress) el.qrTimerProgress.style.width = `${pct}%`;
+      if (el.qrTimerSeconds) el.qrTimerSeconds.textContent = `يتجدد الكود خلال ${state.activeQrSession.countdownRemaining} ثانية`;
+
+      if (state.activeQrSession.countdownRemaining <= 0) {
+        generateNewQrCode();
+      }
+    }, 1000);
+  }
+
+  function generateNewQrCode() {
+    if (!state.activeQrSession.active) return;
+
+    const pin = String(Math.floor(1000 + Math.random() * 9000));
+    const token = Math.random().toString(36).substring(2, 8);
+    const exp = Date.now() + 18000;
+
+    state.activeQrSession.currentPin = pin;
+    state.activeQrSession.token = token;
+    state.activeQrSession.exp = exp;
+    state.activeQrSession.countdownRemaining = 15;
+
+    if (el.qrPinDisplay) el.qrPinDisplay.textContent = pin;
+    if (el.qrTimerProgress) el.qrTimerProgress.style.width = '100%';
+
+    const qrPayload = JSON.stringify({
+      c: state.activeQrSession.courseId,
+      g: state.activeQrSession.groupId,
+      w: Number(state.activeQrSession.week),
+      p: pin,
+      t: token,
+      exp: exp
+    });
+
+    if (el.qrCanvasContainer) {
+      el.qrCanvasContainer.innerHTML = '';
+      if (typeof QRCode !== 'undefined') {
+        try {
+          new QRCode(el.qrCanvasContainer, {
+            text: qrPayload,
+            width: 230,
+            height: 230,
+            colorDark: "#0f172a",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        } catch (e) {
+          renderFallbackQrSvg(el.qrCanvasContainer, pin);
+        }
+      } else {
+        renderFallbackQrSvg(el.qrCanvasContainer, pin);
+      }
+    }
+  }
+
+  function renderFallbackQrSvg(container, pin) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 1.5rem 1rem;">
+        <i class="fa-solid fa-qrcode" style="font-size: 5.5rem; color: #0284c7; margin-bottom: 0.5rem;"></i>
+        <div style="font-size: 1.1rem; font-weight: 800; color: #0f172a;">رمز الحضور المباشر</div>
+        <div style="font-size: 2.5rem; font-weight: 900; letter-spacing: 6px; color: #0284c7; font-family: monospace;">${pin}</div>
+      </div>
+    `;
+  }
+
+  function updateQrAttendeesDisplay() {
+    const courseId = state.activeQrSession.courseId;
+    const groupId = state.activeQrSession.groupId;
+    const week = state.activeQrSession.week;
+    const key = getSessionKey(courseId, groupId, week);
+    const session = state.sessions[key];
+    const group = getGroup(courseId, groupId);
+    if (!session || !session.records || !group) {
+      if (el.qrAttendeesCount) el.qrAttendeesCount.textContent = '0';
+      if (el.qrRecentAttendeesList) el.qrRecentAttendeesList.innerHTML = '<div class="stream-empty">بانتظار مسح أول طالب للكود...</div>';
+      return;
+    }
+
+    const presentStudents = [];
+    Object.keys(session.records).forEach(sid => {
+      const rec = session.records[sid];
+      if (rec && (rec.status === 'present' || rec.status === 'late' || rec.status === 'excused')) {
+        const found = findStudentAcrossAllGroups(sid);
+        if (found) {
+          presentStudents.push({
+            id: sid,
+            name: found.student.name,
+            notes: rec.notes || ''
+          });
+        }
+      }
+    });
+
+    if (el.qrAttendeesCount) el.qrAttendeesCount.textContent = presentStudents.length;
+
+    if (el.qrRecentAttendeesList) {
+      if (presentStudents.length === 0) {
+        el.qrRecentAttendeesList.innerHTML = '<div class="stream-empty">بانتظار مسح أول طالب للكود...</div>';
+      } else {
+        el.qrRecentAttendeesList.innerHTML = presentStudents.slice(-8).reverse().map(s => `
+          <div class="stream-item">
+            <span><strong>${s.name}</strong> <small class="text-muted">(${s.id})</small></span>
+            <span class="badge-pill text-success" style="font-size:0.75rem;"><i class="fa-solid fa-check"></i> حاضر</span>
+          </div>
+        `).join('');
+      }
+    }
+  }
+
+  function toggleQrPause() {
+    state.activeQrSession.isPaused = !state.activeQrSession.isPaused;
+    if (el.btnToggleQrPause) {
+      const icon = el.btnToggleQrPause.querySelector('i');
+      if (icon) {
+        icon.className = state.activeQrSession.isPaused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
+      }
+      el.btnToggleQrPause.title = state.activeQrSession.isPaused ? 'استئناف التجديد' : 'إيقاف مؤقت';
+    }
+    showToast(state.activeQrSession.isPaused ? 'تم إيقاف تجديد الكود مؤقتاً' : 'تم استئناف تجديد الكود', 'info');
+  }
+
+  function closeQrProjectorSession() {
+    if (state.activeQrSession.timer) {
+      clearInterval(state.activeQrSession.timer);
+      state.activeQrSession.timer = null;
+    }
+    state.activeQrSession.active = false;
+    if (document.fullscreenElement) {
+      try { document.exitFullscreen(); } catch (e) {}
+    }
+    if (el.qrProjectorModal) {
+      el.qrProjectorModal.classList.remove('is-fullscreen');
+      el.qrProjectorModal.classList.add('hidden');
+    }
+    loadCurrentAdminAttendanceSession();
+  }
+
+  // ============================================================
+  // --- 15. Student QR Scanner & PIN Self-Checkin Engine ---
+  // ============================================================
+  function openStudentCheckinModal() {
+    if (el.studentAttendanceModal) el.studentAttendanceModal.classList.remove('hidden');
+    if (el.studentCheckinSuccessCard) el.studentCheckinSuccessCard.classList.add('hidden');
+    if (el.studentSessionPinInput) el.studentSessionPinInput.value = '';
+
+    if (state.selectedStudentId && el.studentCheckinIdInput) {
+      el.studentCheckinIdInput.value = state.selectedStudentId;
+      lookupStudentForCheckin(state.selectedStudentId);
+    } else if (el.studentSearchInput && el.studentSearchInput.value && el.studentCheckinIdInput) {
+      const match = el.studentSearchInput.value.match(/\((\d+)\)/);
+      if (match && match[1]) {
+        el.studentCheckinIdInput.value = match[1];
+        lookupStudentForCheckin(match[1]);
+      }
+    }
+
+    switchCheckinTab('camera');
+  }
+
+  function closeStudentCheckinModal() {
+    stopQrCamera();
+    if (el.studentAttendanceModal) el.studentAttendanceModal.classList.add('hidden');
+  }
+
+  function switchCheckinTab(tab) {
+    if (tab === 'camera') {
+      if (el.tabBtnScanCamera) el.tabBtnScanCamera.classList.add('active');
+      if (el.tabBtnManualPin) el.tabBtnManualPin.classList.remove('active');
+      if (el.tabContentScanCamera) el.tabContentScanCamera.classList.remove('hidden');
+      if (el.tabContentManualPin) el.tabContentManualPin.classList.add('hidden');
+      startQrCamera();
+    } else {
+      if (el.tabBtnManualPin) el.tabBtnManualPin.classList.add('active');
+      if (el.tabBtnScanCamera) el.tabBtnScanCamera.classList.remove('active');
+      if (el.tabContentManualPin) el.tabContentManualPin.classList.remove('hidden');
+      if (el.tabContentScanCamera) el.tabContentScanCamera.classList.add('hidden');
+      stopQrCamera();
+      if (el.studentSessionPinInput) el.studentSessionPinInput.focus();
+    }
+  }
+
+  function lookupStudentForCheckin(studentId) {
+    const cleanId = String(studentId || '').trim();
+    if (!cleanId || !el.studentCheckinLookupResult) return null;
+
+    const res = findStudentAcrossAllGroups(cleanId);
+    if (res) {
+      el.studentCheckinLookupResult.classList.remove('hidden');
+      el.studentCheckinLookupResult.innerHTML = `
+        <div style="color: var(--color-present); font-weight: bold;"><i class="fa-solid fa-circle-check"></i> ${res.student.name}</div>
+        <div style="color: var(--text-secondary); font-size: 0.8rem;">المقرر: ${res.course.name} | السكشن: ${res.group.name}</div>
+      `;
+      return res;
+    } else {
+      el.studentCheckinLookupResult.classList.remove('hidden');
+      el.studentCheckinLookupResult.innerHTML = `
+        <div style="color: var(--color-absent); font-weight: 600;"><i class="fa-solid fa-triangle-exclamation"></i> لم يتم العثور على طالب بهذا الكود!</div>
+      `;
+      return null;
+    }
+  }
+
+  function startQrCamera() {
+    if (typeof Html5Qrcode === 'undefined') {
+      showToast('مكتبة الكاميرا غير محملة، يرجى إدخال رمز الجلسة (PIN) المكون من 4 أرقام', 'warning');
+      switchCheckinTab('pin');
+      return;
+    }
+
+    stopQrCamera();
+
+    try {
+      const html5QrCode = new Html5Qrcode("studentQrReader");
+      state.html5QrScannerInstance = html5QrCode;
+      html5QrCode.start(
+        { facingMode: "environment" },
+        {
+          fps: 10,
+          qrbox: { width: 220, height: 220 }
+        },
+        (decodedText) => {
+          handleScannedQrResult(decodedText);
+        },
+        () => {}
+      ).catch(err => {
+        console.warn('Camera failed:', err);
+        showToast('تعذر فتح الكاميرا، يرجى استخدام رمز الـ PIN بدلاً من ذلك', 'info');
+        switchCheckinTab('pin');
+      });
+    } catch(err) {
+      console.warn('Scanner init error:', err);
+      switchCheckinTab('pin');
+    }
+  }
+
+  function stopQrCamera() {
+    if (state.html5QrScannerInstance) {
+      try {
+        state.html5QrScannerInstance.stop().then(() => {
+          state.html5QrScannerInstance = null;
+        }).catch(() => {
+          state.html5QrScannerInstance = null;
+        });
+      } catch (e) {
+        state.html5QrScannerInstance = null;
+      }
+    }
+  }
+
+  function handleScannedQrResult(decodedText) {
+    stopQrCamera();
+    try {
+      let data;
+      if (decodedText.startsWith('{')) {
+        data = JSON.parse(decodedText);
+      } else {
+        const parts = decodedText.split('|');
+        if (parts.length >= 6) {
+          data = {
+            c: parts[1],
+            g: parts[2],
+            w: Number(parts[3]),
+            t: parts[4],
+            p: parts[5],
+            exp: Number(parts[6] || 0)
+          };
+        }
+      }
+
+      if (!data || !data.c || !data.g || !data.w) {
+        showToast('كود الـ QR غير صالح أو غير مخصص لهذا النظام', 'error');
+        playBeep('warning');
+        startQrCamera();
+        return;
+      }
+
+      if (data.exp && Date.now() > data.exp + 60000) {
+        showToast('انتهت صلاحية هذا الكود، يرجى مسح الكود المتجدد حالياً على الشاشة', 'warning');
+        playBeep('warning');
+        startQrCamera();
+        return;
+      }
+
+      executeStudentCheckin(data.c, data.g, data.w, 'كود QR الذكي');
+    } catch (e) {
+      showToast('تعذر قراءة بيانات الكود، يرجى المحاولة ثانية أو استخدام الـ PIN', 'error');
+      playBeep('warning');
+      startQrCamera();
+    }
+  }
+
+  function handleManualPinSubmit() {
+    const enteredPin = (el.studentSessionPinInput ? el.studentSessionPinInput.value : '').trim();
+    if (!enteredPin || enteredPin.length < 4) {
+      showToast('يرجى إدخال رمز الجلسة المكون من 4 أرقام', 'warning');
+      return;
+    }
+
+    if (state.activeQrSession.active && state.activeQrSession.currentPin === enteredPin) {
+      executeStudentCheckin(
+        state.activeQrSession.courseId,
+        state.activeQrSession.groupId,
+        state.activeQrSession.week,
+        'رمز PIN المباشر'
+      );
+      return;
+    }
+
+    if (state.currentAdminSession.courseId && state.currentAdminSession.groupId) {
+      executeStudentCheckin(
+        state.currentAdminSession.courseId,
+        state.currentAdminSession.groupId,
+        state.currentAdminSession.week,
+        'رمز PIN المباشر'
+      );
+      return;
+    }
+
+    showToast('رمز الجلسة غير صحيح أو انتهت صلاحيته!', 'error');
+    playBeep('warning');
+  }
+
+  function executeStudentCheckin(courseId, groupId, week, methodLabel) {
+    const studentId = (el.studentCheckinIdInput ? el.studentCheckinIdInput.value : '').trim();
+    if (!studentId) {
+      showToast('يرجى إدخال كودك الجامعي أولاً لتأكيد الحضور', 'warning');
+      playBeep('warning');
+      return;
+    }
+
+    const studentInfo = findStudentAcrossAllGroups(studentId);
+    if (!studentInfo) {
+      showToast('كود الطالب غير مسجل في قوائم الكلية، يرجى التحقق من الكود!', 'error');
+      playBeep('warning');
+      return;
+    }
+
+    const student = studentInfo.student;
+    const sessionKey = getSessionKey(courseId, groupId, week);
+    const dateStr = el.adminSessionDate.value || new Date().toISOString().split('T')[0];
+    const timeStr = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+
+    if (!state.sessions[sessionKey]) {
+      state.sessions[sessionKey] = {
+        courseId,
+        groupId,
+        week: String(week),
+        date: dateStr,
+        records: {}
+      };
+    }
+    if (!state.sessions[sessionKey].records) {
+      state.sessions[sessionKey].records = {};
+    }
+
+    const note = `حضور ذاتي عبر ${methodLabel} [${timeStr}]`;
+    state.sessions[sessionKey].records[student.id] = {
+      status: 'present',
+      notes: note
+    };
+
+    if (studentInfo.group.id !== groupId) {
+      const homeKey = getSessionKey(courseId, studentInfo.group.id, week);
+      if (!state.sessions[homeKey]) {
+        state.sessions[homeKey] = {
+          courseId,
+          groupId: studentInfo.group.id,
+          week: String(week),
+          date: dateStr,
+          records: {}
+        };
+      }
+      if (!state.sessions[homeKey].records) state.sessions[homeKey].records = {};
+      state.sessions[homeKey].records[student.id] = {
+        status: 'present',
+        notes: `حضور مع مجموعة ${groupId} عبر ${methodLabel} [${timeStr}]`
+      };
+    }
+
+    saveSessions();
+    playBeep('success');
+
+    if (state.activeQrSession.active) {
+      updateQrAttendeesDisplay();
+    }
+
+    if (el.tabContentScanCamera) el.tabContentScanCamera.classList.add('hidden');
+    if (el.tabContentManualPin) el.tabContentManualPin.classList.add('hidden');
+    if (el.studentCheckinSuccessCard) el.studentCheckinSuccessCard.classList.remove('hidden');
+
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+
+    if (el.checkinSuccessTitle) el.checkinSuccessTitle.textContent = `تم تسجيل حضورك بنجاح! 🎉`;
+    if (el.checkinSuccessDetails) {
+      el.checkinSuccessDetails.innerHTML = `
+        <strong>الطالب/ـة:</strong> ${student.name} (${student.id})<br>
+        <strong>المقرر:</strong> ${course ? course.name : courseId} | <strong>السكشن:</strong> ${group ? group.name : groupId}<br>
+        <strong>الأسبوع:</strong> ${week} | <strong>الوقت:</strong> ${timeStr}
+      `;
+    }
+
+    state.selectedStudentId = student.id;
+    if (el.studentPortalView && el.studentPortalView.classList.contains('active')) {
+      selectStudentAndRenderCard(student.id);
+    }
+
+    if (state.config.googleScriptUrl) {
+      try {
+        fetch(state.config.googleScriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'qr_checkin',
+            date: dateStr,
+            week: week,
+            courseId,
+            groupId,
+            records: [{
+              id: student.id,
+              name: student.name,
+              program: student.program || '',
+              status: 'present',
+              bonus: 0,
+              notes: note
+            }]
+          })
+        }).catch(() => {});
+      } catch(e) {}
+    }
+
+    showToast(`تم توثيق حضور ${student.name} بنجاح!`, 'success');
+  }
+
+  // ============================================================
+  // --- 16. Flash Roll Call Keyboard Engine ---
+  // ============================================================
+  function startFlashRollCall() {
+    const courseId = state.currentAdminSession.courseId;
+    const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+    if (!course || !group || group.students.length === 0) {
+      showToast('يرجى اختيار مجموعة تحتوي على طلاب أولاً', 'error');
+      return;
+    }
+
+    state.flashCallState = {
+      active: true,
+      students: group.students,
+      currentIndex: 0
+    };
+
+    if (el.flashSessionTitle) el.flashSessionTitle.textContent = `${course.name} - ${group.name} (الأسبوع ${week})`;
+    if (el.flashCallModal) el.flashCallModal.classList.remove('hidden');
+    renderFlashCurrentStudent();
+  }
+
+  function renderFlashCurrentStudent() {
+    if (!state.flashCallState.active) return;
+    const list = state.flashCallState.students;
+    const idx = state.flashCallState.currentIndex;
+    if (idx < 0 || idx >= list.length) return;
+
+    const s = list[idx];
+    if (el.flashCurrentIndex) el.flashCurrentIndex.textContent = idx + 1;
+    if (el.flashTotalCount) el.flashTotalCount.textContent = list.length;
+
+    const progressPct = ((idx + 1) / list.length) * 100;
+    if (el.flashProgressBarFill) el.flashProgressBarFill.style.width = `${progressPct}%`;
+
+    if (el.flashStudentName) el.flashStudentName.textContent = s.name;
+    if (el.flashStudentId) el.flashStudentId.textContent = s.id;
+    if (el.flashStudentProgram) el.flashStudentProgram.textContent = s.program || 'طالب';
+
+    const rec = state.currentAdminSession.records[s.id];
+    const status = rec ? rec.status : '';
+
+    if (el.flashCurrentStatusBadge) {
+      el.flashCurrentStatusBadge.className = 'flash-status-badge ' + (status || '');
+      if (status === 'present') el.flashCurrentStatusBadge.textContent = 'حاضر ✓';
+      else if (status === 'absent') el.flashCurrentStatusBadge.textContent = 'غائب ✗';
+      else if (status === 'late') el.flashCurrentStatusBadge.textContent = 'متأخر ⏱';
+      else if (status === 'excused') el.flashCurrentStatusBadge.textContent = 'بعذر ⚕';
+      else el.flashCurrentStatusBadge.textContent = 'لم يُسجل بعد';
+    }
+  }
+
+  function markFlashStudent(newStatus) {
+    if (!state.flashCallState.active) return;
+    const s = state.flashCallState.students[state.flashCallState.currentIndex];
+    if (!s) return;
+
+    if (!state.currentAdminSession.records[s.id]) {
+      state.currentAdminSession.records[s.id] = { status: newStatus, notes: '' };
+    } else {
+      state.currentAdminSession.records[s.id].status = newStatus;
+    }
+
+    const courseId = state.currentAdminSession.courseId;
+    const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
+    const key = getSessionKey(courseId, groupId, week);
+    if (!state.sessions[key]) {
+      state.sessions[key] = {
+        courseId, groupId, week,
+        date: el.adminSessionDate.value || new Date().toISOString().split('T')[0],
+        records: {}
+      };
+    }
+    state.sessions[key].records[s.id] = {
+      status: newStatus,
+      notes: state.currentAdminSession.records[s.id].notes || ''
+    };
+    saveSessions();
+
+    playBeep(newStatus === 'present' ? 'success' : 'beep');
+
+    if (state.flashCallState.currentIndex < state.flashCallState.students.length - 1) {
+      state.flashCallState.currentIndex++;
+      renderFlashCurrentStudent();
+    } else {
+      renderFlashCurrentStudent();
+      showToast('وصلت إلى نهاية الكشف! تم رصد جميع الطلاب بنجاح 🎉', 'success');
+    }
+  }
+
+  function flashPrevStudent() {
+    if (state.flashCallState.currentIndex > 0) {
+      state.flashCallState.currentIndex--;
+      renderFlashCurrentStudent();
+    }
+  }
+
+  function flashNextStudent() {
+    if (state.flashCallState.currentIndex < state.flashCallState.students.length - 1) {
+      state.flashCallState.currentIndex++;
+      renderFlashCurrentStudent();
+    }
+  }
+
+  function flashAddBonus() {
+    if (!state.flashCallState.active) return;
+    const s = state.flashCallState.students[state.flashCallState.currentIndex];
+    if (!s) return;
+
+    const courseId = state.currentAdminSession.courseId;
+    const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
+
+    const bonus = {
+      id: 'b_' + Date.now(),
+      courseId,
+      groupId,
+      studentId: s.id,
+      studentName: s.name,
+      week: Number(week),
+      points: 5,
+      reason: 'تميز ومشاركة أثناء السكشن (Flash Bonus)',
+      date: el.adminSessionDate.value || new Date().toISOString().split('T')[0],
+      createdAt: new Date().toISOString()
+    };
+
+    state.bonuses.push(bonus);
+    saveBonuses();
+    playBeep('success');
+    showToast(`تمت إضافة +5 درجات بونص للطالب ${s.name}! 🌟`, 'success');
+  }
+
+  function closeFlashRollCall() {
+    state.flashCallState.active = false;
+    if (el.flashCallModal) el.flashCallModal.classList.add('hidden');
+    renderAdminAttendanceTable();
+  }
+
+  // ============================================================
+  // --- 17. Student Appeals & Resolution Engine ---
+  // ============================================================
+  function openAppealModalForStudent(student, courseId, groupId, stats) {
+    if (el.appealModal) el.appealModal.classList.remove('hidden');
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+
+    if (el.appealStudentSummary) {
+      el.appealStudentSummary.innerHTML = `
+        <strong>${student.name}</strong> (${student.id})<br>
+        <span class="text-muted">${course ? course.name : courseId} - ${group ? group.name : groupId}</span>
+      `;
+    }
+
+    if (el.appealWeekSelect) {
+      el.appealWeekSelect.innerHTML = stats.timeline.map(t => {
+        let statusText = 'لم يُسجل';
+        if (t.status === 'present') statusText = 'حاضر';
+        if (t.status === 'absent') statusText = 'غائب ⚠️';
+        if (t.status === 'late') statusText = 'متأخر';
+        if (t.status === 'excused') statusText = 'عذر';
+        return `<option value="${t.week}" ${t.status === 'absent' ? 'selected' : ''}>الأسبوع ${t.week} (${statusText})</option>`;
+      }).join('');
+    }
+
+    if (el.appealNotesInput) el.appealNotesInput.value = '';
+    if (el.appealForm) {
+      el.appealForm.setAttribute('data-student-id', student.id);
+      el.appealForm.setAttribute('data-student-name', student.name);
+      el.appealForm.setAttribute('data-course-id', courseId);
+      el.appealForm.setAttribute('data-group-id', groupId);
+    }
+  }
+
+  function handleAppealFormSubmit(e) {
+    e.preventDefault();
+    const studentId = el.appealForm.getAttribute('data-student-id');
+    const studentName = el.appealForm.getAttribute('data-student-name');
+    const courseId = el.appealForm.getAttribute('data-course-id');
+    const groupId = el.appealForm.getAttribute('data-group-id');
+    const week = el.appealWeekSelect ? el.appealWeekSelect.value : '1';
+    const reason = el.appealReasonSelect ? el.appealReasonSelect.value : 'أخرى';
+    const notes = el.appealNotesInput ? el.appealNotesInput.value.trim() : '';
+
+    const newTicket = {
+      id: 'appeal_' + Date.now(),
+      studentId,
+      studentName,
+      courseId,
+      groupId,
+      week: Number(week),
+      reason,
+      notes,
+      status: 'pending',
+      date: new Date().toLocaleDateString('ar-EG'),
+      time: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }),
+      createdAt: new Date().toISOString()
+    };
+
+    state.appeals.unshift(newTicket);
+    saveAppeals();
+    if (el.appealModal) el.appealModal.classList.add('hidden');
+    playBeep('success');
+
+    if (state.config.googleScriptUrl) {
+      try {
+        fetch(state.config.googleScriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'appeal_ticket',
+            ticket: newTicket
+          })
+        }).catch(() => {});
+      } catch(err) {}
+    }
+
+    showToast('تم إرسال طلب المراجعة بنجاح! سيتم مراجعته واعتماده من قبل م. أحمد الخطيب 📩', 'success');
+  }
+
+  function renderAppealsTable() {
+    updateAppealsBadge();
+
+    const filter = state.appealsFilter || 'all';
+    const list = state.appeals.filter(a => {
+      if (filter === 'all') return true;
+      return a.status === filter;
+    });
+
+    const countAll = state.appeals.length;
+    const countPending = state.appeals.filter(a => a.status === 'pending').length;
+    const countApproved = state.appeals.filter(a => a.status === 'approved').length;
+    const countRejected = state.appeals.filter(a => a.status === 'rejected').length;
+
+    if (el.countAppealsAll) el.countAppealsAll.textContent = countAll;
+    if (el.countAppealsPending) el.countAppealsPending.textContent = countPending;
+    if (el.countAppealsApproved) el.countAppealsApproved.textContent = countApproved;
+    if (el.countAppealsRejected) el.countAppealsRejected.textContent = countRejected;
+
+    if (!el.appealsTableBody) return;
+
+    if (list.length === 0) {
+      el.appealsTableBody.innerHTML = `
+        <tr>
+          <td colspan="9" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+            <i class="fa-solid fa-inbox" style="font-size: 2.5rem; margin-bottom: 0.5rem; display: block;"></i>
+            لا توجد طلبات مراجعة في هذه الفئة حالياً.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    el.appealsTableBody.innerHTML = list.map(a => {
+      const course = getCourse(a.courseId);
+      const group = getGroup(a.courseId, a.groupId);
+      const groupLabel = `${course ? course.id : a.courseId} / ${group ? group.id : a.groupId}`;
+
+      let statusBadge = '<span class="status-chip pending"><i class="fa-solid fa-clock"></i> قيد المراجعة</span>';
+      if (a.status === 'approved') {
+        statusBadge = '<span class="status-chip approved"><i class="fa-solid fa-check"></i> معتمد ومقبول</span>';
+      } else if (a.status === 'rejected') {
+        statusBadge = '<span class="status-chip rejected"><i class="fa-solid fa-xmark"></i> مرفوض</span>';
+      }
+
+      return `
+        <tr data-appeal-id="${a.id}">
+          <td><small class="text-muted">${a.date}<br>${a.time || ''}</small></td>
+          <td><span class="meta-pill id-pill">${a.studentId}</span></td>
+          <td><strong>${a.studentName}</strong></td>
+          <td><small class="meta-pill">${groupLabel}</small></td>
+          <td style="text-align: center;"><strong>الأسبوع ${a.week}</strong></td>
+          <td><span style="color: var(--accent-primary); font-weight: 600;">${a.reason}</span></td>
+          <td><small>${a.notes || '<span class="text-muted">-</span>'}</small></td>
+          <td style="text-align: center;">${statusBadge}</td>
+          <td style="text-align: center;">
+            <div style="display: flex; gap: 4px; justify-content: center;">
+              ${a.status !== 'approved' ? `
+                <button class="btn btn-sm btn-success btn-appeal-action" data-action="approve" data-id="${a.id}" title="قبول واعتماد الحضور فوراً">
+                  <i class="fa-solid fa-check"></i> قبول
+                </button>
+              ` : ''}
+              ${a.status !== 'rejected' ? `
+                <button class="btn btn-sm btn-outline-danger btn-appeal-action" data-action="reject" data-id="${a.id}" title="رفض الطلب">
+                  <i class="fa-solid fa-xmark"></i> رفض
+                </button>
+              ` : ''}
+              <button class="btn btn-sm btn-outline btn-appeal-action" data-action="delete" data-id="${a.id}" title="حذف الطلب">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    el.appealsTableBody.querySelectorAll('.btn-appeal-action').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action');
+        const id = btn.getAttribute('data-id');
+        handleAppealAction(action, id);
+      });
+    });
+  }
+
+  function handleAppealAction(action, appealId) {
+    const appeal = state.appeals.find(a => a.id === appealId);
+    if (!appeal) return;
+
+    if (action === 'approve') {
+      appeal.status = 'approved';
+      const key = getSessionKey(appeal.courseId, appeal.groupId, appeal.week);
+      if (!state.sessions[key]) {
+        state.sessions[key] = {
+          courseId: appeal.courseId,
+          groupId: appeal.groupId,
+          week: String(appeal.week),
+          date: new Date().toISOString().split('T')[0],
+          records: {}
+        };
+      }
+      if (!state.sessions[key].records) state.sessions[key].records = {};
+      state.sessions[key].records[appeal.studentId] = {
+        status: 'present',
+        notes: `تم قبول التظلم: ${appeal.reason}`
+      };
+
+      saveSessions();
+      saveAppeals();
+      playBeep('success');
+      showToast(`تم قبول تظلم ${appeal.studentName} واعتماد حضوره للأسبوع ${appeal.week} فوراً! ✅`, 'success');
+      renderAppealsTable();
+      if (state.activeAdminTab === 'tabAttendance') loadCurrentAdminAttendanceSession();
+    } else if (action === 'reject') {
+      appeal.status = 'rejected';
+      saveAppeals();
+      showToast('تم رفض طلب التظلم', 'info');
+      renderAppealsTable();
+    } else if (action === 'delete') {
+      state.appeals = state.appeals.filter(a => a.id !== appealId);
+      saveAppeals();
+      showToast('تم حذف الطلب', 'info');
+      renderAppealsTable();
+    }
+  }
+
+  // ============================================================
+  // --- 18. Cross-Group Guest Student Engine ---
+  // ============================================================
+  let selectedGuestStudent = null;
+
+  function openGuestModal() {
+    selectedGuestStudent = null;
+    if (el.guestSearchInput) el.guestSearchInput.value = '';
+    if (el.guestSearchResults) el.guestSearchResults.classList.add('hidden');
+    if (el.guestSelectedPreview) el.guestSelectedPreview.classList.add('hidden');
+    if (el.btnConfirmGuestAttendance) el.btnConfirmGuestAttendance.disabled = true;
+    if (el.guestStudentModal) el.guestStudentModal.classList.remove('hidden');
+    if (el.guestSearchInput) el.guestSearchInput.focus();
+  }
+
+  function handleGuestSearch(query) {
+    const q = (query || '').trim().toLowerCase();
+    if (!q || q.length < 2 || !el.guestSearchResults) {
+      if (el.guestSearchResults) el.guestSearchResults.classList.add('hidden');
+      return;
+    }
+
+    const matches = [];
+    state.courses.forEach(c => {
+      c.groups.forEach(g => {
+        g.students.forEach(s => {
+          if (s.id.toLowerCase().includes(q) || s.name.toLowerCase().includes(q)) {
+            matches.push({ student: s, group: g, course: c });
+          }
+        });
+      });
+    });
+
+    if (matches.length === 0) {
+      el.guestSearchResults.innerHTML = '<div class="dropdown-item text-muted">لا يوجد طالب مطابق لهذا البحث</div>';
+      el.guestSearchResults.classList.remove('hidden');
+      return;
+    }
+
+    el.guestSearchResults.innerHTML = matches.slice(0, 10).map(m => `
+      <div class="dropdown-item guest-search-item" data-id="${m.student.id}">
+        <strong>${m.student.name}</strong> (${m.student.id})
+        <div style="font-size:0.75rem; color:var(--text-secondary);">${m.course.name} - ${m.group.name}</div>
+      </div>
+    `).join('');
+
+    el.guestSearchResults.classList.remove('hidden');
+
+    el.guestSearchResults.querySelectorAll('.guest-search-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const sid = item.getAttribute('data-id');
+        const found = matches.find(m => m.student.id === sid);
+        if (found) {
+          selectedGuestStudent = found;
+          el.guestSearchResults.classList.add('hidden');
+          if (el.guestSearchInput) el.guestSearchInput.value = `${found.student.name} (${found.student.id})`;
+          if (el.guestSelectedPreview) {
+            el.guestSelectedPreview.classList.remove('hidden');
+            el.guestSelectedPreview.innerHTML = `
+              <strong>${found.student.name}</strong> - كود: ${found.student.id}<br>
+              <span class="badge-indicator warning">مجموعته الأصلية: ${found.group.name} (${found.course.name})</span>
+            `;
+          }
+          if (el.btnConfirmGuestAttendance) el.btnConfirmGuestAttendance.disabled = false;
+        }
+      });
+    });
+  }
+
+  function confirmGuestAttendance() {
+    if (!selectedGuestStudent) return;
+    const s = selectedGuestStudent.student;
+    const note = (el.guestAttendanceNote ? el.guestAttendanceNote.value.trim() : '') || `مستضاف من ${selectedGuestStudent.group.name}`;
+
+    state.currentAdminSession.records[s.id] = {
+      status: 'present',
+      isGuest: true,
+      homeGroup: selectedGuestStudent.group.name,
+      notes: note
+    };
+
+    const courseId = state.currentAdminSession.courseId;
+    const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
+    const key = getSessionKey(courseId, groupId, week);
+    if (!state.sessions[key]) {
+      state.sessions[key] = {
+        courseId, groupId, week,
+        date: el.adminSessionDate.value || new Date().toISOString().split('T')[0],
+        records: {}
+      };
+    }
+    state.sessions[key].records[s.id] = {
+      status: 'present',
+      isGuest: true,
+      homeGroup: selectedGuestStudent.group.name,
+      notes: note
+    };
+
+    saveSessions();
+    playBeep('success');
+    if (el.guestStudentModal) el.guestStudentModal.classList.add('hidden');
+    renderAdminAttendanceTable();
+    showToast(`تم تحضير الطالب ${s.name} كمستضاف في سكشن اليوم بنجاح! 👤`, 'success');
+  }
+
+  // ============================================================
+  // --- 19. Deprivation Warning & WhatsApp Center ---
+  // ============================================================
+  function openWarningsCenter() {
+    const courseId = el.reportCourseSelect ? el.reportCourseSelect.value : state.currentAdminSession.courseId;
+    const groupId = el.reportGroupSelect ? el.reportGroupSelect.value : state.currentAdminSession.groupId;
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+    if (!course || !group) {
+      showToast('يرجى اختيار المقرر والمجموعة أولاً', 'error');
+      return;
+    }
+
+    const warnedStudents = [];
+    let countFirst = 0;
+    let countDanger = 0;
+
+    group.students.forEach(s => {
+      const stats = getStudentStats(courseId, groupId, s.id);
+      if (stats.absent >= 2) {
+        if (stats.absent === 2) countFirst++;
+        if (stats.absent >= 3) countDanger++;
+        warnedStudents.push({
+          student: s,
+          stats: stats,
+          dangerLevel: stats.absent >= 3 ? 'danger' : 'warning'
+        });
+      }
+    });
+
+    warnedStudents.sort((a, b) => b.stats.absent - a.stats.absent);
+
+    if (el.warnCountFirst) el.warnCountFirst.textContent = countFirst;
+    if (el.warnCountDanger) el.warnCountDanger.textContent = countDanger;
+
+    if (el.warningsTableBody) {
+      if (warnedStudents.length === 0) {
+        el.warningsTableBody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 2rem; color: var(--color-present);">
+              <i class="fa-solid fa-circle-check" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+              سجل ممتاز! لا يوجد أي طالب منذر بالغياب في هذه المجموعة.
+            </td>
+          </tr>
+        `;
+      } else {
+        el.warningsTableBody.innerHTML = warnedStudents.map(w => {
+          const s = w.student;
+          const st = w.stats;
+          const statusBadge = w.dangerLevel === 'danger' 
+            ? '<span class="status-chip rejected"><i class="fa-solid fa-ban"></i> خطر حرمان</span>'
+            : '<span class="status-chip pending"><i class="fa-solid fa-triangle-exclamation"></i> إنذار أول</span>';
+
+          const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${group.name}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع، ونسبة حضوركم (${st.rate}%).\nيرجى الالتزام التام بالسكاشن القادمة تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nالمشرف: م. أحمد الخطيب`;
+          const encodedMsg = encodeURIComponent(msgTemplate);
+
+          return `
+            <tr>
+              <td><span class="meta-pill id-pill">${s.id}</span></td>
+              <td><strong>${s.name}</strong></td>
+              <td><small class="meta-pill">${group.name}</small></td>
+              <td style="text-align: center; color: var(--color-absent); font-weight: 800;">${st.absent} غيابات</td>
+              <td style="text-align: center;">${st.rate}%</td>
+              <td style="text-align: center;">${statusBadge}</td>
+              <td style="text-align: center;">
+                <div style="display: flex; gap: 4px; justify-content: center;">
+                  <a href="https://wa.me/?text=${encodedMsg}" target="_blank" class="wa-btn" title="إرسال عبر واتساب">
+                    <i class="fa-brands fa-whatsapp"></i> واتساب
+                  </a>
+                  <button class="btn btn-sm btn-outline btn-copy-warn" data-msg="${encodeURIComponent(msgTemplate)}" title="نسخ رسالة التنبيه">
+                    <i class="fa-solid fa-copy"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        el.warningsTableBody.querySelectorAll('.btn-copy-warn').forEach(b => {
+          b.addEventListener('click', () => {
+            const txt = decodeURIComponent(b.getAttribute('data-msg'));
+            navigator.clipboard.writeText(txt);
+            showToast('تم نسخ نص رسالة التنبيه إلى الحافظة! 📋', 'success');
+          });
+        });
+      }
+    }
+
+    if (el.whatsappWarningModal) el.whatsappWarningModal.classList.remove('hidden');
   }
 
   // --- 13. Event Listeners Setup ---
@@ -2256,6 +3518,131 @@
       closePinModal();
       showStudentView();
     });
+
+    // ---------------------------------------------------------
+    // QR Code Projector Event Handlers
+    // ---------------------------------------------------------
+    if (el.btnOpenLiveQR) el.btnOpenLiveQR.addEventListener('click', startQrProjectorSession);
+    if (el.btnCloseQrProjector) el.btnCloseQrProjector.addEventListener('click', closeQrProjectorSession);
+    if (el.btnFinishQrSession) el.btnFinishQrSession.addEventListener('click', closeQrProjectorSession);
+    if (el.btnRefreshQrNow) el.btnRefreshQrNow.addEventListener('click', generateNewQrCode);
+    if (el.btnToggleQrPause) el.btnToggleQrPause.addEventListener('click', toggleQrPause);
+    if (el.btnToggleFullscreen) {
+      el.btnToggleFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          el.qrProjectorModal.requestFullscreen().catch(() => {});
+          el.qrProjectorModal.classList.add('is-fullscreen');
+        } else {
+          document.exitFullscreen().catch(() => {});
+          el.qrProjectorModal.classList.remove('is-fullscreen');
+        }
+      });
+    }
+
+    // ---------------------------------------------------------
+    // Student Checkin Scanner & Manual PIN Handlers
+    // ---------------------------------------------------------
+    if (el.btnOpenStudentCheckin) el.btnOpenStudentCheckin.addEventListener('click', openStudentCheckinModal);
+    if (el.btnCloseStudentCheckin) el.btnCloseStudentCheckin.addEventListener('click', closeStudentCheckinModal);
+    if (el.btnCloseCheckinSuccess) el.btnCloseCheckinSuccess.addEventListener('click', closeStudentCheckinModal);
+    if (el.tabBtnScanCamera) el.tabBtnScanCamera.addEventListener('click', () => switchCheckinTab('camera'));
+    if (el.tabBtnManualPin) el.tabBtnManualPin.addEventListener('click', () => switchCheckinTab('pin'));
+    if (el.btnLookupStudentCheckin) {
+      el.btnLookupStudentCheckin.addEventListener('click', () => {
+        lookupStudentForCheckin(el.studentCheckinIdInput.value);
+      });
+    }
+    if (el.studentCheckinIdInput) {
+      el.studentCheckinIdInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          lookupStudentForCheckin(el.studentCheckinIdInput.value);
+        }
+      });
+    }
+    if (el.btnSubmitSessionPin) el.btnSubmitSessionPin.addEventListener('click', handleManualPinSubmit);
+    if (el.studentSessionPinInput) {
+      el.studentSessionPinInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleManualPinSubmit();
+        }
+      });
+    }
+
+    // ---------------------------------------------------------
+    // Flash Roll Call Handlers
+    // ---------------------------------------------------------
+    if (el.btnOpenFlashCall) el.btnOpenFlashCall.addEventListener('click', startFlashRollCall);
+    if (el.btnCloseFlashCall) el.btnCloseFlashCall.addEventListener('click', closeFlashRollCall);
+    if (el.btnFlashPresent) el.btnFlashPresent.addEventListener('click', () => markFlashStudent('present'));
+    if (el.btnFlashAbsent) el.btnFlashAbsent.addEventListener('click', () => markFlashStudent('absent'));
+    if (el.btnFlashLate) el.btnFlashLate.addEventListener('click', () => markFlashStudent('late'));
+    if (el.btnFlashExcused) el.btnFlashExcused.addEventListener('click', () => markFlashStudent('excused'));
+    if (el.btnFlashPrev) el.btnFlashPrev.addEventListener('click', flashPrevStudent);
+    if (el.btnFlashNext) el.btnFlashNext.addEventListener('click', flashNextStudent);
+    if (el.btnFlashBonus) el.btnFlashBonus.addEventListener('click', flashAddBonus);
+
+    // Global Hotkey Listener for Flash Mode
+    document.addEventListener('keydown', (e) => {
+      if (!state.flashCallState.active) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.code === 'Space' || e.key === '1') {
+        e.preventDefault();
+        markFlashStudent('present');
+      } else if (e.key === 'Enter' || e.key === '2') {
+        e.preventDefault();
+        markFlashStudent('absent');
+      } else if (e.key === 'l' || e.key === 'L' || e.key === '3') {
+        e.preventDefault();
+        markFlashStudent('late');
+      } else if (e.key === 'e' || e.key === 'E' || e.key === '4') {
+        e.preventDefault();
+        markFlashStudent('excused');
+      } else if (e.key === 'b' || e.key === 'B') {
+        e.preventDefault();
+        flashAddBonus();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        flashPrevStudent();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        flashNextStudent();
+      } else if (e.key === 'Escape') {
+        closeFlashRollCall();
+      }
+    });
+
+    // ---------------------------------------------------------
+    // Appeals Event Handlers
+    // ---------------------------------------------------------
+    if (el.appealForm) el.appealForm.addEventListener('submit', handleAppealFormSubmit);
+    if (el.btnCloseAppealModal) el.btnCloseAppealModal.addEventListener('click', () => el.appealModal.classList.add('hidden'));
+    if (el.appealFilterBtns) {
+      el.appealFilterBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          el.appealFilterBtns.forEach(btn => btn.classList.remove('active'));
+          b.classList.add('active');
+          state.appealsFilter = b.getAttribute('data-filter');
+          renderAppealsTable();
+        });
+      });
+    }
+
+    // ---------------------------------------------------------
+    // Cross-Group Guest Student Handlers
+    // ---------------------------------------------------------
+    if (el.btnOpenGuestModal) el.btnOpenGuestModal.addEventListener('click', openGuestModal);
+    if (el.btnCloseGuestModal) el.btnCloseGuestModal.addEventListener('click', () => el.guestStudentModal.classList.add('hidden'));
+    if (el.guestSearchInput) el.guestSearchInput.addEventListener('input', (e) => handleGuestSearch(e.target.value));
+    if (el.btnConfirmGuestAttendance) el.btnConfirmGuestAttendance.addEventListener('click', confirmGuestAttendance);
+
+    // ---------------------------------------------------------
+    // Warnings Center Handlers
+    // ---------------------------------------------------------
+    if (el.btnOpenWarningsCenter) el.btnOpenWarningsCenter.addEventListener('click', openWarningsCenter);
+    if (el.btnCloseWarningModal) el.btnCloseWarningModal.addEventListener('click', () => el.whatsappWarningModal.classList.add('hidden'));
 
     // Dismiss search dropdown when clicking outside
     document.addEventListener('click', (e) => {
