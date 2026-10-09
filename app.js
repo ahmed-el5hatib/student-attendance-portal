@@ -44,7 +44,7 @@
   // تحميل وتحديث جلسات الحضور للأسابيع الأول والثاني والثالث (OS S15 ومجموعات Data Communication)
   let storedSessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
   const initialSessions = (window.INITIAL_DATA && window.INITIAL_DATA.sessions) ? window.INITIAL_DATA.sessions : {};
-  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_W3_PRESET_V3';
+  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_W3_PRESET_V4';
   if (localStorage.getItem(FULL_PRESET_KEY) !== 'done') {
     Object.keys(initialSessions).forEach(key => {
       const sess = initialSessions[key];
@@ -61,7 +61,7 @@
     localStorage.setItem(FULL_PRESET_KEY, 'done');
   }
 
-  // ترحيل وتعديل غياب الطلاب الذين أبلغوا عن حضورهم في تراسل البيانات (17 طالباً)
+  // ترحيل وتعديل غياب الطلاب الذين أبلغوا عن حضورهم في تراسل البيانات (الدفعة الأولى 17 طالباً)
   const ATTENDANCE_CORRECTIONS_KEY = 'ATTENDANCE_CORRECTIONS_STUDENTS_V1';
   if (localStorage.getItem(ATTENDANCE_CORRECTIONS_KEY) !== 'done') {
     const corrections = [
@@ -105,6 +105,55 @@
 
     localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
     localStorage.setItem(ATTENDANCE_CORRECTIONS_KEY, 'done');
+  }
+
+  // ترحيل وتعديل غياب الدفعة الثانية من الطلاب من مجلد correction (19 طالباً)
+  const ATTENDANCE_CORRECTIONS_V2_KEY = 'ATTENDANCE_CORRECTIONS_STUDENTS_V2';
+  if (localStorage.getItem(ATTENDANCE_CORRECTIONS_V2_KEY) !== 'done') {
+    const correctionsV2 = [
+      { id: '25010482', group: 'GC', weeks: [1] },
+      { id: '25010432', group: 'GC', weeks: [1] },
+      { id: '25010136', group: 'GC', weeks: [3] },
+      { id: '25010199', group: 'GB', weeks: [1] },
+      { id: '25010280', group: 'GC', weeks: [3] },
+      { id: '25010068', group: 'GC', weeks: [3] },
+      { id: '25010496', group: 'GC', weeks: [2] },
+      { id: '25010306', group: 'GC', weeks: [1] },
+      { id: '25010525', group: 'GC', weeks: [1] },
+      { id: '25010219', group: 'GC', weeks: [2] },
+      { id: '25010328', group: 'GA', weeks: [2] },
+      { id: '25010423', group: 'GC', weeks: [3] },
+      { id: '25010060', group: 'GA', weeks: [2], note: 'تم تصحيح الغياب بناءً على إفادة الطالب (حضرت مع Group B)' },
+      { id: '25010163', group: 'GC', weeks: [3] },
+      { id: '25010451', group: 'GA', weeks: [2] },
+      { id: '25010221', group: 'GB', weeks: [2] },
+      { id: '25010033', group: 'GA', weeks: [2] },
+      { id: '25010530', group: 'GB', weeks: [3] },
+      { id: '25010528', group: 'GA', weeks: [1, 2] }
+    ];
+
+    correctionsV2.forEach(c => {
+      c.weeks.forEach(w => {
+        const k = `data_communication_${c.group}_w${w}`;
+        if (!storedSessions[k]) {
+          storedSessions[k] = {
+            courseId: 'data_communication',
+            groupId: c.group,
+            week: String(w),
+            date: '2026-10-09',
+            records: {}
+          };
+        }
+        if (!storedSessions[k].records) storedSessions[k].records = {};
+        storedSessions[k].records[c.id] = {
+          status: 'present',
+          notes: c.note || 'تم تصحيح الغياب بناءً على إفادة الطالب'
+        };
+      });
+    });
+
+    localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
+    localStorage.setItem(ATTENDANCE_CORRECTIONS_V2_KEY, 'done');
   }
 
   let state = {
