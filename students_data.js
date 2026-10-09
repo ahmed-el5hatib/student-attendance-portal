@@ -3840,8 +3840,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010328": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010329": {
           "status": "present",
@@ -3856,8 +3856,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010345": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010348": {
           "status": "absent",
@@ -3952,8 +3952,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010400": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010401": {
           "status": "present",
@@ -3988,8 +3988,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010420": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010422": {
           "status": "present",
@@ -4016,8 +4016,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010442": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010443": {
           "status": "present",
@@ -4080,8 +4080,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010489": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010492": {
           "status": "present",
@@ -4104,8 +4104,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010510": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010515": {
           "status": "present",
@@ -4237,8 +4237,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010097": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010103": {
           "status": "present",
@@ -4265,8 +4265,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010137": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010138": {
           "status": "present",
@@ -4409,8 +4409,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010275": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010282": {
           "status": "present",
@@ -4617,8 +4617,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010400": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010401": {
           "status": "present",
@@ -4757,8 +4757,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010499": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010502": {
           "status": "absent",
@@ -4777,8 +4777,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010516": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010526": {
           "status": "absent",
@@ -4830,8 +4830,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010018": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010019": {
           "status": "present",
@@ -4846,8 +4846,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010038": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010043": {
           "status": "present",
@@ -4922,8 +4922,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010113": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010114": {
           "status": "present",
@@ -4934,8 +4934,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010141": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010144": {
           "status": "absent",
@@ -4994,8 +4994,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010174": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010177": {
           "status": "absent",
@@ -5030,8 +5030,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010202": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010218": {
           "status": "absent",
@@ -5074,8 +5074,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010263": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010267": {
           "status": "present",
@@ -5222,8 +5222,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010418": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010421": {
           "status": "absent",
@@ -5250,8 +5250,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010440": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010441": {
           "status": "present",
@@ -5354,12 +5354,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010534": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010538": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010539": {
           "status": "present",
@@ -5423,8 +5423,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010038": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010043": {
           "status": "present",
@@ -5571,8 +5571,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010174": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010177": {
           "status": "absent",
@@ -5607,8 +5607,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010202": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010218": {
           "status": "present",
@@ -5687,8 +5687,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010323": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010325": {
           "status": "present",
@@ -5759,8 +5759,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010384": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010389": {
           "status": "absent",
@@ -5795,8 +5795,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010415": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010418": {
           "status": "present",
@@ -5815,8 +5815,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010431": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010435": {
           "status": "absent",
@@ -5827,8 +5827,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010440": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010441": {
           "status": "absent",
@@ -5884,7 +5884,7 @@ window.INITIAL_DATA = {
         },
         "25010501": {
           "status": "present",
-          "notes": ""
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010505": {
           "status": "present",
@@ -5903,12 +5903,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010513": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010514": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010517": {
           "status": "present",
@@ -5935,8 +5935,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010538": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010539": {
           "status": "present",
@@ -6072,8 +6072,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010076": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010077": {
           "status": "present",
@@ -6144,8 +6144,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010118": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010119": {
           "status": "present",
@@ -6240,8 +6240,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010175": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010182": {
           "status": "present",
@@ -6280,8 +6280,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010205": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010207": {
           "status": "present",
@@ -6392,8 +6392,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010289": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010298": {
           "status": "absent",
@@ -6476,8 +6476,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010346": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010347": {
           "status": "present",
@@ -6488,8 +6488,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010355": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010365": {
           "status": "present",
@@ -6504,8 +6504,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010392": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010396": {
           "status": "absent",
@@ -6548,8 +6548,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010433": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010438": {
           "status": "present",
@@ -6568,8 +6568,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010458": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010460": {
           "status": "present",
@@ -6628,8 +6628,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010496": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010497": {
           "status": "absent",
@@ -6660,8 +6660,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010523": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010524": {
           "status": "present",
@@ -6765,8 +6765,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010064": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010066": {
           "status": "present",
@@ -7065,8 +7065,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010255": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010256": {
           "status": "present",
@@ -7293,8 +7293,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010458": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010460": {
           "status": "present",
@@ -7427,8 +7427,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010014": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010021": {
           "status": "present",
@@ -7559,8 +7559,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010178": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010179": {
           "status": "absent",
@@ -7579,8 +7579,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010195": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010196": {
           "status": "present",
@@ -7743,8 +7743,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010304": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010307": {
           "status": "absent",
@@ -7883,8 +7883,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010399": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010400": {
           "status": "present",
@@ -7935,8 +7935,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010428": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010434": {
           "status": "present",
@@ -7999,8 +7999,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010481": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010483": {
           "status": "present",
@@ -8100,8 +8100,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010018": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010019": {
           "status": "present",
@@ -8120,8 +8120,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010043": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010046": {
           "status": "present",
@@ -8548,8 +8548,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010454": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010455": {
           "status": "present",
@@ -8577,7 +8577,7 @@ window.INITIAL_DATA = {
         },
         "25010501": {
           "status": "present",
-          "notes": ""
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010505": {
           "status": "present",
@@ -8657,8 +8657,8 @@ window.INITIAL_DATA = {
       "instructor": "م. أحمد الخطيب",
       "records": {
         "25010001": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010005": {
           "status": "present",
@@ -8693,8 +8693,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010027": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010036": {
           "status": "present",
@@ -8705,12 +8705,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010040": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010042": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010044": {
           "status": "present",
@@ -8745,8 +8745,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010069": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010071": {
           "status": "absent",
@@ -8801,8 +8801,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010101": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010102": {
           "status": "present",
@@ -8813,8 +8813,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010105": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010108": {
           "status": "present",
@@ -8849,12 +8849,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010123": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010126": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010127": {
           "status": "present",
@@ -8921,8 +8921,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010167": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010169": {
           "status": "present",
@@ -8953,8 +8953,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010194": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010197": {
           "status": "present",
@@ -8993,8 +8993,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010213": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010214": {
           "status": "absent",
@@ -9125,8 +9125,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010320": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010324": {
           "status": "present",
@@ -9229,8 +9229,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010426": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010429": {
           "status": "absent",
@@ -9365,8 +9365,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010529": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010536": {
           "status": "present",
