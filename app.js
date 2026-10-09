@@ -44,7 +44,7 @@
   // تحميل وتحديث جلسات الحضور للأسابيع الأول والثاني والثالث (OS S15 ومجموعات Data Communication)
   let storedSessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
   const initialSessions = (window.INITIAL_DATA && window.INITIAL_DATA.sessions) ? window.INITIAL_DATA.sessions : {};
-  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_W3_PRESET_V2';
+  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_W3_PRESET_V3';
   if (localStorage.getItem(FULL_PRESET_KEY) !== 'done') {
     Object.keys(initialSessions).forEach(key => {
       const sess = initialSessions[key];
@@ -59,6 +59,52 @@
     });
     localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
     localStorage.setItem(FULL_PRESET_KEY, 'done');
+  }
+
+  // ترحيل وتعديل غياب الطلاب الذين أبلغوا عن حضورهم في تراسل البيانات (17 طالباً)
+  const ATTENDANCE_CORRECTIONS_KEY = 'ATTENDANCE_CORRECTIONS_STUDENTS_V1';
+  if (localStorage.getItem(ATTENDANCE_CORRECTIONS_KEY) !== 'done') {
+    const corrections = [
+      { id: '25010024', group: 'GC', weeks: [3] },
+      { id: '25010077', group: 'GC', weeks: [3] },
+      { id: '25010073', group: 'GC', weeks: [3] },
+      { id: '25010152', group: 'GA', weeks: [3] },
+      { id: '25010133', group: 'GC', weeks: [3] },
+      { id: '25010512', group: 'GC', weeks: [3] },
+      { id: '25010310', group: 'GA', weeks: [1, 2] },
+      { id: '25010397', group: 'GC', weeks: [3] },
+      { id: '25010518', group: 'GC', weeks: [2] },
+      { id: '25010217', group: 'GA', weeks: [2] },
+      { id: '25010161', group: 'GB', weeks: [2] },
+      { id: '25010228', group: 'GB', weeks: [3] },
+      { id: '25010505', group: 'GB', weeks: [3] },
+      { id: '25010524', group: 'GC', weeks: [2] },
+      { id: '25010122', group: 'GC', weeks: [1] },
+      { id: '25010063', group: 'GA', weeks: [2, 3] }
+    ];
+
+    corrections.forEach(c => {
+      c.weeks.forEach(w => {
+        const k = `data_communication_${c.group}_w${w}`;
+        if (!storedSessions[k]) {
+          storedSessions[k] = {
+            courseId: 'data_communication',
+            groupId: c.group,
+            week: String(w),
+            date: '2026-10-09',
+            records: {}
+          };
+        }
+        if (!storedSessions[k].records) storedSessions[k].records = {};
+        storedSessions[k].records[c.id] = {
+          status: 'present',
+          notes: 'تم تصحيح الغياب بناءً على إفادة الطالب'
+        };
+      });
+    });
+
+    localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
+    localStorage.setItem(ATTENDANCE_CORRECTIONS_KEY, 'done');
   }
 
   let state = {
