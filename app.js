@@ -17,13 +17,18 @@
 
   const DEFAULT_CONFIG = {
     pin: 'root',
-    googleScriptUrl: '',
+    googleScriptUrl: 'https://script.google.com/macros/s/AKfycbxO4oxiOk9ZhOY77c9A_wKeJjdllAggt0Yo5x12-PtWH2Y71Ypbnr-xM6kIBCeRQa1LFA/exec',
     department: 'قسم علوم الحاسب ونظم المعلومات'
   };
 
   const storedConfig = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG) || '{}');
   if (!storedConfig.pin || storedConfig.pin === '1234') {
     storedConfig.pin = 'root'; // ترحيل كلمة المرور السابقة تلقائياً إلى root
+    localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(storedConfig));
+  }
+  // تأصيل وتحديث رابط Google Apps Script تلقائياً بالرابط المعتمد
+  if (!storedConfig.googleScriptUrl || storedConfig.googleScriptUrl.trim() === '') {
+    storedConfig.googleScriptUrl = DEFAULT_CONFIG.googleScriptUrl;
     localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(storedConfig));
   }
 
@@ -2205,6 +2210,75 @@
     }
   }
 
+  async function syncAllSessionsToGoogleSheets() {
+    const url = state.config.googleScriptUrl;
+    if (!url) {
+      showToast('يرجى وضع رابط Google Apps Script Webhook في صفحة الإعدادات أولاً!', 'error');
+      switchAdminTab('tabSettings');
+      return;
+    }
+
+    const sessionKeys = Object.keys(state.sessions || {});
+    if (sessionKeys.length === 0) {
+      showToast('لا توجد جلسات حضور مسجلة للرفع!', 'warning');
+      return;
+    }
+
+    showToast(`جارٍ رفع ${sessionKeys.length} جلسة حضور إلى Google Sheets دفعة واحدة... ⏳`, 'info');
+
+    let successCount = 0;
+    for (const key of sessionKeys) {
+      const sess = state.sessions[key];
+      if (!sess) continue;
+
+      const courseId = sess.courseId;
+      const groupId = sess.groupId;
+      const week = sess.weekNumber || sess.week || '1';
+      const group = getGroup(courseId, groupId);
+      if (!group) continue;
+
+      const records = group.students.map(s => {
+        const rec = (sess.records && sess.records[s.id]) || { status: 'absent', notes: '' };
+        const studentBonuses = state.bonuses.filter(b => 
+          b.courseId === courseId && b.groupId === groupId && b.studentId === s.id && String(b.week) === String(week)
+        );
+        const bonusPts = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
+
+        return {
+          id: s.id,
+          name: s.name,
+          program: s.program || '',
+          status: rec.status,
+          bonus: bonusPts,
+          notes: rec.notes || ''
+        };
+      });
+
+      const payload = {
+        action: 'sync_session',
+        courseId,
+        groupId,
+        week,
+        date: sess.date || new Date().toISOString().split('T')[0],
+        records
+      };
+
+      try {
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        successCount++;
+      } catch (err) {
+        console.error('Error syncing session', key, err);
+      }
+    }
+
+    showToast(`اكتملت المزامنة بنجاح! تم رفع ${successCount} جلسة إلى Google Sheets 🚀`, 'success');
+  }
+
   async function testGoogleConnection() {
     const url = el.googleScriptUrlInput.value.trim();
     if (!url) {
@@ -3684,7 +3758,7 @@
       showToast('تم حفظ رابط Google Apps Script بنجاح! 🔗', 'success');
     });
     el.btnTestGoogleSync.addEventListener('click', testGoogleConnection);
-    el.btnSyncAllDataNow.addEventListener('click', syncCurrentSessionToGoogleSheets);
+    el.btnSyncAllDataNow.addEventListener('click', syncAllSessionsToGoogleSheets);
     el.btnOpenScriptModal.addEventListener('click', () => el.scriptGuideModal.classList.remove('hidden'));
     el.btnCloseScriptModal.addEventListener('click', () => el.scriptGuideModal.classList.add('hidden'));
 
