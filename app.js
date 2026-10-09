@@ -67,6 +67,18 @@
     localStorage.setItem(FULL_PRESET_KEY, 'done');
   }
 
+  // ترحيل قسري فوري يضمن مسح أي كاش قديم ومزامنة جميع السجلات المصححة بنسبة 100%
+  const FORCE_SYNC_V8_KEY = 'ATTENDANCE_FORCE_SYNC_V8';
+  if (localStorage.getItem(FORCE_SYNC_V8_KEY) !== 'done') {
+    if (initialSessions && Object.keys(initialSessions).length > 0) {
+      Object.keys(initialSessions).forEach(key => {
+        storedSessions[key] = JSON.parse(JSON.stringify(initialSessions[key]));
+      });
+      localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
+      localStorage.setItem(FORCE_SYNC_V8_KEY, 'done');
+    }
+  }
+
   // مزامنة فورية قطعية: دمج سجلات الحضور الرسمية من INITIAL_DATA لضمان عدم بقاء أي طالب بحالة غياب بسبب كاش قديم بالمتصفح
   if (initialSessions) {
     Object.keys(initialSessions).forEach(key => {
@@ -679,6 +691,23 @@
     };
   }
 
+  // تحديث فوري وشامل لجميع التقارير والمصفوفات التراكمية عند أي تغيير في حالة أي طالب
+  function refreshAllActiveReportsAndMatrices(showToastNotification = false) {
+    try {
+      if (typeof renderCumulativeMatrix === 'function') {
+        renderCumulativeMatrix();
+      }
+      if (typeof generateOfficialReportPreview === 'function') {
+        generateOfficialReportPreview(showToastNotification);
+      }
+      if (typeof updateLiveAttendanceStatsOnly === 'function') {
+        updateLiveAttendanceStatsOnly();
+      }
+    } catch (e) {
+      console.warn('Error refreshing reports:', e);
+    }
+  }
+
   // --- 4. Initialization & Dropdowns Setup ---
   function initApp() {
     // Theme restore
@@ -764,11 +793,18 @@
           });
           if (updated) {
             saveSessions();
+            if (typeof loadCurrentAdminAttendanceSession === 'function') {
+              loadCurrentAdminAttendanceSession();
+            }
+            if (typeof renderAdminAttendanceTable === 'function') {
+              renderAdminAttendanceTable();
+            }
+            refreshAllActiveReportsAndMatrices(false);
             if (state.selectedStudentId) {
               selectStudentAndRenderCard(state.selectedStudentId);
             }
             if (forceNotification) {
-              showToast('تم تحديث كافة السجلات من الخادم مباشرة!', 'success');
+              showToast('تم تحديث كافة السجلات والتقارير من الخادم مباشرة! 🚀', 'success');
             }
           } else if (forceNotification) {
             showToast('البيانات محدثة بالفعل إلى آخر إصدار.', 'info');
@@ -1284,7 +1320,7 @@
         state.sessions[key].updatedAt = new Date().toISOString();
         saveSessions();
 
-        updateLiveAttendanceStatsOnly();
+        refreshAllActiveReportsAndMatrices(false);
 
         // If this student is currently being viewed in the Student Portal, refresh their view immediately!
         if (state.selectedStudentId === studentId) {
@@ -1398,6 +1434,7 @@
     saveSessions();
 
     renderAdminAttendanceTable();
+    refreshAllActiveReportsAndMatrices(false);
     showToast('تم تحضير جميع الطلاب كحاضرين بنجاح ✅', 'success');
   }
 
@@ -1416,6 +1453,7 @@
     }
 
     renderAdminAttendanceTable();
+    refreshAllActiveReportsAndMatrices(false);
     showToast('تمت إعادة ضبط حالات الحضور للجلسة الحالية', 'info');
   }
 
@@ -1445,6 +1483,7 @@
     };
 
     saveSessions();
+    refreshAllActiveReportsAndMatrices(false);
     showToast(`تم حفظ غياب الأسبوع ${week} بنجاح في الذاكرة المحلية! 💾`, 'success');
   }
 
@@ -1657,7 +1696,7 @@
   };
 
   // --- 8. Reports & Printable PDF Engine ---
-  function generateOfficialReportPreview() {
+  function generateOfficialReportPreview(showToastNotification = true) {
     const courseId = el.reportCourseSelect.value;
     const groupId = el.reportGroupSelect.value;
     const reportType = el.reportTypeSelect.value;
@@ -1981,7 +2020,9 @@
     }
 
     el.printTableContainer.innerHTML = tableHtml;
-    showToast('تم تجهيز التقرير الرسمي بنجاح - جاهز للطباعة والـ PDF 🖨️', 'success');
+    if (showToastNotification) {
+      showToast('تم تجهيز التقرير الرسمي بنجاح - جاهز للطباعة والـ PDF 🖨️', 'success');
+    }
   }
 
   function printOfficialPDF() {
@@ -2048,7 +2089,13 @@
 
     group.students.forEach((s, idx) => {
       const rec = session && session.records ? session.records[s.id] : null;
-      const status = rec ? rec.status : 'حاضر';
+      let status = 'حاضر';
+      if (rec) {
+        if (rec.status === 'absent') status = 'غائب';
+        else if (rec.status === 'late') status = 'متأخر';
+        else if (rec.status === 'excused') status = 'عذر مقبول';
+        else status = 'حاضر';
+      }
       const notes = rec ? (rec.notes || '') : '';
       csvContent += `${idx + 1},"${s.id}","${s.name}","${s.program}","${status}","${notes}"\n`;
     });
@@ -2394,12 +2441,29 @@
     });
 
     if (tabId === 'tabCumulative') {
+      if (state.currentAdminSession && state.currentAdminSession.courseId) {
+        if (el.cumCourseSelect) el.cumCourseSelect.value = state.currentAdminSession.courseId;
+        updateCumGroupOptions();
+        if (el.cumGroupSelect && state.currentAdminSession.groupId) {
+          el.cumGroupSelect.value = state.currentAdminSession.groupId;
+        }
+      }
       renderCumulativeMatrix();
     } else if (tabId === 'tabBonus') {
       renderBonusLeaderboard();
       renderBonusLogTable();
     } else if (tabId === 'tabReports') {
-      generateOfficialReportPreview();
+      if (state.currentAdminSession && state.currentAdminSession.courseId) {
+        if (el.reportCourseSelect) el.reportCourseSelect.value = state.currentAdminSession.courseId;
+        updateReportsGroupOptions();
+        if (el.reportGroupSelect && state.currentAdminSession.groupId) {
+          el.reportGroupSelect.value = state.currentAdminSession.groupId;
+        }
+        if (el.reportWeekSelect && state.currentAdminSession.week) {
+          el.reportWeekSelect.value = state.currentAdminSession.week;
+        }
+      }
+      generateOfficialReportPreview(false);
     } else if (tabId === 'tabAppeals') {
       renderAppealsTable();
     }
