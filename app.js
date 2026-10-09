@@ -36,10 +36,18 @@
   // تحميل وتحديث جلسات الحضور للأسابيع الأول والثاني والثالث (OS S15 ومجموعات Data Communication)
   let storedSessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
   const initialSessions = (window.INITIAL_DATA && window.INITIAL_DATA.sessions) ? window.INITIAL_DATA.sessions : {};
-  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_W3_PRESET_V1';
+  const FULL_PRESET_KEY = 'ATTENDANCE_FULL_W1_W2_W3_PRESET_V2';
   if (localStorage.getItem(FULL_PRESET_KEY) !== 'done') {
     Object.keys(initialSessions).forEach(key => {
-      storedSessions[key] = initialSessions[key];
+      const sess = initialSessions[key];
+      if (sess && Array.isArray(sess.records)) {
+        const recDict = {};
+        sess.records.forEach(r => {
+          recDict[r.id] = { status: r.status, notes: r.notes || '' };
+        });
+        sess.records = recDict;
+      }
+      storedSessions[key] = sess;
     });
     localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
     localStorage.setItem(FULL_PRESET_KEY, 'done');
