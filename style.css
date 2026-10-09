@@ -2128,10 +2128,10 @@ body.theme-light .print-paper-wrapper {
 }
 
 /* ============================================================
-   Student Checkin Scanner Modal
+   Student Checkin Scanner & Direct QR Modal
    ============================================================ */
 .modal-student-checkin {
-  max-width: 500px;
+  max-width: 520px;
 }
 
 .input-with-action {
@@ -2139,13 +2139,207 @@ body.theme-light .print-paper-wrapper {
   gap: 6px;
 }
 
-.lookup-result-box {
-  margin-top: 8px;
-  padding: 8px 12px;
+.direct-link-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: var(--radius-sm);
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  font-size: 0.88rem;
+  padding: 10px 12px;
+}
+
+.direct-link-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 6px;
+}
+
+.text-ltr {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.checkin-session-banner {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkin-session-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-primary);
+}
+
+.session-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.badge-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-pill.pulse {
+  animation: pulseGlow 2s infinite;
+}
+
+.week-chip {
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+}
+
+.session-course-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.session-meta-row {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  background: #1e293b;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-sm);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 1050;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  margin-top: 4px;
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover, .suggestion-item.active {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.suggestion-name {
+  font-weight: 700;
+  color: #f8fafc;
+  font-size: 0.92rem;
+}
+
+.suggestion-meta {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.student-verify-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.verify-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.verify-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border: 2px solid rgba(16, 185, 129, 0.4);
+}
+
+.verify-info h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #f1f5f9;
+}
+
+.verify-info p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.verify-status-banner {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.verify-status-banner.status-ok {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.verify-status-banner.status-already {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.verify-status-banner.status-guest {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
 .checkin-tabs-nav {
@@ -2161,9 +2355,9 @@ body.theme-light .print-paper-wrapper {
   border: none;
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  padding: 8px;
+  padding: 8px 6px;
   cursor: pointer;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
@@ -2200,7 +2394,7 @@ body.theme-light .print-paper-wrapper {
 
 .checkin-success-card {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 0.5rem;
 }
 
 .success-animation-circle {
@@ -2216,6 +2410,52 @@ body.theme-light .print-paper-wrapper {
   margin: 0 auto 1.25rem auto;
   border: 2px solid #10b981;
   animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.receipt-stamp-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1.5px dashed #10b981;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+}
+
+.receipt-stamp-badge .stamp-icon {
+  font-size: 1.8rem;
+  color: #10b981;
+}
+
+.receipt-stamp-badge .stamp-text {
+  text-align: right;
+}
+
+.receipt-stamp-badge .stamp-label {
+  display: block;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.receipt-stamp-badge .stamp-code {
+  font-family: 'Consolas', monospace;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #34d399;
+  letter-spacing: 2px;
+}
+
+.checkin-details-box {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 10px;
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: right;
 }
 
 /* ============================================================

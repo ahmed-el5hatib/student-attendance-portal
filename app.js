@@ -245,6 +245,9 @@
       currentIndex: 0
     },
     html5QrScannerInstance: null,
+    pendingCheckinSession: null,
+    pendingCheckinStudent: null,
+    syncBroadcastChannel: null,
     currentAdminSession: {
       courseId: '',
       groupId: '',
@@ -392,23 +395,34 @@
     qrRecentAttendeesList: document.getElementById('qrRecentAttendeesList'),
     btnRefreshQrNow: document.getElementById('btnRefreshQrNow'),
     btnFinishQrSession: document.getElementById('btnFinishQrSession'),
+    qrDirectCheckinUrlInput: document.getElementById('qrDirectCheckinUrlInput'),
+    btnCopyQrDirectUrl: document.getElementById('btnCopyQrDirectUrl'),
 
     // Student Checkin Modal
     studentAttendanceModal: document.getElementById('studentAttendanceModal'),
     btnCloseStudentCheckin: document.getElementById('btnCloseStudentCheckin'),
-    studentCheckinIdInput: document.getElementById('studentCheckinIdInput'),
-    btnLookupStudentCheckin: document.getElementById('btnLookupStudentCheckin'),
-    studentCheckinLookupResult: document.getElementById('studentCheckinLookupResult'),
+    checkinSessionBanner: document.getElementById('checkinSessionBanner'),
+    checkinBannerWeekBadge: document.getElementById('checkinBannerWeekBadge'),
+    checkinBannerTitle: document.getElementById('checkinBannerTitle'),
+    checkinBannerDate: document.getElementById('checkinBannerDate'),
+    tabBtnDirectNameId: document.getElementById('tabBtnDirectNameId'),
     tabBtnScanCamera: document.getElementById('tabBtnScanCamera'),
     tabBtnManualPin: document.getElementById('tabBtnManualPin'),
+    tabContentDirectNameId: document.getElementById('tabContentDirectNameId'),
     tabContentScanCamera: document.getElementById('tabContentScanCamera'),
     tabContentManualPin: document.getElementById('tabContentManualPin'),
+    studentCheckinSearchInput: document.getElementById('studentCheckinSearchInput'),
+    studentCheckinSuggestions: document.getElementById('studentCheckinSuggestions'),
+    studentCheckinVerifiedCard: document.getElementById('studentCheckinVerifiedCard'),
+    btnConfirmDirectAttendance: document.getElementById('btnConfirmDirectAttendance'),
     studentQrReader: document.getElementById('studentQrReader'),
     studentSessionPinInput: document.getElementById('studentSessionPinInput'),
     btnSubmitSessionPin: document.getElementById('btnSubmitSessionPin'),
     studentCheckinSuccessCard: document.getElementById('studentCheckinSuccessCard'),
     checkinSuccessTitle: document.getElementById('checkinSuccessTitle'),
     checkinSuccessDetails: document.getElementById('checkinSuccessDetails'),
+    checkinReceiptCode: document.getElementById('checkinReceiptCode'),
+    btnViewStudentPortalFromCheckin: document.getElementById('btnViewStudentPortalFromCheckin'),
     btnCloseCheckinSuccess: document.getElementById('btnCloseCheckinSuccess'),
 
     // Flash Call Modal
@@ -479,13 +493,26 @@
   }
 
   function getCourse(courseId) {
-    return state.courses.find(c => c.id === courseId);
+    if (!courseId) return state.courses[0] || null;
+    let found = state.courses.find(c => c.id === courseId);
+    if (!found) {
+      if (courseId === 'data_comm') found = state.courses.find(c => c.id === 'data_communication');
+      else if (courseId === 'os') found = state.courses.find(c => c.id === 'operating_systems');
+    }
+    return found || state.courses[0] || null;
   }
 
   function getGroup(courseId, groupId) {
     const course = getCourse(courseId);
-    if (!course) return null;
-    return course.groups.find(g => g.id === groupId);
+    if (!course || !course.groups || course.groups.length === 0) return null;
+    if (!groupId) return course.groups[0];
+    let found = course.groups.find(g => g.id === groupId);
+    if (!found) {
+      if (groupId === 'sec_a' || groupId === 'A') found = course.groups.find(g => g.id === 'GA');
+      else if (groupId === 'sec_b' || groupId === 'B') found = course.groups.find(g => g.id === 'GB');
+      else if (groupId === 'sec_c' || groupId === 'C') found = course.groups.find(g => g.id === 'GC');
+    }
+    return found || course.groups[0];
   }
 
   function getStudent(courseId, groupId, studentId) {
@@ -2381,21 +2408,20 @@
     if (el.qrPinDisplay) el.qrPinDisplay.textContent = pin;
     if (el.qrTimerProgress) el.qrTimerProgress.style.width = '100%';
 
-    const qrPayload = JSON.stringify({
-      c: state.activeQrSession.courseId,
-      g: state.activeQrSession.groupId,
-      w: Number(state.activeQrSession.week),
-      p: pin,
-      t: token,
-      exp: exp
-    });
+    // Generate Full Direct Checkin Web URL so scanning with ANY mobile phone camera opens the page!
+    const baseUrl = window.location.href.split('#')[0].split('?')[0];
+    const checkinUrl = `${baseUrl}?checkin=1&c=${encodeURIComponent(state.activeQrSession.courseId)}&g=${encodeURIComponent(state.activeQrSession.groupId)}&w=${encodeURIComponent(state.activeQrSession.week)}&pin=${pin}&t=${token}`;
+
+    if (el.qrDirectCheckinUrlInput) {
+      el.qrDirectCheckinUrlInput.value = checkinUrl;
+    }
 
     if (el.qrCanvasContainer) {
       el.qrCanvasContainer.innerHTML = '';
       if (typeof QRCode !== 'undefined') {
         try {
           new QRCode(el.qrCanvasContainer, {
-            text: qrPayload,
+            text: checkinUrl,
             width: 230,
             height: 230,
             colorDark: "#0f172a",
@@ -2494,74 +2520,255 @@
   }
 
   // ============================================================
-  // --- 15. Student QR Scanner & PIN Self-Checkin Engine ---
+  // --- 15. Student QR Scanner, PIN & Direct Self-Checkin Engine ---
   // ============================================================
-  function openStudentCheckinModal() {
+  function openDirectCheckinModalForSession(courseId, groupId, week, pin) {
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+    if (!course || !group) return;
+
+    state.pendingCheckinSession = {
+      courseId,
+      groupId,
+      week: String(week),
+      pin: pin || ''
+    };
+    state.pendingCheckinStudent = null;
+
     if (el.studentAttendanceModal) el.studentAttendanceModal.classList.remove('hidden');
     if (el.studentCheckinSuccessCard) el.studentCheckinSuccessCard.classList.add('hidden');
-    if (el.studentSessionPinInput) el.studentSessionPinInput.value = '';
+    if (el.studentCheckinVerifiedCard) el.studentCheckinVerifiedCard.classList.add('hidden');
+    if (el.btnConfirmDirectAttendance) el.btnConfirmDirectAttendance.disabled = true;
 
-    if (state.selectedStudentId && el.studentCheckinIdInput) {
-      el.studentCheckinIdInput.value = state.selectedStudentId;
-      lookupStudentForCheckin(state.selectedStudentId);
-    } else if (el.studentSearchInput && el.studentSearchInput.value && el.studentCheckinIdInput) {
-      const match = el.studentSearchInput.value.match(/\((\d+)\)/);
-      if (match && match[1]) {
-        el.studentCheckinIdInput.value = match[1];
-        lookupStudentForCheckin(match[1]);
+    // Populate Active Session Info Banner
+    if (el.checkinSessionBanner) {
+      el.checkinSessionBanner.classList.remove('hidden');
+      if (el.checkinBannerTitle) el.checkinBannerTitle.textContent = `${course.name} - ${group.name}`;
+      if (el.checkinBannerWeekBadge) el.checkinBannerWeekBadge.textContent = `الأسبوع ${week}`;
+      if (el.checkinBannerDate) {
+        const todayStr = new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        el.checkinBannerDate.textContent = todayStr;
       }
     }
 
-    switchCheckinTab('camera');
+    // Default to Direct Name/ID Lookup Tab
+    switchCheckinTab('direct');
+
+    // Pre-fill if student is already selected or saved in state
+    if (el.studentCheckinSearchInput) {
+      if (state.selectedStudentId) {
+        const existingStudent = findStudentAcrossAllGroups(state.selectedStudentId);
+        if (existingStudent) {
+          el.studentCheckinSearchInput.value = `${existingStudent.student.name} (${existingStudent.student.id})`;
+          selectStudentForDirectCheckin(existingStudent.student.id);
+        } else {
+          el.studentCheckinSearchInput.value = '';
+          el.studentCheckinSearchInput.focus();
+        }
+      } else {
+        el.studentCheckinSearchInput.value = '';
+        setTimeout(() => el.studentCheckinSearchInput.focus(), 300);
+      }
+    }
+  }
+
+  function openStudentCheckinModal() {
+    let courseId = state.activeQrSession.active ? state.activeQrSession.courseId : state.currentAdminSession.courseId;
+    let groupId = state.activeQrSession.active ? state.activeQrSession.groupId : state.currentAdminSession.groupId;
+    let week = state.activeQrSession.active ? state.activeQrSession.week : state.currentAdminSession.week;
+
+    if (!courseId || !groupId) {
+      courseId = 'data_comm';
+      groupId = 'sec_a';
+      week = '1';
+    }
+
+    openDirectCheckinModalForSession(courseId, groupId, week, state.activeQrSession.currentPin);
   }
 
   function closeStudentCheckinModal() {
     stopQrCamera();
     if (el.studentAttendanceModal) el.studentAttendanceModal.classList.add('hidden');
+    if (el.studentCheckinSuggestions) el.studentCheckinSuggestions.classList.add('hidden');
   }
 
   function switchCheckinTab(tab) {
-    if (tab === 'camera') {
+    if (tab === 'direct') {
+      if (el.tabBtnDirectNameId) el.tabBtnDirectNameId.classList.add('active');
+      if (el.tabBtnScanCamera) el.tabBtnScanCamera.classList.remove('active');
+      if (el.tabBtnManualPin) el.tabBtnManualPin.classList.remove('active');
+      if (el.tabContentDirectNameId) el.tabContentDirectNameId.classList.remove('hidden');
+      if (el.tabContentScanCamera) el.tabContentScanCamera.classList.add('hidden');
+      if (el.tabContentManualPin) el.tabContentManualPin.classList.add('hidden');
+      stopQrCamera();
+      if (el.studentCheckinSearchInput) el.studentCheckinSearchInput.focus();
+    } else if (tab === 'camera') {
       if (el.tabBtnScanCamera) el.tabBtnScanCamera.classList.add('active');
+      if (el.tabBtnDirectNameId) el.tabBtnDirectNameId.classList.remove('active');
       if (el.tabBtnManualPin) el.tabBtnManualPin.classList.remove('active');
       if (el.tabContentScanCamera) el.tabContentScanCamera.classList.remove('hidden');
+      if (el.tabContentDirectNameId) el.tabContentDirectNameId.classList.add('hidden');
       if (el.tabContentManualPin) el.tabContentManualPin.classList.add('hidden');
       startQrCamera();
     } else {
       if (el.tabBtnManualPin) el.tabBtnManualPin.classList.add('active');
+      if (el.tabBtnDirectNameId) el.tabBtnDirectNameId.classList.remove('active');
       if (el.tabBtnScanCamera) el.tabBtnScanCamera.classList.remove('active');
       if (el.tabContentManualPin) el.tabContentManualPin.classList.remove('hidden');
+      if (el.tabContentDirectNameId) el.tabContentDirectNameId.classList.add('hidden');
       if (el.tabContentScanCamera) el.tabContentScanCamera.classList.add('hidden');
       stopQrCamera();
       if (el.studentSessionPinInput) el.studentSessionPinInput.focus();
     }
   }
 
-  function lookupStudentForCheckin(studentId) {
-    const cleanId = String(studentId || '').trim();
-    if (!cleanId || !el.studentCheckinLookupResult) return null;
+  function handleStudentCheckinSearch(query) {
+    const q = String(query || '').trim().toLowerCase();
+    if (!el.studentCheckinSuggestions) return;
 
-    const res = findStudentAcrossAllGroups(cleanId);
-    if (res) {
-      el.studentCheckinLookupResult.classList.remove('hidden');
-      el.studentCheckinLookupResult.innerHTML = `
-        <div style="color: var(--color-present); font-weight: bold;"><i class="fa-solid fa-circle-check"></i> ${res.student.name}</div>
-        <div style="color: var(--text-secondary); font-size: 0.8rem;">المقرر: ${res.course.name} | السكشن: ${res.group.name}</div>
-      `;
-      return res;
-    } else {
-      el.studentCheckinLookupResult.classList.remove('hidden');
-      el.studentCheckinLookupResult.innerHTML = `
-        <div style="color: var(--color-absent); font-weight: 600;"><i class="fa-solid fa-triangle-exclamation"></i> لم يتم العثور على طالب بهذا الكود!</div>
-      `;
-      return null;
+    if (!q || q.length < 1) {
+      el.studentCheckinSuggestions.classList.add('hidden');
+      el.studentCheckinSuggestions.innerHTML = '';
+      return;
     }
+
+    const session = state.pendingCheckinSession || state.currentAdminSession;
+    const courseId = session.courseId;
+    const groupId = session.groupId;
+    const currentGroup = getGroup(courseId, groupId);
+
+    const matches = [];
+    if (currentGroup && currentGroup.students) {
+      currentGroup.students.forEach(st => {
+        if (st.name.toLowerCase().includes(q) || String(st.id).includes(q)) {
+          matches.push({ student: st, group: currentGroup, isCurrentGroup: true });
+        }
+      });
+    }
+
+    if (matches.length < 8 && window.STUDENTS_DATA && window.STUDENTS_DATA.courses) {
+      Object.keys(window.STUDENTS_DATA.courses).forEach(cid => {
+        const c = window.STUDENTS_DATA.courses[cid];
+        if (c.groups) {
+          Object.keys(c.groups).forEach(gid => {
+            const grp = c.groups[gid];
+            if (grp.students) {
+              grp.students.forEach(st => {
+                const alreadyAdded = matches.some(m => String(m.student.id) === String(st.id));
+                if (!alreadyAdded && (st.name.toLowerCase().includes(q) || String(st.id).includes(q))) {
+                  matches.push({ student: st, group: grp, isCurrentGroup: grp.id === groupId });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+
+    if (matches.length === 0) {
+      el.studentCheckinSuggestions.classList.remove('hidden');
+      el.studentCheckinSuggestions.innerHTML = `
+        <div class="suggestion-item text-muted" style="cursor: default;">
+          <span><i class="fa-solid fa-triangle-exclamation text-warning"></i> لم يتم العثور على طالب يطابق البحث</span>
+        </div>
+      `;
+      return;
+    }
+
+    el.studentCheckinSuggestions.classList.remove('hidden');
+    el.studentCheckinSuggestions.innerHTML = matches.slice(0, 6).map(m => `
+      <div class="suggestion-item" data-id="${m.student.id}">
+        <div class="suggestion-name">
+          <i class="fa-solid fa-user-graduate" style="color: var(--accent-primary); margin-left: 6px;"></i>
+          ${m.student.name}
+          ${!m.isCurrentGroup ? `<span class="badge badge-secondary" style="font-size: 0.72rem; margin-right: 6px;">${m.group.name}</span>` : ''}
+        </div>
+        <div class="suggestion-meta">${m.student.id}</div>
+      </div>
+    `).join('');
+
+    el.studentCheckinSuggestions.querySelectorAll('.suggestion-item[data-id]').forEach(item => {
+      item.addEventListener('click', () => {
+        const sid = item.getAttribute('data-id');
+        selectStudentForDirectCheckin(sid);
+      });
+    });
+  }
+
+  function selectStudentForDirectCheckin(studentId) {
+    const cleanId = String(studentId || '').trim();
+    const info = findStudentAcrossAllGroups(cleanId);
+    if (!info) {
+      showToast('كود الطالب غير موجود في قوائم الكلية!', 'error');
+      return;
+    }
+
+    state.pendingCheckinStudent = info;
+    if (el.studentCheckinSearchInput) {
+      el.studentCheckinSearchInput.value = `${info.student.name} (${info.student.id})`;
+    }
+    if (el.studentCheckinSuggestions) {
+      el.studentCheckinSuggestions.classList.add('hidden');
+    }
+
+    const session = state.pendingCheckinSession || state.currentAdminSession;
+    const sessionKey = getSessionKey(session.courseId, session.groupId, session.week);
+    const existingSession = state.sessions[sessionKey];
+    const isAlreadyPresent = existingSession && existingSession.records && existingSession.records[cleanId] && existingSession.records[cleanId].status === 'present';
+    const isGuest = info.group.id !== session.groupId;
+
+    if (el.studentCheckinVerifiedCard) {
+      el.studentCheckinVerifiedCard.classList.remove('hidden');
+      el.studentCheckinVerifiedCard.innerHTML = `
+        <div class="verify-header">
+          <div class="verify-avatar">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div class="verify-info">
+            <h4>${info.student.name}</h4>
+            <p>الكود الجامعي: <strong>${info.student.id}</strong> | المقيد به: <strong>${info.group.name}</strong></p>
+          </div>
+        </div>
+        ${isAlreadyPresent ? `
+          <div class="verify-status-banner status-already">
+            <i class="fa-solid fa-circle-check"></i> أنت مسجل حاضر بالفعل لهذا الأسبوع (${session.week})! يمكنك إعادة التأكيد إذا رغبت.
+          </div>
+        ` : (isGuest ? `
+          <div class="verify-status-banner status-guest">
+            <i class="fa-solid fa-users-between-lines"></i> تنبيه: أنت مقيد في (${info.group.name})، سيتم تسجيل حضورك كطالب مستضاف في هذا السكشن.
+          </div>
+        ` : `
+          <div class="verify-status-banner status-ok">
+            <i class="fa-solid fa-circle-check"></i> تم التحقق من هويتك بنجاح ومطابقة بيانات السكشن.
+          </div>
+        `)}
+      `;
+    }
+
+    if (el.btnConfirmDirectAttendance) {
+      el.btnConfirmDirectAttendance.disabled = false;
+    }
+  }
+
+  function confirmDirectStudentAttendance() {
+    if (!state.pendingCheckinStudent) {
+      showToast('يرجى اختيار طالب أولاً لتأكيد الحضور', 'warning');
+      return;
+    }
+
+    const session = state.pendingCheckinSession || state.currentAdminSession;
+    const student = state.pendingCheckinStudent.student;
+    const courseId = session.courseId;
+    const groupId = session.groupId;
+    const week = session.week;
+
+    executeStudentCheckin(courseId, groupId, week, 'كود QR الذكي');
   }
 
   function startQrCamera() {
     if (typeof Html5Qrcode === 'undefined') {
-      showToast('مكتبة الكاميرا غير محملة، يرجى إدخال رمز الجلسة (PIN) المكون من 4 أرقام', 'warning');
-      switchCheckinTab('pin');
+      showToast('مكتبة الكاميرا غير محملة، يرجى كتابة اسمك أو كودك للتحضير', 'warning');
+      switchCheckinTab('direct');
       return;
     }
 
@@ -2582,12 +2789,12 @@
         () => {}
       ).catch(err => {
         console.warn('Camera failed:', err);
-        showToast('تعذر فتح الكاميرا، يرجى استخدام رمز الـ PIN بدلاً من ذلك', 'info');
-        switchCheckinTab('pin');
+        showToast('تعذر فتح الكاميرا، يرجى استخدام البحث بالاسم أو الكود بدلاً من ذلك', 'info');
+        switchCheckinTab('direct');
       });
     } catch(err) {
       console.warn('Scanner init error:', err);
-      switchCheckinTab('pin');
+      switchCheckinTab('direct');
     }
   }
 
@@ -2608,42 +2815,35 @@
   function handleScannedQrResult(decodedText) {
     stopQrCamera();
     try {
-      let data;
-      if (decodedText.startsWith('{')) {
-        data = JSON.parse(decodedText);
-      } else {
-        const parts = decodedText.split('|');
-        if (parts.length >= 6) {
-          data = {
-            c: parts[1],
-            g: parts[2],
-            w: Number(parts[3]),
-            t: parts[4],
-            p: parts[5],
-            exp: Number(parts[6] || 0)
-          };
-        }
+      let courseId, groupId, week, pin;
+      if (decodedText.includes('checkin=1') || decodedText.includes('?')) {
+        const url = new URL(decodedText, window.location.origin);
+        courseId = url.searchParams.get('c');
+        groupId = url.searchParams.get('g');
+        week = url.searchParams.get('w');
+        pin = url.searchParams.get('pin');
+      } else if (decodedText.startsWith('{')) {
+        const d = JSON.parse(decodedText);
+        courseId = d.c;
+        groupId = d.g;
+        week = d.w;
+        pin = d.p;
       }
 
-      if (!data || !data.c || !data.g || !data.w) {
-        showToast('كود الـ QR غير صالح أو غير مخصص لهذا النظام', 'error');
-        playBeep('warning');
-        startQrCamera();
+      if (courseId && groupId && week) {
+        openDirectCheckinModalForSession(courseId, groupId, week, pin);
+        showToast('تم مسح كود السكشن بنجاح! أدخل كودك أو اسمك لتأكيد الحضور', 'success');
+        playBeep('success');
         return;
       }
 
-      if (data.exp && Date.now() > data.exp + 60000) {
-        showToast('انتهت صلاحية هذا الكود، يرجى مسح الكود المتجدد حالياً على الشاشة', 'warning');
-        playBeep('warning');
-        startQrCamera();
-        return;
-      }
-
-      executeStudentCheckin(data.c, data.g, data.w, 'كود QR الذكي');
-    } catch (e) {
-      showToast('تعذر قراءة بيانات الكود، يرجى المحاولة ثانية أو استخدام الـ PIN', 'error');
+      showToast('كود الـ QR غير صالح أو غير مخصص لهذا السكشن', 'error');
       playBeep('warning');
-      startQrCamera();
+      switchCheckinTab('direct');
+    } catch (e) {
+      showToast('تعذر قراءة بيانات الكود، يرجى المحاولة ثانية أو إدخال كودك بالاسم', 'error');
+      playBeep('warning');
+      switchCheckinTab('direct');
     }
   }
 
@@ -2655,22 +2855,26 @@
     }
 
     if (state.activeQrSession.active && state.activeQrSession.currentPin === enteredPin) {
-      executeStudentCheckin(
+      openDirectCheckinModalForSession(
         state.activeQrSession.courseId,
         state.activeQrSession.groupId,
         state.activeQrSession.week,
-        'رمز PIN المباشر'
+        enteredPin
       );
+      showToast('تم التحقق من رمز الجلسة! أدخل كودك أو اسمك لتأكيد الحضور', 'success');
+      playBeep('success');
       return;
     }
 
     if (state.currentAdminSession.courseId && state.currentAdminSession.groupId) {
-      executeStudentCheckin(
+      openDirectCheckinModalForSession(
         state.currentAdminSession.courseId,
         state.currentAdminSession.groupId,
         state.currentAdminSession.week,
-        'رمز PIN المباشر'
+        enteredPin
       );
+      showToast('تم التحقق من رمز الجلسة! أدخل كودك أو اسمك لتأكيد الحضور', 'success');
+      playBeep('success');
       return;
     }
 
@@ -2679,20 +2883,13 @@
   }
 
   function executeStudentCheckin(courseId, groupId, week, methodLabel) {
-    const studentId = (el.studentCheckinIdInput ? el.studentCheckinIdInput.value : '').trim();
-    if (!studentId) {
-      showToast('يرجى إدخال كودك الجامعي أولاً لتأكيد الحضور', 'warning');
+    if (!state.pendingCheckinStudent) {
+      showToast('يرجى اختيار طالب أولاً لتأكيد الحضور', 'warning');
       playBeep('warning');
       return;
     }
 
-    const studentInfo = findStudentAcrossAllGroups(studentId);
-    if (!studentInfo) {
-      showToast('كود الطالب غير مسجل في قوائم الكلية، يرجى التحقق من الكود!', 'error');
-      playBeep('warning');
-      return;
-    }
-
+    const studentInfo = state.pendingCheckinStudent;
     const student = studentInfo.student;
     const sessionKey = getSessionKey(courseId, groupId, week);
     const dateStr = el.adminSessionDate.value || new Date().toISOString().split('T')[0];
@@ -2738,23 +2935,43 @@
     saveSessions();
     playBeep('success');
 
+    // Broadcast Real-time sync to TA projector screen and tabs
+    if (state.syncBroadcastChannel) {
+      try {
+        state.syncBroadcastChannel.postMessage({
+          type: 'CHECKIN_EVENT',
+          studentId: student.id,
+          studentName: student.name,
+          courseId,
+          groupId,
+          week,
+          timeStr
+        });
+      } catch(e) {}
+    }
+
     if (state.activeQrSession.active) {
       updateQrAttendeesDisplay();
     }
 
+    if (el.tabContentDirectNameId) el.tabContentDirectNameId.classList.add('hidden');
     if (el.tabContentScanCamera) el.tabContentScanCamera.classList.add('hidden');
     if (el.tabContentManualPin) el.tabContentManualPin.classList.add('hidden');
+    if (el.checkinSessionBanner) el.checkinSessionBanner.classList.add('hidden');
     if (el.studentCheckinSuccessCard) el.studentCheckinSuccessCard.classList.remove('hidden');
 
     const course = getCourse(courseId);
     const group = getGroup(courseId, groupId);
+
+    const receiptCode = `#ATT-${week}-${student.id.slice(-4)}-${Math.floor(1000 + Math.random() * 9000)}`;
+    if (el.checkinReceiptCode) el.checkinReceiptCode.textContent = receiptCode;
 
     if (el.checkinSuccessTitle) el.checkinSuccessTitle.textContent = `تم تسجيل حضورك بنجاح! 🎉`;
     if (el.checkinSuccessDetails) {
       el.checkinSuccessDetails.innerHTML = `
         <strong>الطالب/ـة:</strong> ${student.name} (${student.id})<br>
         <strong>المقرر:</strong> ${course ? course.name : courseId} | <strong>السكشن:</strong> ${group ? group.name : groupId}<br>
-        <strong>الأسبوع:</strong> ${week} | <strong>الوقت:</strong> ${timeStr}
+        <strong>الأسبوع:</strong> الأسبوع ${week} | <strong>الوقت:</strong> ${timeStr}
       `;
     }
 
@@ -2789,6 +3006,24 @@
     }
 
     showToast(`تم توثيق حضور ${student.name} بنجاح!`, 'success');
+  }
+
+  function handleIncomingCheckinUrl() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('checkin') === '1' || params.get('action') === 'checkin') {
+        const courseId = params.get('c');
+        const groupId = params.get('g');
+        const week = params.get('w');
+        const pin = params.get('pin');
+        if (courseId && groupId && week) {
+          openDirectCheckinModalForSession(courseId, groupId, week, pin);
+          showToast(`مرحباً بك! يرجى كتابة كودك الجامعي أو اسمك لتأكيد حضورك للأسبوع ${week} 🎯`, 'info');
+        }
+      }
+    } catch(err) {
+      console.warn('URL parse error:', err);
+    }
   }
 
   // ============================================================
@@ -3527,6 +3762,14 @@
     if (el.btnFinishQrSession) el.btnFinishQrSession.addEventListener('click', closeQrProjectorSession);
     if (el.btnRefreshQrNow) el.btnRefreshQrNow.addEventListener('click', generateNewQrCode);
     if (el.btnToggleQrPause) el.btnToggleQrPause.addEventListener('click', toggleQrPause);
+    if (el.btnCopyQrDirectUrl) {
+      el.btnCopyQrDirectUrl.addEventListener('click', () => {
+        if (el.qrDirectCheckinUrlInput && el.qrDirectCheckinUrlInput.value) {
+          navigator.clipboard.writeText(el.qrDirectCheckinUrlInput.value);
+          showToast('تم نسخ رابط الحضور المباشر بنجاح! 📋', 'success');
+        }
+      });
+    }
     if (el.btnToggleFullscreen) {
       el.btnToggleFullscreen.addEventListener('click', () => {
         if (!document.fullscreenElement) {
@@ -3540,26 +3783,44 @@
     }
 
     // ---------------------------------------------------------
-    // Student Checkin Scanner & Manual PIN Handlers
+    // Student Checkin Scanner, PIN & Direct Name/ID Handlers
     // ---------------------------------------------------------
     if (el.btnOpenStudentCheckin) el.btnOpenStudentCheckin.addEventListener('click', openStudentCheckinModal);
     if (el.btnCloseStudentCheckin) el.btnCloseStudentCheckin.addEventListener('click', closeStudentCheckinModal);
     if (el.btnCloseCheckinSuccess) el.btnCloseCheckinSuccess.addEventListener('click', closeStudentCheckinModal);
+    if (el.tabBtnDirectNameId) el.tabBtnDirectNameId.addEventListener('click', () => switchCheckinTab('direct'));
     if (el.tabBtnScanCamera) el.tabBtnScanCamera.addEventListener('click', () => switchCheckinTab('camera'));
     if (el.tabBtnManualPin) el.tabBtnManualPin.addEventListener('click', () => switchCheckinTab('pin'));
-    if (el.btnLookupStudentCheckin) {
-      el.btnLookupStudentCheckin.addEventListener('click', () => {
-        lookupStudentForCheckin(el.studentCheckinIdInput.value);
+    
+    if (el.studentCheckinSearchInput) {
+      el.studentCheckinSearchInput.addEventListener('input', (e) => {
+        handleStudentCheckinSearch(e.target.value);
       });
-    }
-    if (el.studentCheckinIdInput) {
-      el.studentCheckinIdInput.addEventListener('keydown', (e) => {
+      el.studentCheckinSearchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          lookupStudentForCheckin(el.studentCheckinIdInput.value);
+          const cleanVal = e.target.value.trim();
+          if (cleanVal) {
+            selectStudentForDirectCheckin(cleanVal);
+          }
         }
       });
     }
+
+    if (el.btnConfirmDirectAttendance) {
+      el.btnConfirmDirectAttendance.addEventListener('click', confirmDirectStudentAttendance);
+    }
+
+    if (el.btnViewStudentPortalFromCheckin) {
+      el.btnViewStudentPortalFromCheckin.addEventListener('click', () => {
+        closeStudentCheckinModal();
+        showStudentView();
+        if (state.selectedStudentId) {
+          selectStudentAndRenderCard(state.selectedStudentId);
+        }
+      });
+    }
+
     if (el.btnSubmitSessionPin) el.btnSubmitSessionPin.addEventListener('click', handleManualPinSubmit);
     if (el.studentSessionPinInput) {
       el.studentSessionPinInput.addEventListener('keydown', (e) => {
@@ -3569,6 +3830,34 @@
         }
       });
     }
+
+    // Setup Cross-Window/Cross-Tab Real-time attendance broadcast sync
+    if (typeof BroadcastChannel !== 'undefined') {
+      try {
+        state.syncBroadcastChannel = new BroadcastChannel('attendance_live_stream_v1');
+        state.syncBroadcastChannel.onmessage = (event) => {
+          const msg = event.data;
+          if (msg && msg.type === 'CHECKIN_EVENT') {
+            if (state.activeQrSession.active &&
+                state.activeQrSession.courseId === msg.courseId &&
+                state.activeQrSession.groupId === msg.groupId &&
+                String(state.activeQrSession.week) === String(msg.week)) {
+              updateQrAttendeesDisplay();
+              playBeep('success');
+              showToast(`سجل الطالب ${msg.studentName} حضوره للتو! 🎯`, 'info');
+            }
+            if (state.currentAdminSession.courseId === msg.courseId &&
+                state.currentAdminSession.groupId === msg.groupId &&
+                String(state.currentAdminSession.week) === String(msg.week)) {
+              loadCurrentAdminAttendanceSession();
+            }
+          }
+        };
+      } catch (err) {}
+    }
+
+    // Check URL parameters for direct student check-in
+    handleIncomingCheckinUrl();
 
     // ---------------------------------------------------------
     // Flash Roll Call Handlers

@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.9">
+  <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -220,8 +220,8 @@
           <!-- Quick Actions & Search -->
           <div class="actions-toolbar">
             <div class="quick-buttons">
-              <button id="btnOpenLiveQR" class="btn btn-warning" title="عرض كود QR المتجدد وشاشة البروجيكتور للجلسة الحالية">
-                <i class="fa-solid fa-qrcode"></i> عرض QR الحضور
+              <button id="btnOpenLiveQR" class="btn btn-warning" title="توليد كود QR الحضور وشاشة البروجيكتور للجلسة المحددة">
+                <i class="fa-solid fa-qrcode"></i> توليد QR الحضور للسكشن
               </button>
               <button id="btnOpenFlashCall" class="btn btn-info" title="وضع النداء السريع بالكيبورد (Flash Roll Call)">
                 <i class="fa-solid fa-bolt"></i> نداء سريع (Flash)
@@ -880,6 +880,16 @@ function doGet(e) {
             </div>
             <span id="qrTimerSeconds" class="qr-timer-text">يتجدد الكود تلقائياً كل 15 ثانية لمنع تصويره</span>
           </div>
+
+          <!-- Direct Attendance Web Link for Section -->
+          <div class="direct-link-box mt-3">
+            <span class="direct-link-label"><i class="fa-solid fa-link"></i> رابط الحضور المباشر للسكشن:</span>
+            <div class="input-with-action">
+              <input type="text" id="qrDirectCheckinUrlInput" class="form-control form-control-sm text-ltr" readonly value="" placeholder="جارٍ توليد الرابط المباشر...">
+              <button id="btnCopyQrDirectUrl" class="btn btn-primary btn-sm" title="نسخ رابط التسجيل المباشر"><i class="fa-solid fa-copy"></i> نسخ الرابط</button>
+            </div>
+            <small class="pin-hint">عند مسح الكود بكاميرا الموبايل يفتح هذا الرابط ليطلب كود الطالب أو اسمه ويسجل حضوره فوراً</small>
+          </div>
         </div>
 
         <div class="projector-info-zone">
@@ -906,7 +916,7 @@ function doGet(e) {
       <div class="projector-footer">
         <div class="footer-tips">
           <i class="fa-solid fa-circle-info"></i>
-          <span>يفتح الطلاب الموقع ويضغطون زر "تسجيل الحضور الفوري" من هواتفهم.</span>
+          <span>يمكن للطلاب مسح الكود بكاميرا الهاتف مباشرة، أو الدخول عبر الرابط وكتابة أسمائهم/أكوادهم.</span>
         </div>
         <div class="footer-buttons">
           <button id="btnRefreshQrNow" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrows-rotate"></i> تجديد الكود الآن</button>
@@ -923,54 +933,90 @@ function doGet(e) {
     <div class="modal-card modal-student-checkin">
       <div class="modal-header d-flex justify-between align-center">
         <div>
-          <h3><i class="fa-solid fa-camera text-accent"></i> تسجيل الحضور الفوري</h3>
-          <p>أكد حضورك في السكشن بمسح الـ QR أو إدخال الـ PIN</p>
+          <h3><i class="fa-solid fa-qrcode text-accent"></i> تسجيل حضور السكشن الذكي</h3>
+          <p>أكد حضورك في جلسة السكشن عبر كود الطالب أو اسمك</p>
         </div>
         <button id="btnCloseStudentCheckin" class="close-btn">&times;</button>
       </div>
 
       <div class="modal-body">
-        <!-- Step 1: Student Identity -->
-        <div class="student-id-step mb-3">
-          <label for="studentCheckinIdInput"><i class="fa-solid fa-id-card"></i> كود الطالب الجامعي:</label>
-          <div class="input-with-action">
-            <input type="text" id="studentCheckinIdInput" class="form-control" placeholder="أدخل كودك (مثال: 25010258)">
-            <button id="btnLookupStudentCheckin" class="btn btn-secondary btn-sm">تحقق</button>
+        <!-- Active Session Info Banner -->
+        <div id="checkinSessionBanner" class="checkin-session-banner mb-3">
+          <div class="session-badge-row">
+            <span class="badge-pill pulse"><i class="fa-solid fa-signal-stream"></i> جلسة حضور نشطة</span>
+            <span id="checkinBannerWeekBadge" class="week-chip">الأسبوع 1</span>
           </div>
-          <div id="studentCheckinLookupResult" class="lookup-result-box hidden">
-            <!-- Rendered by JS -->
+          <h4 id="checkinBannerTitle" class="session-course-title">تراسل البيانات - Group A</h4>
+          <div class="session-meta-row">
+            <span><i class="fa-solid fa-calendar-day"></i> <span id="checkinBannerDate">اليوم</span></span>
+            <span><i class="fa-solid fa-user-tie"></i> المشرف: <strong class="text-accent">م. أحمد الخطيب</strong></span>
           </div>
         </div>
 
         <!-- Verification Method Tabs -->
         <div class="checkin-tabs-nav mb-3">
-          <button id="tabBtnScanCamera" class="checkin-tab-btn active"><i class="fa-solid fa-camera"></i> مسح QR بالكاميرا</button>
-          <button id="tabBtnManualPin" class="checkin-tab-btn"><i class="fa-solid fa-keyboard"></i> إدخال رمز PIN (4 أرقام)</button>
+          <button id="tabBtnDirectNameId" class="checkin-tab-btn active"><i class="fa-solid fa-id-card-clip"></i> تسجيل بالاسم أو الكود</button>
+          <button id="tabBtnScanCamera" class="checkin-tab-btn"><i class="fa-solid fa-camera"></i> مسح QR بالكاميرا</button>
+          <button id="tabBtnManualPin" class="checkin-tab-btn"><i class="fa-solid fa-keyboard"></i> رمز PIN (4 أرقام)</button>
         </div>
 
-        <!-- Tab 1: Camera Scanner -->
-        <div id="tabContentScanCamera" class="checkin-tab-pane active">
+        <!-- Tab 1: Direct Name / ID Lookup (Primary for QR scans and links) -->
+        <div id="tabContentDirectNameId" class="checkin-tab-pane active">
+          <div class="direct-lookup-form">
+            <label for="studentCheckinSearchInput"><i class="fa-solid fa-magnifying-glass"></i> اكتب كودك الجامعي أو ابحث باسمك:</label>
+            <div class="search-input-wrapper position-relative">
+              <input type="text" id="studentCheckinSearchInput" class="form-control" placeholder="اكتب كود الطالب (مثال: 25010258) أو اسمك..." autocomplete="off">
+              <div id="studentCheckinSuggestions" class="suggestions-dropdown hidden"></div>
+            </div>
+            <small class="text-muted d-block mt-1"><i class="fa-solid fa-lightbulb"></i> ابدأ بكتابة اسمك أو كودك وستظهر لك اقتراحات فورية للاختيار بنقرة واحدة</small>
+
+            <!-- Verified Student Identity Card -->
+            <div id="studentCheckinVerifiedCard" class="student-verify-card mt-3 hidden">
+              <!-- Rendered dynamically by JS -->
+            </div>
+
+            <!-- Confirmation Submit Button -->
+            <button id="btnConfirmDirectAttendance" class="btn btn-success btn-block btn-lg mt-3" disabled>
+              <i class="fa-solid fa-circle-check"></i> تأكيد تسجيل حضوري الآن 🎯
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 2: Camera Scanner (In-app scanner) -->
+        <div id="tabContentScanCamera" class="checkin-tab-pane hidden">
           <div id="studentQrReader" class="qr-camera-viewport"></div>
           <p class="scan-instructions"><i class="fa-solid fa-qrcode"></i> وجّه الكاميرا نحو كود الـ QR المعروض على شاشة المعيد</p>
         </div>
 
-        <!-- Tab 2: Manual PIN -->
+        <!-- Tab 3: Manual PIN -->
         <div id="tabContentManualPin" class="checkin-tab-pane hidden">
           <div class="manual-pin-form">
             <label>أدخل رمز الجلسة (4 أرقام) المعروض على شاشة المعيد:</label>
             <input type="text" id="studentSessionPinInput" class="form-control text-center session-pin-input" maxlength="6" placeholder="0000" autocomplete="off">
-            <button id="btnSubmitSessionPin" class="btn btn-primary btn-block mt-3"><i class="fa-solid fa-check"></i> تأكيد الحضور بالرمز</button>
+            <button id="btnSubmitSessionPin" class="btn btn-primary btn-block mt-3"><i class="fa-solid fa-check"></i> التحقق من الرمز والمتابعة</button>
           </div>
         </div>
 
-        <!-- Success Animation Card -->
+        <!-- Success Digital Attendance Receipt Card -->
         <div id="studentCheckinSuccessCard" class="checkin-success-card hidden">
           <div class="success-animation-circle">
             <i class="fa-solid fa-check"></i>
           </div>
-          <h3 id="checkinSuccessTitle">تم تسجيل حضورك بنجاح!</h3>
-          <p id="checkinSuccessDetails"></p>
-          <button id="btnCloseCheckinSuccess" class="btn btn-success btn-block mt-3">تم، إغلاق</button>
+          <h3 id="checkinSuccessTitle">تم تسجيل حضورك بنجاح! 🎉</h3>
+          <div id="checkinSuccessDetails" class="checkin-details-box"></div>
+          
+          <div class="receipt-stamp-badge mt-3">
+            <div class="stamp-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <div class="stamp-text">
+              <span class="stamp-label">إثبات حضور رقمي معتمد</span>
+              <span id="checkinReceiptCode" class="stamp-code">#ATT-2026-XXXX</span>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-4">
+            <button id="btnViewStudentPortalFromCheckin" class="btn btn-primary flex-1"><i class="fa-solid fa-table-list"></i> استعراض سجلي في البوابة</button>
+            <button id="btnCloseCheckinSuccess" class="btn btn-outline flex-1">إغلاق</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1152,7 +1198,7 @@ function doGet(e) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=4.0"></script>
-  <script src="app.js?v=4.0"></script>
+  <script src="students_data.js?v=4.1"></script>
+  <script src="app.js?v=4.1"></script>
 </body>
 </html>
