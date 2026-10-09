@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=2.7">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -413,13 +413,14 @@
             <div class="form-group">
               <label for="reportTypeSelect">نوع التقرير:</label>
               <select id="reportTypeSelect" class="form-control">
-                <option value="weekly">تقرير الغياب الأسبوعي (كشف رسمي للغائبين)</option>
-                <option value="attendance_sheet">كشف الحضور الكامل للأسبوع</option>
+                <option value="formal_12weeks" selected>كشف الحضور الرسمي الفصلي (12 أسبوعاً - معتمد للطباعة و PDF)</option>
+                <option value="weekly">تقرير الغياب الأسبوعي (كشف رسمي للغائبين فقط)</option>
+                <option value="attendance_sheet">كشف الحضور الكامل لأسبوع محدد</option>
                 <option value="bonus_report">تقرير درجات البونص التراكمي</option>
               </select>
             </div>
 
-            <div class="form-group" id="reportWeekGroup">
+            <div class="form-group" id="reportWeekGroup" style="display: none;">
               <label for="reportWeekSelect">الأسبوع المطلوب:</label>
               <select id="reportWeekSelect" class="form-control">
                 <option value="1">الأسبوع 1</option>
@@ -769,7 +770,7 @@ function doGet(e) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=2.6"></script>
-  <script src="app.js?v=2.6"></script>
+  <script src="students_data.js?v=2.7"></script>
+  <script src="app.js?v=2.7"></script>
 </body>
 </html>

@@ -124,6 +124,7 @@
     reportCourseSelect: document.getElementById('reportCourseSelect'),
     reportGroupSelect: document.getElementById('reportGroupSelect'),
     reportTypeSelect: document.getElementById('reportTypeSelect'),
+    reportWeekGroup: document.getElementById('reportWeekGroup'),
     reportWeekSelect: document.getElementById('reportWeekSelect'),
     btnGenerateReportPreview: document.getElementById('btnGenerateReportPreview'),
     btnPrintReportPDF: document.getElementById('btnPrintReportPDF'),
@@ -405,6 +406,7 @@
     const course = getCourse(courseId);
     if (!course) return;
     el.reportGroupSelect.innerHTML = course.groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    generateOfficialReportPreview();
   }
 
   function updateCumGroupOptions() {
@@ -1066,6 +1068,20 @@
     const group = getGroup(courseId, groupId);
     if (!course || !group) return;
 
+    const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
+
+    // Detect active weeks (weeks that have been recorded / uploaded)
+    const activeWeeks = [];
+    const weekAttendanceCounts = {};
+    weeks.forEach(w => {
+      const key = getSessionKey(courseId, groupId, w);
+      const sess = state.sessions[key];
+      if (sess && sess.records && Object.keys(sess.records).length > 0) {
+        activeWeeks.push(w);
+      }
+      weekAttendanceCounts[w] = 0;
+    });
+
     const sessionKey = getSessionKey(courseId, groupId, week);
     const session = state.sessions[sessionKey];
     const sessionDate = session ? session.date : new Date().toLocaleDateString('ar-EG');
@@ -1073,8 +1089,6 @@
     // Populate Report Header Meta
     el.printCourseName.textContent = `${course.name} (${course.nameAr})`;
     el.printGroupName.textContent = group.name;
-    el.printWeekNumber.textContent = `الأسبوع ${week}`;
-    el.printSessionDate.textContent = sessionDate;
     el.printGeneratedTimestamp.textContent = new Date().toLocaleString('ar-EG');
 
     let totalStudents = group.students.length;
@@ -1082,11 +1096,124 @@
     let absentCount = 0;
     let excusedCount = 0;
     let lateCount = 0;
-
     let tableHtml = '';
 
-    if (reportType === 'weekly') {
+    if (reportType === 'formal_12weeks') {
+      el.printReportMainTitle.textContent = 'كشف رصد الحضور والغياب الرسمي الفصلي (12 أسبوعاً)';
+      el.printWeekNumber.textContent = activeWeeks.length > 0 ? `الأسابيع المرصودة: (1 - ${Math.max(...activeWeeks)})` : 'لم يتم رصد أسابيع بعد';
+      el.printSessionDate.textContent = 'الفصل الدراسي الأول 2026 / 2027';
+
+      let totalGroupPresences = 0;
+      let totalGroupAbsences = 0;
+      let totalGroupBonuses = 0;
+
+      const rows = group.students.map((s, idx) => {
+        let studentPresences = 0;
+        let studentAbsences = 0;
+
+        // 12 Weeks attendance marks: ✓ for present, ✗ for absent, - for not yet uploaded
+        const weekCells = weeks.map(w => {
+          if (!activeWeeks.includes(w)) {
+            return `<td class="col-week"><span class="formal-mark future" title="الأسبوع ${w} - لم يُرفع بعد">-</span></td>`;
+          }
+
+          const wKey = getSessionKey(courseId, groupId, w);
+          const wSess = state.sessions[wKey];
+          const rec = wSess && wSess.records ? wSess.records[s.id] : null;
+          const status = rec ? rec.status : 'absent';
+
+          if (status === 'present' || status === 'late') {
+            studentPresences++;
+            weekAttendanceCounts[w]++;
+            totalGroupPresences++;
+            return `<td class="col-week"><span class="formal-mark present" title="الأسبوع ${w}: حاضر">✓</span></td>`;
+          } else if (status === 'absent') {
+            studentAbsences++;
+            totalGroupAbsences++;
+            return `<td class="col-week"><span class="formal-mark absent" title="الأسبوع ${w}: غائب">✗</span></td>`;
+          } else if (status === 'excused') {
+            studentPresences++;
+            totalGroupPresences++;
+            return `<td class="col-week"><span class="formal-mark excused" style="color: #2563eb; font-weight: bold;" title="الأسبوع ${w}: عذر مقبول">ع</span></td>`;
+          }
+          return `<td class="col-week"><span class="formal-mark future">-</span></td>`;
+        }).join('');
+
+        // Student bonuses
+        const studentBonuses = state.bonuses.filter(b => 
+          b.courseId === courseId && b.groupId === groupId && b.studentId === s.id
+        );
+        const bonusPts = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
+        totalGroupBonuses += bonusPts;
+
+        // Attendance rate over recorded active weeks
+        const studentRate = activeWeeks.length > 0 ? Math.round((studentPresences / activeWeeks.length) * 100) : 100;
+
+        return `
+          <tr>
+            <td class="col-num">${idx + 1}</td>
+            <td class="col-name"><strong>${s.name}</strong></td>
+            <td class="col-code">${s.id}</td>
+            ${weekCells}
+            <td class="col-stat stat-val-present">${studentPresences}</td>
+            <td class="col-stat stat-val-absent">${studentAbsences}</td>
+            <td class="col-stat stat-val-bonus">${bonusPts > 0 ? '+' + bonusPts : '0'}</td>
+            <td class="col-stat" style="font-weight: 800; color: ${studentRate < 60 ? '#dc2626' : studentRate < 75 ? '#d97706' : '#059669'};">${studentRate}%</td>
+          </tr>
+        `;
+      }).join('');
+
+      const totalRecordedOpportunities = group.students.length * activeWeeks.length;
+      const overallGroupRate = totalRecordedOpportunities > 0 ? Math.round((totalGroupPresences / totalRecordedOpportunities) * 100) : 100;
+
+      tableHtml = `
+        <table class="formal-12w-table">
+          <thead>
+            <tr class="header-main-row">
+              <th rowspan="2" class="col-num">م</th>
+              <th rowspan="2" class="col-name">اسم الطالب رباعي</th>
+              <th rowspan="2" class="col-code">كود الطالب</th>
+              <th colspan="12" class="col-weeks-title">أسابيع الفصل الدراسي (12 أسبوعاً)</th>
+              <th colspan="4" class="col-summary-title">الإحصائيات الكلية</th>
+            </tr>
+            <tr>
+              ${weeks.map(w => `<th class="col-week ${activeWeeks.includes(w) ? 'week-active' : 'week-future'}" title="الأسبوع ${w}">أ${w}</th>`).join('')}
+              <th class="col-stat" title="إجمالي أسابيع الحضور">حضور</th>
+              <th class="col-stat" title="إجمالي أسابيع الغياب">غياب</th>
+              <th class="col-stat" title="إجمالي درجات البونص">بونص</th>
+              <th class="col-stat" title="نسبة الحضور المئوية">النسبة</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+          <tfoot>
+            <tr style="background: #f1f5f9; font-weight: 800; border-top: 2px solid #334155;">
+              <td colspan="3" style="text-align: right; padding-right: 10px;">إجمالي الحاضرين في السكشن:</td>
+              ${weeks.map(w => {
+                if (!activeWeeks.includes(w)) return '<td class="col-week" style="color: #94a3b8;">-</td>';
+                return `<td class="col-week" style="color: #059669; font-weight: 800;">${weekAttendanceCounts[w]}</td>`;
+              }).join('')}
+              <td class="col-stat stat-val-present">${totalGroupPresences}</td>
+              <td class="col-stat stat-val-absent">${totalGroupAbsences}</td>
+              <td class="col-stat stat-val-bonus">+${totalGroupBonuses}</td>
+              <td class="col-stat" style="color: #0f172a; font-weight: 900;">${overallGroupRate}%</td>
+            </tr>
+          </tfoot>
+        </table>
+      `;
+
+      // Set stats pills
+      el.printTotalStudents.textContent = totalStudents;
+      el.printPresentStudents.textContent = `${totalGroupPresences} حضور`;
+      el.printAbsentStudents.textContent = `${totalGroupAbsences} غياب`;
+      el.printExcusedStudents.textContent = `${activeWeeks.length} / 12 أسبوع`;
+      el.printAttendanceRate.textContent = `${overallGroupRate}%`;
+
+    } else if (reportType === 'weekly') {
       el.printReportMainTitle.textContent = `كشف غياب الطلاب الأسبوعي - الأسبوع ${week}`;
+      el.printWeekNumber.textContent = `الأسبوع ${week}`;
+      el.printSessionDate.textContent = sessionDate;
 
       // Filter absent & late & excused students
       const absentees = [];
@@ -1113,8 +1240,8 @@
             <thead>
               <tr>
                 <th style="width: 45px;">م</th>
-                <th style="width: 100px;">كود الطالب</th>
                 <th>اسم الطالب رباعي</th>
+                <th style="width: 100px;">كود الطالب</th>
                 <th style="width: 130px;">البرنامج</th>
                 <th style="width: 90px; text-align: center;">الحالة</th>
                 <th>ملاحظات المعيد / العذر</th>
@@ -1124,8 +1251,8 @@
               ${absentees.map((item, i) => `
                 <tr>
                   <td style="text-align: center; font-weight: bold;">${i + 1}</td>
-                  <td>${item.student.id}</td>
                   <td><strong>${item.student.name}</strong></td>
+                  <td>${item.student.id}</td>
                   <td>${item.student.program}</td>
                   <td style="text-align: center; font-weight: bold; color: ${item.status === 'absent' ? '#ef4444' : item.status === 'late' ? '#f59e0b' : '#3b82f6'};">
                     ${item.status === 'absent' ? 'غائب' : item.status === 'late' ? 'متأخر' : 'عذر مقبول'}
@@ -1138,8 +1265,18 @@
         `;
       }
 
+      el.printTotalStudents.textContent = totalStudents;
+      el.printPresentStudents.textContent = presentCount;
+      el.printAbsentStudents.textContent = absentCount;
+      el.printExcusedStudents.textContent = lateCount + excusedCount;
+      const attended = presentCount + lateCount + excusedCount;
+      const rate = totalStudents > 0 ? Math.round((attended / totalStudents) * 100) : 0;
+      el.printAttendanceRate.textContent = `${rate}%`;
+
     } else if (reportType === 'attendance_sheet') {
       el.printReportMainTitle.textContent = `كشف الحضور الكامل للأسبوع ${week}`;
+      el.printWeekNumber.textContent = `الأسبوع ${week}`;
+      el.printSessionDate.textContent = sessionDate;
 
       const rows = group.students.map((s, idx) => {
         const rec = session && session.records ? session.records[s.id] : null;
@@ -1158,8 +1295,8 @@
         return `
           <tr>
             <td style="text-align: center;">${idx + 1}</td>
+            <td><strong>${s.name}</strong></td>
             <td>${s.id}</td>
-            <td>${s.name}</td>
             <td>${s.program}</td>
             <td style="text-align: center; font-weight: bold; color: ${statusColor};">${statusText}</td>
             <td>${rec ? rec.notes || '' : ''}</td>
@@ -1172,8 +1309,8 @@
           <thead>
             <tr>
               <th style="width: 40px;">م</th>
+              <th>اسم الطالب رباعي</th>
               <th style="width: 100px;">الكود</th>
-              <th>الاسم</th>
               <th style="width: 130px;">البرنامج</th>
               <th style="width: 80px; text-align: center;">الحالة</th>
               <th>ملاحظات</th>
@@ -1183,8 +1320,18 @@
         </table>
       `;
 
+      el.printTotalStudents.textContent = totalStudents;
+      el.printPresentStudents.textContent = presentCount;
+      el.printAbsentStudents.textContent = absentCount;
+      el.printExcusedStudents.textContent = lateCount + excusedCount;
+      const attended = presentCount + lateCount + excusedCount;
+      const rate = totalStudents > 0 ? Math.round((attended / totalStudents) * 100) : 0;
+      el.printAttendanceRate.textContent = `${rate}%`;
+
     } else if (reportType === 'bonus_report') {
       el.printReportMainTitle.textContent = `تقرير درجات البونص التراكمي للمقرر`;
+      el.printWeekNumber.textContent = 'جميع الأسابيع';
+      el.printSessionDate.textContent = new Date().toLocaleDateString('ar-EG');
 
       // Find all students in this group with bonuses
       const bonusStudents = [];
@@ -1205,8 +1352,8 @@
           <thead>
             <tr>
               <th style="width: 45px;">م</th>
-              <th style="width: 100px;">كود الطالب</th>
               <th>اسم الطالب</th>
+              <th style="width: 100px;">كود الطالب</th>
               <th style="width: 130px;">البرنامج</th>
               <th style="width: 90px; text-align: center;">إجمالي البونص</th>
               <th>تفاصيل وأسباب المنح</th>
@@ -1216,8 +1363,8 @@
             ${bonusStudents.map((item, i) => `
               <tr>
                 <td style="text-align: center;">${i + 1}</td>
-                <td>${item.student.id}</td>
                 <td><strong>${item.student.name}</strong></td>
+                <td>${item.student.id}</td>
                 <td>${item.student.program}</td>
                 <td style="text-align: center; font-weight: bold; color: #d97706;">+${item.totalBonus}</td>
                 <td><small>${item.bonuses.map(b => `[W${b.week}: +${b.points} - ${b.reason}]`).join(' , ')}</small></td>
@@ -1226,17 +1373,13 @@
           </tbody>
         </table>
       `;
+
+      el.printTotalStudents.textContent = totalStudents;
+      el.printPresentStudents.textContent = `${bonusStudents.length} طلاب حاصلون على بونص`;
+      el.printAbsentStudents.textContent = '0';
+      el.printExcusedStudents.textContent = '-';
+      el.printAttendanceRate.textContent = '100%';
     }
-
-    // Set stats pills
-    el.printTotalStudents.textContent = totalStudents;
-    el.printPresentStudents.textContent = presentCount;
-    el.printAbsentStudents.textContent = absentCount;
-    el.printExcusedStudents.textContent = lateCount + excusedCount;
-
-    const attended = presentCount + lateCount + excusedCount;
-    const rate = totalStudents > 0 ? Math.round((attended / totalStudents) * 100) : 0;
-    el.printAttendanceRate.textContent = `${rate}%`;
 
     el.printTableContainer.innerHTML = tableHtml;
     showToast('تم تجهيز التقرير الرسمي بنجاح - جاهز للطباعة والـ PDF 🖨️', 'success');
@@ -1250,10 +1393,54 @@
   function exportReportToCSV() {
     const courseId = el.reportCourseSelect.value;
     const groupId = el.reportGroupSelect.value;
+    const reportType = el.reportTypeSelect.value;
     const week = el.reportWeekSelect.value;
     const course = getCourse(courseId);
     const group = getGroup(courseId, groupId);
     if (!course || !group) return;
+
+    const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
+    const activeWeeks = [];
+    weeks.forEach(w => {
+      const key = getSessionKey(courseId, groupId, w);
+      const sess = state.sessions[key];
+      if (sess && sess.records && Object.keys(sess.records).length > 0) {
+        activeWeeks.push(w);
+      }
+    });
+
+    if (reportType === 'formal_12weeks') {
+      let csvContent = "\uFEFFم,اسم الطالب,كود الطالب,البرنامج,";
+      csvContent += weeks.map(w => `الأسبوع ${w}`).join(',') + ",إجمالي الحضور,إجمالي الغياب,درجات البونص,نسبة الحضور %\n";
+
+      group.students.forEach((s, idx) => {
+        let pCount = 0;
+        let aCount = 0;
+        const weekMarks = weeks.map(w => {
+          if (!activeWeeks.includes(w)) return '-';
+          const key = getSessionKey(courseId, groupId, w);
+          const sess = state.sessions[key];
+          const rec = sess && sess.records ? sess.records[s.id] : null;
+          const status = rec ? rec.status : 'absent';
+          if (status === 'present' || status === 'late') { pCount++; return 'حاضر'; }
+          if (status === 'absent') { aCount++; return 'غائب'; }
+          if (status === 'excused') { pCount++; return 'عذر'; }
+          return '-';
+        });
+
+        const studentBonuses = state.bonuses.filter(b => 
+          b.courseId === courseId && b.groupId === groupId && b.studentId === s.id
+        );
+        const bPts = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
+        const rate = activeWeeks.length > 0 ? Math.round((pCount / activeWeeks.length) * 100) : 100;
+
+        csvContent += `${idx + 1},"${s.name}","${s.id}","${s.program}",${weekMarks.join(',')},${pCount},${aCount},${bPts},${rate}%\n`;
+      });
+
+      downloadBlob(csvContent, `Formal_Attendance_12Weeks_${courseId}_${groupId}.csv`, 'text/csv;charset=utf-8;');
+      showToast('تم تصدير كشف الحضور الفصلي (12 أسبوعاً) إلى Excel بنجاح 📊', 'success');
+      return;
+    }
 
     const sessionKey = getSessionKey(courseId, groupId, week);
     const session = state.sessions[sessionKey];
@@ -1625,6 +1812,17 @@
 
     // Reports Actions
     el.reportCourseSelect.addEventListener('change', updateReportsGroupOptions);
+    el.reportGroupSelect.addEventListener('change', generateOfficialReportPreview);
+    el.reportTypeSelect.addEventListener('change', () => {
+      const val = el.reportTypeSelect.value;
+      if (val === 'formal_12weeks' || val === 'bonus_report') {
+        el.reportWeekGroup.style.display = 'none';
+      } else {
+        el.reportWeekGroup.style.display = '';
+      }
+      generateOfficialReportPreview();
+    });
+    el.reportWeekSelect.addEventListener('change', generateOfficialReportPreview);
     el.btnGenerateReportPreview.addEventListener('click', generateOfficialReportPreview);
     el.btnPrintReportPDF.addEventListener('click', printOfficialPDF);
     el.btnExportReportCSV.addEventListener('click', exportReportToCSV);

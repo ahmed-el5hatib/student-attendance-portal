@@ -1223,7 +1223,7 @@ body.theme-light .print-paper-wrapper {
   background: #ffffff;
   color: #0f172a;
   width: 100%;
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 2.5rem 3rem;
   border-radius: 4px;
@@ -1310,6 +1310,8 @@ body.theme-light .print-paper-wrapper {
 
 .official-table-wrapper {
   margin-bottom: 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .official-table-wrapper table {
@@ -1335,6 +1337,139 @@ body.theme-light .print-paper-wrapper {
 .official-table-wrapper tr:nth-child(even) td {
   background: #f8fafc;
 }
+
+/* --- Formal 12-Week Attendance Matrix Table --- */
+.formal-12w-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  line-height: 1.35;
+  border: 1px solid #334155;
+  margin-top: 0.5rem;
+}
+
+.formal-12w-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #64748b;
+  padding: 5px 3px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.formal-12w-table td {
+  border: 1px solid #cbd5e1;
+  padding: 4px 3px;
+  text-align: center;
+  color: #1e293b;
+}
+
+.formal-12w-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.formal-12w-table tr:hover td {
+  background: #f1f5f9;
+}
+
+.formal-12w-table .header-main-row th {
+  background: #e2e8f0;
+  color: #0f172a;
+  font-size: 12px;
+  padding: 6px 4px;
+}
+
+.formal-12w-table .col-weeks-title {
+  background: #e0e7ff !important;
+  color: #1e1b4b !important;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.formal-12w-table .col-summary-title {
+  background: #fef3c7 !important;
+  color: #78350f !important;
+  font-size: 12px;
+}
+
+.formal-12w-table .col-num {
+  width: 32px;
+  font-weight: 800;
+}
+
+.formal-12w-table .col-code {
+  width: 78px;
+  font-family: monospace, 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.formal-12w-table .col-name {
+  text-align: right !important;
+  padding-right: 8px !important;
+  min-width: 175px;
+  font-weight: 600;
+}
+
+.formal-12w-table .col-week {
+  width: 27px;
+  font-size: 11px;
+}
+
+.formal-12w-table .col-week.week-active {
+  background: #f0fdf4;
+  color: #166534;
+  font-weight: 800;
+}
+
+.formal-12w-table .col-week.week-future {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.formal-12w-table .col-stat {
+  width: 38px;
+  font-weight: 800;
+}
+
+/* Formal Marks */
+.formal-mark {
+  display: inline-block;
+  font-size: 13.5px;
+  line-height: 1;
+}
+
+.formal-mark.present {
+  color: #059669;
+  font-weight: 900;
+}
+
+.formal-mark.absent {
+  color: #dc2626;
+  font-weight: 900;
+}
+
+.formal-mark.future {
+  color: #94a3b8;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.stat-val-present {
+  font-weight: 800;
+  color: #059669;
+}
+
+.stat-val-absent {
+  font-weight: 800;
+  color: #dc2626;
+}
+
+.stat-val-bonus {
+  font-weight: 800;
+  color: #d97706;
+}
+
 
 .official-signatures {
   display: grid;
@@ -1702,14 +1837,23 @@ body.theme-light .print-paper-wrapper {
     box-shadow: none !important;
     padding: 0 !important;
     max-width: 100% !important;
+    width: 100% !important;
     border: none !important;
   }
 
   .official-header {
     border-bottom: 2px solid #000 !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 12px !important;
   }
 
-  .official-table-wrapper th {
+  .official-table-wrapper {
+    margin-bottom: 1rem !important;
+    overflow: visible !important;
+  }
+
+  .official-table-wrapper th,
+  .formal-12w-table th {
     background: #e2e8f0 !important;
     color: #000 !important;
     -webkit-print-color-adjust: exact;
@@ -1717,12 +1861,54 @@ body.theme-light .print-paper-wrapper {
   }
 
   .official-table-wrapper td,
-  .official-table-wrapper th {
+  .official-table-wrapper th,
+  .formal-12w-table td,
+  .formal-12w-table th {
     border: 1px solid #000 !important;
   }
 
+  .formal-12w-table {
+    font-size: 10px !important;
+  }
+
+  .formal-12w-table thead {
+    display: table-header-group !important;
+  }
+
+  .formal-12w-table tr {
+    page-break-inside: avoid !important;
+  }
+
+  .formal-12w-table td {
+    padding: 3px 2px !important;
+  }
+
+  .formal-mark.present {
+    color: #047857 !important;
+    font-weight: 900 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .formal-mark.absent {
+    color: #b91c1c !important;
+    font-weight: 900 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .formal-mark.future {
+    color: #64748b !important;
+  }
+
+  .official-signatures {
+    page-break-inside: avoid !important;
+    margin-top: 1.5rem !important;
+    padding-top: 1rem !important;
+  }
+
   @page {
-    margin: 1.5cm;
-    size: A4 portrait;
+    margin: 0.8cm 1cm;
+    size: A4 landscape;
   }
 }
