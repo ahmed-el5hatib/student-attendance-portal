@@ -805,46 +805,140 @@
         
         <div class="code-container mt-3">
           <button id="btnCopyScriptCode" class="copy-code-btn"><i class="fa-solid fa-copy"></i> نسخ الكود</button>
-          <pre><code id="scriptCodeDisplay">// كود Google Apps Script جاهز ومعدل
+          <pre><code id="scriptCodeDisplay">/**
+ * Google Apps Script - خادم مزامنة الحضور والغياب والبونص
+ * إشراف: المهندس أحمد الخطيب (Eng. Ahmed El-khatib)
+ */
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents);
+    if (!e || !e.postData || !e.postData.contents) {
+      return jsonResponse({ status: "error", message: "No data received" });
+    }
+    var payload = JSON.parse(e.postData.contents);
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheetName = data.courseId + "_" + data.groupId;
-    var sheet = ss.getSheetByName(sheetName);
-    
-    if (!sheet) {
-      sheet = ss.insertSheet(sheetName);
-      sheet.appendRow(["التاريخ", "الأسبوع", "كود الطالب", "اسم الطالب", "البرنامج", "الحالة", "البونص", "ملاحظات"]);
-      sheet.getRange("A1:H1").setBackground("#1e293b").setFontColor("#ffffff").setFontWeight("bold");
+    var actionType = payload.action || payload.type || 'attendance';
+
+    if (actionType === 'bonus') {
+      var bonusSheet = getOrCreateSheet(ss, "Bonuses_سجل_البونص", [
+        "التاريخ والوقت", "كود الطالب", "اسم الطالب", "المقرر", "المجموعة", "النقاط", "السبب", "المسؤول"
+      ]);
+      bonusSheet.appendRow([
+        payload.timestamp || new Date().toLocaleString('ar-EG'),
+        payload.studentId, payload.studentName,
+        payload.courseName || payload.courseId,
+        payload.groupName || payload.groupId,
+        payload.points, payload.reason || "مشاركة متميزة",
+        payload.instructor || "Eng. Ahmed El-khatib"
+      ]);
+      return jsonResponse({ status: "success", action: "bonus_saved" });
     }
-    
-    if (data.records && data.records.length > 0) {
-      data.records.forEach(function(r) {
-        sheet.appendRow([
-          data.date || new Date().toLocaleDateString(),
-          "الأسبوع " + data.week,
-          r.id,
-          r.name,
-          r.program || "",
-          r.status,
-          r.bonus || 0,
-          r.notes || ""
+
+    if (actionType === 'appeal_ticket') {
+      var ticket = payload.ticket || {};
+      var appealSheet = getOrCreateSheet(ss, "Appeals_تظلمات_الطلاب", [
+        "وقت التظلم", "كود الطالب", "اسم الطالب", "المقرر", "المجموعة", "الأسبوع", "سبب التظلم", "ملاحظات الطالب", "الحالة"
+      ]);
+      appealSheet.appendRow([
+        ticket.createdAt || new Date().toLocaleString('ar-EG'),
+        ticket.studentId || "", ticket.studentName || "",
+        ticket.courseName || ticket.courseId || "",
+        ticket.groupName || ticket.groupId || "",
+        "الأسبوع " + (ticket.week || ""),
+        ticket.reason || "", ticket.notes || "",
+        ticket.status === 'approved' ? 'مقبول' : (ticket.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة')
+      ]);
+      return jsonResponse({ status: "success", action: "appeal_saved" });
+    }
+
+    var sheetName = sanitizeSheetName((payload.courseId || "Course") + "_" + (payload.groupId || "Group"));
+    var sheet = getOrCreateSheet(ss, sheetName, [
+      "تاريخ الجلسة", "الأسبوع", "كود الطالب", "اسم الطالب", "البرنامج الأكاديمي", "حالة الحضور", "البونص", "ملاحظات", "وقت المزامنة"
+    ]);
+
+    var syncTime = new Date().toLocaleString('ar-EG');
+    var records = payload.records || [];
+    var weekLabel = "الأسبوع " + (payload.week || 1);
+
+    if (actionType === 'qr_checkin') {
+      if (records.length > 0) {
+        var r = records[0];
+        var lastRow = sheet.getLastRow();
+        var updatedInPlace = false;
+        if (lastRow > 1) {
+          var dataRange = sheet.getRange(2, 1, lastRow - 1, 9).getValues();
+          for (var i = 0; i < dataRange.length; i++) {
+            if (String(dataRange[i][1]) === weekLabel && String(dataRange[i][2]) === String(r.id)) {
+              sheet.getRange(i + 2, 6).setValue('حاضر');
+              sheet.getRange(i + 2, 9).setValue(syncTime);
+              updatedInPlace = true;
+              break;
+            }
+          }
+        }
+        if (!updatedInPlace) {
+          sheet.appendRow([
+            payload.date || new Date().toLocaleDateString('ar-EG'),
+            weekLabel, r.id, r.name, r.program || "", 'حاضر', r.bonus || 0,
+            r.notes || "حضور ذاتي عبر QR Code", syncTime
+          ]);
+        }
+        return jsonResponse({ status: "success", action: "qr_checkin_recorded", studentId: r.id });
+      }
+    }
+
+    if (records.length > 0) {
+      var lastRow = sheet.getLastRow();
+      if (lastRow > 1) {
+        var weekCol = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+        for (var rIndex = weekCol.length - 1; rIndex >= 0; rIndex--) {
+          if (String(weekCol[rIndex][0]) === weekLabel) {
+            sheet.deleteRow(rIndex + 2);
+          }
+        }
+      }
+      var rowsToInsert = [];
+      for (var j = 0; j < records.length; j++) {
+        var rec = records[j];
+        rowsToInsert.push([
+          payload.date || new Date().toLocaleDateString('ar-EG'),
+          weekLabel, rec.id, rec.name, rec.program || "",
+          rec.status === 'present' ? 'حاضر' : (rec.status === 'absent' ? 'غائب' : (rec.status === 'late' ? 'متأخر' : (rec.status === 'excused' ? 'عذر مقبول' : rec.status))),
+          rec.bonus || 0, rec.notes || "", syncTime
         ]);
-      });
+      }
+      var startRow = sheet.getLastRow() + 1;
+      sheet.getRange(startRow, 1, rowsToInsert.length, rowsToInsert[0].length).setValues(rowsToInsert);
     }
-    
-    return ContentService.createTextOutput(JSON.stringify({status: "success", count: data.records.length}))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch(error) {
-    return ContentService.createTextOutput(JSON.stringify({status: "error", message: error.toString()}))
-      .setMimeType(ContentService.MimeType.JSON);
+
+    return jsonResponse({ status: "success", message: "تم حفظ " + records.length + " سجلاً بنجاح", count: records.length, sheet: sheetName });
+  } catch (err) {
+    return jsonResponse({ status: "error", message: err.toString() });
   }
 }
 
 function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({status: "alive", instructor: "Eng. Ahmed El-khatib"}))
-    .setMimeType(ContentService.MimeType.JSON);
+  return jsonResponse({ status: "alive", instructor: "Eng. Ahmed El-khatib", timestamp: new Date().toISOString() });
+}
+
+function getOrCreateSheet(ss, name, headers) {
+  var sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
+    var headerRange = sheet.getRange(1, 1, 1, headers.length);
+    headerRange.setBackground("#1e293b").setFontColor("#ffffff").setFontWeight("bold").setHorizontalAlignment("center");
+    sheet.setFrozenRows(1);
+    sheet.setRightToLeft(true);
+  }
+  return sheet;
+}
+
+function sanitizeSheetName(name) {
+  return name.replace(/[\\\/\?\*\[\]]/g, "_").substring(0, 30);
+}
+
+function jsonResponse(data) {
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
 }</code></pre>
         </div>
       </div>
@@ -1198,7 +1292,7 @@ function doGet(e) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=4.5"></script>
-  <script src="app.js?v=4.5"></script>
+  <script src="students_data.js?v=4.6"></script>
+  <script src="app.js?v=4.6"></script>
 </body>
 </html>

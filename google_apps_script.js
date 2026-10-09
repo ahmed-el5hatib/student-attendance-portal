@@ -1,22 +1,15 @@
 /**
  * ==============================================================================
- * Google Apps Script - خادم مزامنة الحضور والغياب والبونص
+ * Google Apps Script - خادم مزامنة الحضور والغياب والبونص الشامل الذكي
  * إشراف: المهندس أحمد الخطيب (Eng. Ahmed El-khatib)
  * ==============================================================================
  * 
- * طريقة التركيب السريع (في دقيقتين فقط):
- * 1. افتح Google Sheets وأنشئ ملفاً جديداً باسم:
- *    Attendance - Eng Ahmed El-khatib
- * 2. من القائمة العلوية: Extensions (الإضافات) > Apps Script
- * 3. امسح أي كود موجود في المحرر، والصق هذا الكود بالكامل.
- * 4. اضغط على الزر الأزرق: Deploy (نشر) > New deployment (نشر جديد)
- * 5. اضغط على الترس بجانب "Select type" واختر "Web app" (تطبيق ويب).
- * 6. ضع الإعدادات كالتالي:
- *    - Description: Attendance Sync API
- *    - Execute as: Me (حسابك الشخصي)
- *    - Who has access: Anyone (أي شخص - لكي يستطيع الموقع المزامنة دون طلب تسجيل دخول)
- * 7. اضغط Deploy ووافق على الصلاحيات (Authorize access).
- * 8. انسخ الـ Web app URL وضعه في إعدادات المنظومة في الموقع!
+ * الميزات المتقدمة:
+ * 1. منع تكرار السجلات عند إعادة رفع نفس الأسبوع (تحديث تلقائي بالاستبدال).
+ * 2. دعم التحضير الذاتي عبر QR Code وتعديل حالة الطالب إلى "حاضر" مباشرة في نفس صفه.
+ * 3. حفظ سجل التظلمات في صفحة مستقلة (Appeals_تظلمات_الطلاب).
+ * 4. حفظ سجل درجات البونص التراكمي (Bonuses_سجل_البونص).
+ * 5. تنسيق الهيدر العربي الملون تلقائياً.
  */
 
 function doPost(e) {
@@ -28,11 +21,11 @@ function doPost(e) {
     var payload = JSON.parse(e.postData.contents);
     var ss = SpreadsheetApp.getActiveSpreadsheet();
 
-    // نوع العملية: تسجيل حضور جلسة أسبوعية أو رصد بونص فردي
-    var actionType = payload.type || 'attendance';
+    // نوع العملية: تسجيل حضور جلسة أسبوعية أو رصد بونص فردي أو تظلم أو تسجيل QR
+    var actionType = payload.action || payload.type || 'attendance';
 
+    // 1. مزامنة البونص
     if (actionType === 'bonus') {
-      // مزامنة سجل بونص خاص
       var bonusSheet = getOrCreateSheet(ss, "Bonuses_سجل_البونص", [
         "التاريخ والوقت", "كود الطالب", "اسم الطالب", "المقرر", "المجموعة", "النقاط", "السبب", "المسؤول"
       ]);
@@ -51,7 +44,29 @@ function doPost(e) {
       return jsonResponse({ status: "success", action: "bonus_saved" });
     }
 
-    // المعالجة الافتراضية: مزامنة جلسة حضور أسبوعية
+    // 2. مزامنة تظلمات ومراجعات الطلاب
+    if (actionType === 'appeal_ticket') {
+      var ticket = payload.ticket || {};
+      var appealSheet = getOrCreateSheet(ss, "Appeals_تظلمات_الطلاب", [
+        "وقت التظلم", "كود الطالب", "اسم الطالب", "المقرر", "المجموعة", "الأسبوع", "سبب التظلم", "ملاحظات الطالب", "الحالة"
+      ]);
+
+      appealSheet.appendRow([
+        ticket.createdAt || new Date().toLocaleString('ar-EG'),
+        ticket.studentId || "",
+        ticket.studentName || "",
+        ticket.courseName || ticket.courseId || "",
+        ticket.groupName || ticket.groupId || "",
+        "الأسبوع " + (ticket.week || ""),
+        ticket.reason || "",
+        ticket.notes || "",
+        ticket.status === 'approved' ? 'مقبول' : (ticket.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة')
+      ]);
+
+      return jsonResponse({ status: "success", action: "appeal_saved" });
+    }
+
+    // 3. مزامنة جلسات الحضور الأسبوعية أو تحضير الـ QR Code
     var sheetName = sanitizeSheetName((payload.courseId || "Course") + "_" + (payload.groupId || "Group"));
     var sheet = getOrCreateSheet(ss, sheetName, [
       "تاريخ الجلسة", "الأسبوع", "كود الطالب", "اسم الطالب", "البرنامج الأكاديمي", "حالة الحضور", "البونص", "ملاحظات", "وقت المزامنة"
@@ -59,32 +74,81 @@ function doPost(e) {
 
     var syncTime = new Date().toLocaleString('ar-EG');
     var records = payload.records || [];
+    var weekLabel = "الأسبوع " + (payload.week || 1);
 
+    // حالة التحضير الفردي المباشر عبر الـ QR Code
+    if (actionType === 'qr_checkin') {
+      if (records.length > 0) {
+        var r = records[0];
+        var lastRow = sheet.getLastRow();
+        var updatedInPlace = false;
+        
+        // البحث عن الطالب في نفس الأسبوع وتحديث حالته لـ حاضر دون تكرار الصف
+        if (lastRow > 1) {
+          var dataRange = sheet.getRange(2, 1, lastRow - 1, 9).getValues();
+          for (var i = 0; i < dataRange.length; i++) {
+            if (String(dataRange[i][1]) === weekLabel && String(dataRange[i][2]) === String(r.id)) {
+              sheet.getRange(i + 2, 6).setValue('حاضر');
+              sheet.getRange(i + 2, 9).setValue(syncTime);
+              updatedInPlace = true;
+              break;
+            }
+          }
+        }
+        
+        if (!updatedInPlace) {
+          sheet.appendRow([
+            payload.date || new Date().toLocaleDateString('ar-EG'),
+            weekLabel,
+            r.id,
+            r.name,
+            r.program || "",
+            'حاضر',
+            r.bonus || 0,
+            r.notes || "حضور ذاتي عبر QR Code",
+            syncTime
+          ]);
+        }
+        return jsonResponse({ status: "success", action: "qr_checkin_recorded", studentId: r.id });
+      }
+    }
+
+    // المزامنة الكاملة لجلسة أسبوعية:
+    // لمنع تكرار السجلات عند إعادة الرفع: نحذف أي صفوف سابقة لنفس الأسبوع قبل الإضافة
     if (records.length > 0) {
+      var lastRow = sheet.getLastRow();
+      if (lastRow > 1) {
+        var weekCol = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+        for (var rIndex = weekCol.length - 1; rIndex >= 0; rIndex--) {
+          if (String(weekCol[rIndex][0]) === weekLabel) {
+            sheet.deleteRow(rIndex + 2);
+          }
+        }
+      }
+
       var rowsToInsert = [];
-      for (var i = 0; i < records.length; i++) {
-        var r = records[i];
+      for (var j = 0; j < records.length; j++) {
+        var rec = records[j];
         rowsToInsert.push([
           payload.date || new Date().toLocaleDateString('ar-EG'),
-          "الأسبوع " + (payload.week || 1),
-          r.id,
-          r.name,
-          r.program || "",
-          r.status === 'present' ? 'حاضر' : (r.status === 'absent' ? 'غائب' : 'عذر مقبول'),
-          r.bonus || 0,
-          r.notes || "",
+          weekLabel,
+          rec.id,
+          rec.name,
+          rec.program || "",
+          rec.status === 'present' ? 'حاضر' : (rec.status === 'absent' ? 'غائب' : (rec.status === 'late' ? 'متأخر' : (rec.status === 'excused' ? 'عذر مقبول' : rec.status))),
+          rec.bonus || 0,
+          rec.notes || "",
           syncTime
         ]);
       }
 
-      // إضافة السجلات دفعة واحدة لتحسين السرعة
-      var lastRow = sheet.getLastRow();
-      sheet.getRange(lastRow + 1, 1, rowsToInsert.length, rowsToInsert[0].length).setValues(rowsToInsert);
+      var startRow = sheet.getLastRow() + 1;
+      sheet.getRange(startRow, 1, rowsToInsert.length, rowsToInsert[0].length).setValues(rowsToInsert);
     }
 
     return jsonResponse({
       status: "success",
-      message: "تم حفظ " + records.length + " سجلاً بنجاح",
+      message: "تم حفظ ومزامنة " + records.length + " سجلاً بنجاح",
       count: records.length,
       sheet: sheetName
     });
@@ -95,7 +159,6 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // فحص حالة الاتصال من الموقع
   return jsonResponse({
     status: "alive",
     instructor: "Eng. Ahmed El-khatib",
@@ -104,9 +167,6 @@ function doGet(e) {
   });
 }
 
-/**
- * دالة مساعدة لإنشاء الورقة وتنسيق ترويستها إذا لم تكن موجودة
- */
 function getOrCreateSheet(ss, name, headers) {
   var sheet = ss.getSheetByName(name);
   if (!sheet) {
@@ -126,16 +186,10 @@ function getOrCreateSheet(ss, name, headers) {
   return sheet;
 }
 
-/**
- * حماية وتعديل اسم الورقة ليتوافق مع قيود Google Sheets
- */
 function sanitizeSheetName(name) {
   return name.replace(/[\\\/\?\*\[\]]/g, "_").substring(0, 30);
 }
 
-/**
- * دالة لإرجاع JSON Output مع الترويسة الصحيحة
- */
 function jsonResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);

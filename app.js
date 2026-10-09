@@ -634,25 +634,49 @@
     // Check all weeks 1 to 12
     for (let w = 1; w <= 12; w++) {
       const key = getSessionKey(courseId, groupId, w);
-      const session = state.sessions[key];
-      if (session && session.records && session.records[studentId]) {
+      let session = state.sessions[key];
+      let rec = session && session.records ? session.records[studentId] : null;
+
+      // If student was not present in their group or session unrecorded, check if they attended as a guest in another group for this same week
+      if (!rec || rec.status === 'absent') {
+        const course = getCourse(courseId);
+        if (course && course.groups) {
+          for (const otherG of course.groups) {
+            if (otherG.id === groupId) continue;
+            const otherKey = getSessionKey(courseId, otherG.id, w);
+            const otherSess = state.sessions[otherKey];
+            if (otherSess && otherSess.records && otherSess.records[studentId]) {
+              const otherRec = otherSess.records[studentId];
+              if (otherRec.status === 'present' || otherRec.status === 'late' || otherRec.status === 'excused') {
+                rec = {
+                  status: otherRec.status,
+                  notes: (otherRec.notes || '') + (otherRec.notes ? ' | ' : '') + `(حضور مستضاف مع ${otherG.name})`
+                };
+                session = otherSess;
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      if (rec) {
         totalSessions++;
-        const rec = session.records[studentId];
         const status = rec.status;
         if (status === 'present') present++;
         else if (status === 'absent') absent++;
         else if (status === 'late') late++;
         else if (status === 'excused') excused++;
 
-        // Bonus points in this week
+        // Bonus points in this week across the course
         const weekBonuses = state.bonuses.filter(b => 
-          b.courseId === courseId && b.groupId === groupId && b.studentId === studentId && String(b.week) === String(w)
+          b.courseId === courseId && b.studentId === studentId && String(b.week) === String(w)
         );
         const bonusPts = weekBonuses.reduce((sum, b) => sum + Number(b.points), 0);
 
         timeline.push({
           week: w,
-          date: session.date,
+          date: session ? session.date : null,
           status: status,
           bonus: bonusPts,
           notes: rec.notes || ''
@@ -668,9 +692,9 @@
       }
     }
 
-    // Total bonuses for this student
+    // Total bonuses for this student across this course
     const studentBonuses = state.bonuses.filter(b => 
-      b.courseId === courseId && b.groupId === groupId && b.studentId === studentId
+      b.courseId === courseId && b.studentId === studentId
     );
     const totalBonusPoints = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
 
@@ -772,8 +796,8 @@
       const res = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
         const liveData = await res.json();
+        let updated = false;
         if (liveData && liveData.sessions) {
-          let updated = false;
           Object.keys(liveData.sessions).forEach(k => {
             const liveS = liveData.sessions[k];
             if (!state.sessions[k]) {
@@ -791,24 +815,47 @@
               });
             }
           });
-          if (updated) {
-            saveSessions();
-            if (typeof loadCurrentAdminAttendanceSession === 'function') {
-              loadCurrentAdminAttendanceSession();
+        }
+
+        if (liveData && liveData.bonuses && Array.isArray(liveData.bonuses)) {
+          let bonusUpdated = false;
+          liveData.bonuses.forEach(b => {
+            const exists = state.bonuses.some(localB => 
+              localB.studentId === b.studentId && 
+              localB.courseId === b.courseId && 
+              String(localB.week) === String(b.week) && 
+              localB.reason === b.reason
+            );
+            if (!exists) {
+              state.bonuses.push(b);
+              bonusUpdated = true;
             }
-            if (typeof renderAdminAttendanceTable === 'function') {
-              renderAdminAttendanceTable();
-            }
-            refreshAllActiveReportsAndMatrices(false);
-            if (state.selectedStudentId) {
-              selectStudentAndRenderCard(state.selectedStudentId);
-            }
-            if (forceNotification) {
-              showToast('تم تحديث كافة السجلات والتقارير من الخادم مباشرة! 🚀', 'success');
-            }
-          } else if (forceNotification) {
-            showToast('البيانات محدثة بالفعل إلى آخر إصدار.', 'info');
+          });
+          if (bonusUpdated) {
+            saveBonuses();
+            renderBonusLeaderboard();
+            renderBonusLogTable();
+            updated = true;
           }
+        }
+
+        if (updated) {
+          saveSessions();
+          if (typeof loadCurrentAdminAttendanceSession === 'function') {
+            loadCurrentAdminAttendanceSession();
+          }
+          if (typeof renderAdminAttendanceTable === 'function') {
+            renderAdminAttendanceTable();
+          }
+          refreshAllActiveReportsAndMatrices(false);
+          if (state.selectedStudentId) {
+            selectStudentAndRenderCard(state.selectedStudentId);
+          }
+          if (forceNotification) {
+            showToast('تم تحديث كافة السجلات والتقارير من الخادم مباشرة! 🚀', 'success');
+          }
+        } else if (forceNotification) {
+          showToast('البيانات محدثة بالفعل إلى آخر إصدار.', 'info');
         }
       }
     } catch (err) {
@@ -1145,6 +1192,14 @@
     const group = getGroup(courseId, groupId);
     if (!group) return;
 
+    // Refresh state.sessions from localStorage to ensure we have any changes made in background/other tabs
+    try {
+      const freshStored = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
+      if (freshStored && typeof freshStored === 'object') {
+        state.sessions = freshStored;
+      }
+    } catch (e) {}
+
     // Existing session in storage or initialize default
     const existing = state.sessions[key];
     if (existing) {
@@ -1385,6 +1440,7 @@
     let countLate = 0;
     let countExcused = 0;
 
+    const nativeIds = new Set(group.students.map(s => s.id));
     group.students.forEach(s => {
       const rec = state.currentAdminSession.records[s.id];
       const status = rec ? rec.status : 'present';
@@ -1394,7 +1450,20 @@
       else if (status === 'excused') countExcused++;
     });
 
-    const total = group.students.length;
+    let guestCount = 0;
+    Object.keys(state.currentAdminSession.records || {}).forEach(sid => {
+      if (!nativeIds.has(sid)) {
+        guestCount++;
+        const rec = state.currentAdminSession.records[sid];
+        const status = rec ? rec.status : 'present';
+        if (status === 'present') countPresent++;
+        else if (status === 'absent') countAbsent++;
+        else if (status === 'late') countLate++;
+        else if (status === 'excused') countExcused++;
+      }
+    });
+
+    const total = group.students.length + guestCount;
     el.statTotalStudents.textContent = total;
     el.statPresentCount.textContent = countPresent;
     el.statAbsentCount.textContent = countAbsent;
@@ -1466,6 +1535,18 @@
     const group = getGroup(courseId, groupId);
     if (!group) return;
 
+    // Merge latest sessions from localStorage so other sessions recorded concurrently are never lost
+    try {
+      const freshStored = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
+      if (freshStored && typeof freshStored === 'object') {
+        Object.keys(freshStored).forEach(k => {
+          if (k !== key && !state.sessions[k]) {
+            state.sessions[k] = freshStored[k];
+          }
+        });
+      }
+    } catch (e) {}
+
     // Ensure all students have a record (default to present if untouched)
     group.students.forEach(s => {
       if (!state.currentAdminSession.records[s.id]) {
@@ -1488,6 +1569,28 @@
   }
 
   // --- 7. Bonus & Minus Engine ---
+  function syncBonusToGoogleSheets(bonusObj) {
+    if (!state.config.googleScriptUrl) return;
+    try {
+      fetch(state.config.googleScriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'bonus',
+          studentId: bonusObj.studentId,
+          studentName: bonusObj.studentName,
+          courseId: bonusObj.courseId,
+          groupId: bonusObj.groupId,
+          points: bonusObj.points,
+          reason: bonusObj.reason,
+          timestamp: new Date().toLocaleString('ar-EG'),
+          instructor: 'Eng. Ahmed El-khatib'
+        })
+      }).catch(() => {});
+    } catch (e) {}
+  }
+
   function addQuickBonus(studentId, studentName) {
     const courseId = state.currentAdminSession.courseId;
     const groupId = state.currentAdminSession.groupId;
@@ -1507,10 +1610,12 @@
 
     state.bonuses.push(bonusObj);
     saveBonuses();
+    syncBonusToGoogleSheets(bonusObj);
 
     updateStudentBonusBadge(studentId, courseId, groupId);
     renderBonusLeaderboard();
     renderBonusLogTable();
+    refreshAllActiveReportsAndMatrices(false);
     showToast(`تمت إضافة +1 درجات بونص للطالب: ${studentName} ⭐`, 'success');
   }
 
@@ -1533,16 +1638,18 @@
 
     state.bonuses.push(bonusObj);
     saveBonuses();
+    syncBonusToGoogleSheets(bonusObj);
 
     updateStudentBonusBadge(studentId, courseId, groupId);
     renderBonusLeaderboard();
     renderBonusLogTable();
+    refreshAllActiveReportsAndMatrices(false);
     showToast(`تم خصم -1 (ماينص) للطالب: ${studentName} ⚠️`, 'error');
   }
 
   function updateStudentBonusBadge(studentId, courseId, groupId) {
     const studentBonuses = state.bonuses.filter(b => 
-      b.courseId === courseId && b.groupId === groupId && b.studentId === studentId
+      b.studentId === studentId && (!courseId || b.courseId === courseId)
     );
     const totalBonus = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
     const badge = document.getElementById(`bonusVal_${studentId}`);
@@ -1583,11 +1690,13 @@
 
     state.bonuses.push(bonusObj);
     saveBonuses();
+    syncBonusToGoogleSheets(bonusObj);
 
     el.bonusReasonInput.value = '';
     renderBonusLeaderboard();
     renderBonusLogTable();
     loadCurrentAdminAttendanceSession(); // refresh badges
+    refreshAllActiveReportsAndMatrices(false);
 
     if (points > 0) {
       showToast(`تم توثيق +${points} درجات بونص للطالب ${student.name} بنجاح! 🏆`, 'success');
@@ -3246,6 +3355,7 @@
       notes: state.currentAdminSession.records[s.id].notes || ''
     };
     saveSessions();
+    refreshAllActiveReportsAndMatrices(false);
 
     playBeep(newStatus === 'present' ? 'success' : 'beep');
 
@@ -3500,6 +3610,7 @@
       playBeep('success');
       showToast(`تم قبول تظلم ${appeal.studentName} واعتماد حضوره للأسبوع ${appeal.week} فوراً! ✅`, 'success');
       renderAppealsTable();
+      refreshAllActiveReportsAndMatrices(false);
       if (state.activeAdminTab === 'tabAttendance') loadCurrentAdminAttendanceSession();
     } else if (action === 'reject') {
       appeal.status = 'rejected';
@@ -3617,6 +3728,7 @@
     playBeep('success');
     if (el.guestStudentModal) el.guestStudentModal.classList.add('hidden');
     renderAdminAttendanceTable();
+    refreshAllActiveReportsAndMatrices(false);
     showToast(`تم تحضير الطالب ${s.name} كمستضاف في سكشن اليوم بنجاح! 👤`, 'success');
   }
 
@@ -3976,6 +4088,10 @@
         state.syncBroadcastChannel.onmessage = (event) => {
           const msg = event.data;
           if (msg && msg.type === 'CHECKIN_EVENT') {
+            try {
+              state.sessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
+            } catch (err) {}
+
             if (state.activeQrSession.active &&
                 state.activeQrSession.courseId === msg.courseId &&
                 state.activeQrSession.groupId === msg.groupId &&
@@ -3988,11 +4104,44 @@
                 state.currentAdminSession.groupId === msg.groupId &&
                 String(state.currentAdminSession.week) === String(msg.week)) {
               loadCurrentAdminAttendanceSession();
+              refreshAllActiveReportsAndMatrices(false);
+            }
+            if (state.selectedStudentId && state.selectedStudentId === msg.studentId) {
+              selectStudentAndRenderCard(msg.studentId);
             }
           }
         };
       } catch (err) {}
     }
+
+    // Cross-tab synchronization via standard localStorage storage event
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEYS.SESSIONS) {
+        try {
+          state.sessions = JSON.parse(e.newValue || '{}');
+          if (state.activeAdminTab === 'tabAttendance') {
+            loadCurrentAdminAttendanceSession();
+          }
+          refreshAllActiveReportsAndMatrices(false);
+          if (state.selectedStudentId) {
+            selectStudentAndRenderCard(state.selectedStudentId);
+          }
+        } catch (err) {}
+      } else if (e.key === STORAGE_KEYS.BONUSES) {
+        try {
+          state.bonuses = JSON.parse(e.newValue || '[]');
+          renderBonusLeaderboard();
+          renderBonusLogTable();
+          refreshAllActiveReportsAndMatrices(false);
+        } catch (err) {}
+      } else if (e.key === STORAGE_KEYS.APPEALS) {
+        try {
+          state.appeals = JSON.parse(e.newValue || '[]');
+          renderAppealsTable();
+          updateAppealsBadge();
+        } catch (err) {}
+      }
+    });
 
     // Check URL parameters for direct student check-in
     handleIncomingCheckinUrl();

@@ -1,5 +1,5 @@
-// Service Worker for Offline Attendance System - Version 19
-const CACHE_NAME = 'attendance-app-v19';
+// Service Worker for Offline Attendance System - Version 20
+const CACHE_NAME = 'attendance-app-v20';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
