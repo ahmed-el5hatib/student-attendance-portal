@@ -3173,11 +3173,75 @@ window.INITIAL_DATA = {
       "week": "1",
       "date": "2026-10-01",
       "records": {
-        "25010258": {
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010227": {
           "status": "present",
           "notes": ""
         },
         "25010235": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010258": {
           "status": "present",
           "notes": ""
         },
@@ -3250,70 +3314,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010522": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010050": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010072": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010086": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010088": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010089": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010105": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010123": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010126": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010136": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010139": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010143": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010149": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010210": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010214": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010215": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010227": {
           "status": "present",
           "notes": ""
         }
@@ -3326,11 +3326,75 @@ window.INITIAL_DATA = {
       "week": "2",
       "date": "2026-10-08",
       "records": {
-        "25010258": {
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010227": {
           "status": "present",
           "notes": ""
         },
         "25010235": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010258": {
           "status": "present",
           "notes": ""
         },
@@ -3403,70 +3467,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010522": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010050": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010072": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010086": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010088": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010089": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010105": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010123": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010126": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010136": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010139": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010143": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010149": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010210": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010214": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010215": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010227": {
           "status": "present",
           "notes": ""
         }
@@ -3479,6 +3479,214 @@ window.INITIAL_DATA = {
       "week": "1",
       "date": "2026-09-23",
       "records": {
+        "25010002": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010003": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010009": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010014": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010021": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010023": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010031": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010032": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010033": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010034": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010035": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010045": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010049": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010051": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010052": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010053": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010054": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010058": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010060": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010063": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010067": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010078": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010079": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010097": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010103": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010106": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010112": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010121": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010124": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010129": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010137": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010138": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010147": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010152": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010156": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010170": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010178": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010179": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010190": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010191": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010192": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010195": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010196": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010198": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010217": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010223": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010225": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010234": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010236": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010237": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010238": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010239": {
+          "status": "absent",
+          "notes": ""
+        },
         "25010242": {
           "status": "absent",
           "notes": ""
@@ -3525,26 +3733,6 @@ window.INITIAL_DATA = {
         },
         "25010269": {
           "status": "present",
-          "notes": ""
-        },
-        "25010234": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010236": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010237": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010238": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010239": {
-          "status": "absent",
           "notes": ""
         },
         "25010272": {
@@ -3875,6 +4063,10 @@ window.INITIAL_DATA = {
           "status": "absent",
           "notes": ""
         },
+        "25010481": {
+          "status": "absent",
+          "notes": ""
+        },
         "25010483": {
           "status": "absent",
           "notes": ""
@@ -3941,198 +4133,6 @@ window.INITIAL_DATA = {
         },
         "25010537": {
           "status": "absent",
-          "notes": ""
-        },
-        "25010003": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010009": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010014": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010021": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010023": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010031": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010032": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010033": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010034": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010035": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010002": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010045": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010049": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010051": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010052": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010053": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010054": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010058": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010060": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010063": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010067": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010078": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010079": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010097": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010103": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010106": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010112": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010121": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010124": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010129": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010137": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010138": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010147": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010152": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010156": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010170": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010178": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010179": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010481": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010190": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010191": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010192": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010195": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010196": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010198": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010217": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010223": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010225": {
-          "status": "present",
           "notes": ""
         }
       },
@@ -4144,6 +4144,214 @@ window.INITIAL_DATA = {
       "week": "2",
       "date": "2026-09-30",
       "records": {
+        "25010002": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010003": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010009": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010014": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010021": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010023": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010031": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010032": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010033": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010034": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010035": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010045": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010049": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010051": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010052": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010053": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010054": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010058": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010060": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010063": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010067": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010078": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010079": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010097": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010103": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010106": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010112": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010121": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010124": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010129": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010137": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010138": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010147": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010152": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010156": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010170": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010178": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010179": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010190": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010191": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010192": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010195": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010196": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010198": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010217": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010223": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010225": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010234": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010236": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010237": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010238": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010239": {
+          "status": "present",
+          "notes": ""
+        },
         "25010242": {
           "status": "present",
           "notes": ""
@@ -4189,26 +4397,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010269": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010234": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010236": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010237": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010238": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010239": {
           "status": "present",
           "notes": ""
         },
@@ -4540,6 +4728,10 @@ window.INITIAL_DATA = {
           "status": "present",
           "notes": ""
         },
+        "25010481": {
+          "status": "present",
+          "notes": ""
+        },
         "25010483": {
           "status": "present",
           "notes": ""
@@ -4605,198 +4797,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010537": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010003": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010009": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010014": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010021": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010023": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010031": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010032": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010033": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010034": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010035": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010002": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010045": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010049": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010051": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010052": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010053": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010054": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010058": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010060": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010063": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010067": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010078": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010079": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010097": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010103": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010106": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010112": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010121": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010124": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010129": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010137": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010138": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010147": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010152": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010156": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010170": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010178": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010179": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010481": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010190": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010191": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010192": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010195": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010196": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010198": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010217": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010223": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010225": {
           "status": "present",
           "notes": ""
         }
@@ -4809,322 +4809,6 @@ window.INITIAL_DATA = {
       "week": "1",
       "date": "2026-09-23",
       "records": {
-        "25010246": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010248": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010251": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010263": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010267": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010276": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010281": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010284": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010285": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010308": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010317": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010323": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010325": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010334": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010338": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010339": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010342": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010349": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010351": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010354": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010356": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010357": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010358": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010360": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010363": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010100": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010368": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010541": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010379": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010380": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010383": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010384": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010389": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010395": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010398": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010404": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010405": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010406": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010408": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010414": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010415": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010418": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010421": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010424": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010430": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010431": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010435": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010436": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010440": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010441": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010444": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010445": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010446": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010447": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010448": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010454": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010455": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010459": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010542": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010469": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010479": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010491": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010500": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010501": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010505": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010507": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010508": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010509": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010513": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010514": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010517": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010527": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010530": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010532": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010533": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010534": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010538": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010539": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010540": {
-          "status": "present",
-          "notes": ""
-        },
         "25010004": {
           "status": "present",
           "notes": ""
@@ -5162,10 +4846,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010038": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010277": {
           "status": "absent",
           "notes": ""
         },
@@ -5227,6 +4907,10 @@ window.INITIAL_DATA = {
         },
         "25010096": {
           "status": "absent",
+          "notes": ""
+        },
+        "25010100": {
+          "status": "present",
           "notes": ""
         },
         "25010107": {
@@ -5374,6 +5058,322 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010233": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010246": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010248": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010251": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010263": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010267": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010276": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010277": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010281": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010284": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010285": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010308": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010317": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010323": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010325": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010334": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010338": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010339": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010342": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010349": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010351": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010354": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010356": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010357": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010358": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010360": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010363": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010368": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010379": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010380": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010383": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010384": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010389": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010395": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010398": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010404": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010405": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010406": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010408": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010414": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010415": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010418": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010421": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010424": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010430": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010431": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010435": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010436": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010440": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010441": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010444": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010445": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010446": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010447": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010448": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010454": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010455": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010459": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010469": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010479": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010491": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010500": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010501": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010505": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010507": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010508": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010509": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010513": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010514": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010517": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010527": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010530": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010532": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010533": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010534": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010538": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010539": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010540": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010541": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010542": {
           "status": "present",
           "notes": ""
         }
@@ -5386,322 +5386,6 @@ window.INITIAL_DATA = {
       "week": "2",
       "date": "2026-09-30",
       "records": {
-        "25010246": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010248": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010251": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010263": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010267": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010276": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010281": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010284": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010285": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010308": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010317": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010323": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010325": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010334": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010338": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010339": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010342": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010349": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010351": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010354": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010356": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010357": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010358": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010360": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010363": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010100": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010368": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010541": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010379": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010380": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010383": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010384": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010389": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010395": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010398": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010404": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010405": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010406": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010408": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010414": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010415": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010418": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010421": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010424": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010430": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010431": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010435": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010436": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010440": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010441": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010444": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010445": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010446": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010447": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010448": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010454": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010455": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010459": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010542": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010469": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010479": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010491": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010500": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010501": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010505": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010507": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010508": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010509": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010513": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010514": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010517": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010527": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010530": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010532": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010533": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010534": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010538": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010539": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010540": {
-          "status": "present",
-          "notes": ""
-        },
         "25010004": {
           "status": "absent",
           "notes": ""
@@ -5740,10 +5424,6 @@ window.INITIAL_DATA = {
         },
         "25010038": {
           "status": "absent",
-          "notes": ""
-        },
-        "25010277": {
-          "status": "present",
           "notes": ""
         },
         "25010043": {
@@ -5804,6 +5484,10 @@ window.INITIAL_DATA = {
         },
         "25010096": {
           "status": "absent",
+          "notes": ""
+        },
+        "25010100": {
+          "status": "present",
           "notes": ""
         },
         "25010107": {
@@ -5953,6 +5637,322 @@ window.INITIAL_DATA = {
         "25010233": {
           "status": "present",
           "notes": ""
+        },
+        "25010246": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010248": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010251": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010263": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010267": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010276": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010277": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010281": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010284": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010285": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010308": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010317": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010323": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010325": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010334": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010338": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010339": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010342": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010349": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010351": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010354": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010356": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010357": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010358": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010360": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010363": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010368": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010379": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010380": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010383": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010384": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010389": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010395": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010398": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010404": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010405": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010406": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010408": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010414": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010415": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010418": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010421": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010424": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010430": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010431": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010435": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010436": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010440": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010441": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010444": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010445": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010446": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010447": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010448": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010454": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010455": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010459": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010469": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010479": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010491": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010500": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010501": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010505": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010507": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010508": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010509": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010513": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010514": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010517": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010527": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010530": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010532": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010533": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010534": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010538": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010539": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010540": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010541": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010542": {
+          "status": "present",
+          "notes": ""
         }
       },
       "updatedAt": "2026-09-30T12:00:00.000Z"
@@ -5963,6 +5963,378 @@ window.INITIAL_DATA = {
       "week": "1",
       "date": "2026-09-23",
       "records": {
+        "25010001": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010005": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010006": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010007": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010011": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010013": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010020": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010024": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010025": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010027": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010036": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010039": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010040": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010042": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010044": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010048": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010056": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010062": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010064": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010066": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010068": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010069": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010071": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010073": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010075": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010076": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010077": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010087": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010091": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010092": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010094": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010101": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010102": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010104": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010108": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010109": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010115": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010116": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010117": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010118": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010119": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010122": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010127": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010128": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010131": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010132": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010133": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010135": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010142": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010154": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010159": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010163": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010164": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010165": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010167": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010169": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010171": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010175": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010182": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010184": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010185": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010186": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010194": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010197": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010200": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010203": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010204": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010205": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010207": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010209": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010211": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010213": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010216": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010219": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010231": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010232": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "absent",
+          "notes": ""
+        },
         "25010245": {
           "status": "present",
           "notes": ""
@@ -5993,10 +6365,6 @@ window.INITIAL_DATA = {
         },
         "25010270": {
           "status": "present",
-          "notes": ""
-        },
-        "25010235": {
-          "status": "absent",
           "notes": ""
         },
         "25010271": {
@@ -6231,6 +6599,10 @@ window.INITIAL_DATA = {
           "status": "present",
           "notes": ""
         },
+        "25010482": {
+          "status": "absent",
+          "notes": ""
+        },
         "25010485": {
           "status": "present",
           "notes": ""
@@ -6305,378 +6677,6 @@ window.INITIAL_DATA = {
         },
         "25010536": {
           "status": "present",
-          "notes": ""
-        },
-        "25010005": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010006": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010007": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010011": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010013": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010020": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010024": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010025": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010027": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010036": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010001": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010039": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010040": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010042": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010044": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010048": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010050": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010056": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010062": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010064": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010066": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010068": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010069": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010071": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010072": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010073": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010075": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010076": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010077": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010086": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010087": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010088": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010089": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010091": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010092": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010094": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010101": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010102": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010104": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010105": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010109": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010108": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010115": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010116": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010117": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010118": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010119": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010122": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010123": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010126": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010127": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010128": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010131": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010132": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010133": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010135": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010136": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010139": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010142": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010143": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010149": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010154": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010159": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010163": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010164": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010165": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010167": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010169": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010171": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010175": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010182": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010184": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010185": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010482": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010186": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010194": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010197": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010200": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010203": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010204": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010205": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010207": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010209": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010210": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010211": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010213": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010214": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010215": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010216": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010219": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010227": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010231": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010232": {
-          "status": "absent",
           "notes": ""
         }
       },
@@ -6688,6 +6688,378 @@ window.INITIAL_DATA = {
       "week": "2",
       "date": "2026-09-30",
       "records": {
+        "25010001": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010005": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010006": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010007": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010011": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010013": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010020": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010024": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010025": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010027": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010036": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010039": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010040": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010042": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010044": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010048": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010056": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010062": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010064": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010066": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010068": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010069": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010071": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010073": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010075": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010076": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010077": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010087": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010091": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010092": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010094": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010101": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010102": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010104": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010108": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010109": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010115": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010116": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010117": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010118": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010119": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010122": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010127": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010128": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010131": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010132": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010133": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010135": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010142": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010154": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010159": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010163": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010164": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010165": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010167": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010169": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010171": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010175": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010182": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010184": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010185": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010186": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010194": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010197": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010200": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010203": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010204": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010205": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010207": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010209": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010211": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010213": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010216": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010219": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010231": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010232": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "present",
+          "notes": ""
+        },
         "25010245": {
           "status": "present",
           "notes": ""
@@ -6717,10 +7089,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010270": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010235": {
           "status": "present",
           "notes": ""
         },
@@ -6956,6 +7324,10 @@ window.INITIAL_DATA = {
           "status": "present",
           "notes": ""
         },
+        "25010482": {
+          "status": "present",
+          "notes": ""
+        },
         "25010485": {
           "status": "present",
           "notes": ""
@@ -7030,378 +7402,6 @@ window.INITIAL_DATA = {
         },
         "25010536": {
           "status": "present",
-          "notes": ""
-        },
-        "25010005": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010006": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010007": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010011": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010013": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010020": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010024": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010025": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010027": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010036": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010001": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010039": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010040": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010042": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010044": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010048": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010050": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010056": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010062": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010064": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010066": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010068": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010069": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010071": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010072": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010073": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010075": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010076": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010077": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010086": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010087": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010088": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010089": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010091": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010092": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010094": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010101": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010102": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010104": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010105": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010109": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010108": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010115": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010116": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010117": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010118": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010119": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010122": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010123": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010126": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010127": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010128": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010131": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010132": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010133": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010135": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010136": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010139": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010142": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010143": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010149": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010154": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010159": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010163": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010164": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010165": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010167": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010169": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010171": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010175": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010182": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010184": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010185": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010482": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010186": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010194": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010197": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010200": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010203": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010204": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010205": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010207": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010209": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010210": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010211": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010213": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010214": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010215": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010216": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010219": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010227": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010231": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010232": {
-          "status": "absent",
           "notes": ""
         }
       },
@@ -7414,6 +7414,214 @@ window.INITIAL_DATA = {
       "timestamp": "2026-10-07T12:00:00.000Z",
       "instructor": "م. أحمد الخطيب",
       "records": {
+        "25010002": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010003": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010009": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010014": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010021": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010023": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010031": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010032": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010033": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010034": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010035": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010045": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010049": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010051": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010052": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010053": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010054": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010058": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010060": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010063": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010067": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010078": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010079": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010097": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010103": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010106": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010112": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010121": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010124": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010129": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010137": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010138": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010147": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010152": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010156": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010170": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010178": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010179": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010190": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010191": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010192": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010195": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010196": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010198": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010217": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010223": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010225": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010234": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010236": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010237": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010238": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010239": {
+          "status": "present",
+          "notes": ""
+        },
         "25010242": {
           "status": "absent",
           "notes": ""
@@ -7459,26 +7667,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010269": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010234": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010236": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010237": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010238": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010239": {
           "status": "present",
           "notes": ""
         },
@@ -7810,6 +7998,10 @@ window.INITIAL_DATA = {
           "status": "absent",
           "notes": ""
         },
+        "25010481": {
+          "status": "absent",
+          "notes": ""
+        },
         "25010483": {
           "status": "present",
           "notes": ""
@@ -7877,198 +8069,6 @@ window.INITIAL_DATA = {
         "25010537": {
           "status": "present",
           "notes": ""
-        },
-        "25010003": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010009": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010014": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010021": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010023": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010031": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010032": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010033": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010034": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010035": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010002": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010045": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010049": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010051": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010052": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010053": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010054": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010058": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010060": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010063": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010067": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010078": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010079": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010097": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010103": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010106": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010112": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010121": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010124": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010129": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010137": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010138": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010147": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010152": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010156": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010170": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010178": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010179": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010481": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010190": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010191": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010192": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010195": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010196": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010198": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010217": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010223": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010225": {
-          "status": "present",
-          "notes": ""
         }
       }
     },
@@ -8079,322 +8079,6 @@ window.INITIAL_DATA = {
       "timestamp": "2026-10-07T12:00:00.000Z",
       "instructor": "م. أحمد الخطيب",
       "records": {
-        "25010246": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010248": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010251": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010263": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010267": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010276": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010281": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010284": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010285": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010308": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010317": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010323": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010325": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010334": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010338": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010339": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010342": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010349": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010351": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010354": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010356": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010357": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010358": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010360": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010363": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010100": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010368": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010541": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010379": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010380": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010383": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010384": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010389": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010395": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010398": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010404": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010405": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010406": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010408": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010414": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010415": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010418": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010421": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010424": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010430": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010431": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010435": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010436": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010440": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010441": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010444": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010445": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010446": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010447": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010448": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010454": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010455": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010459": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010542": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010469": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010479": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010491": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010500": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010501": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010505": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010507": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010508": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010509": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010513": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010514": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010517": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010527": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010530": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010532": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010533": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010534": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010538": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010539": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010540": {
-          "status": "present",
-          "notes": ""
-        },
         "25010004": {
           "status": "present",
           "notes": ""
@@ -8432,10 +8116,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010038": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010277": {
           "status": "present",
           "notes": ""
         },
@@ -8497,6 +8177,10 @@ window.INITIAL_DATA = {
         },
         "25010096": {
           "status": "absent",
+          "notes": ""
+        },
+        "25010100": {
+          "status": "present",
           "notes": ""
         },
         "25010107": {
@@ -8646,6 +8330,322 @@ window.INITIAL_DATA = {
         "25010233": {
           "status": "present",
           "notes": ""
+        },
+        "25010246": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010248": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010251": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010263": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010267": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010276": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010277": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010281": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010284": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010285": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010308": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010317": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010323": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010325": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010334": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010338": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010339": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010342": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010349": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010351": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010354": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010356": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010357": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010358": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010360": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010363": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010368": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010379": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010380": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010383": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010384": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010389": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010395": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010398": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010404": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010405": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010406": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010408": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010414": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010415": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010418": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010421": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010424": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010430": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010431": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010435": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010436": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010440": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010441": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010444": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010445": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010446": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010447": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010448": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010454": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010455": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010459": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010469": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010479": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010491": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010500": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010501": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010505": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010507": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010508": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010509": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010513": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010514": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010517": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010527": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010530": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010532": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010533": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010534": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010538": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010539": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010540": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010541": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010542": {
+          "status": "present",
+          "notes": ""
         }
       }
     },
@@ -8656,6 +8656,378 @@ window.INITIAL_DATA = {
       "timestamp": "2026-10-07T12:00:00.000Z",
       "instructor": "م. أحمد الخطيب",
       "records": {
+        "25010001": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010005": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010006": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010007": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010011": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010013": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010020": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010024": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010025": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010027": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010036": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010039": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010040": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010042": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010044": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010048": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010050": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010056": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010062": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010064": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010066": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010068": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010069": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010071": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010072": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010073": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010075": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010076": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010077": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010086": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010087": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010088": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010089": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010091": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010092": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010094": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010101": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010102": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010104": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010105": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010108": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010109": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010115": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010116": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010117": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010118": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010119": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010122": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010123": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010126": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010127": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010128": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010131": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010132": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010133": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010135": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010136": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010139": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010142": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010143": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010149": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010154": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010159": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010163": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010164": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010165": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010167": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010169": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010171": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010175": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010182": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010184": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010185": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010186": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010194": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010197": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010200": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010203": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010204": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010205": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010207": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010209": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010210": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010211": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010213": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010214": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010215": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010216": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010219": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010227": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010231": {
+          "status": "present",
+          "notes": ""
+        },
+        "25010232": {
+          "status": "absent",
+          "notes": ""
+        },
+        "25010235": {
+          "status": "present",
+          "notes": ""
+        },
         "25010245": {
           "status": "present",
           "notes": ""
@@ -8685,10 +9057,6 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010270": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010235": {
           "status": "present",
           "notes": ""
         },
@@ -8924,6 +9292,10 @@ window.INITIAL_DATA = {
           "status": "present",
           "notes": ""
         },
+        "25010482": {
+          "status": "present",
+          "notes": ""
+        },
         "25010485": {
           "status": "present",
           "notes": ""
@@ -8999,380 +9371,153 @@ window.INITIAL_DATA = {
         "25010536": {
           "status": "present",
           "notes": ""
-        },
-        "25010005": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010006": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010007": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010011": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010013": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010020": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010024": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010025": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010027": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010036": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010001": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010039": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010040": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010042": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010044": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010048": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010050": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010056": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010062": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010064": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010066": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010068": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010069": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010071": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010072": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010073": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010075": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010076": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010077": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010086": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010087": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010088": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010089": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010091": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010092": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010094": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010101": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010102": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010104": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010105": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010109": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010108": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010115": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010116": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010117": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010118": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010119": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010122": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010123": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010126": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010127": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010128": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010131": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010132": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010133": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010135": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010136": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010139": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010142": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010143": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010149": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010154": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010159": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010163": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010164": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010165": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010167": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010169": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010171": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010175": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010182": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010184": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010185": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010482": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010186": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010194": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010197": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010200": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010203": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010204": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010205": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010207": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010209": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010210": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010211": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010213": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010214": {
-          "status": "absent",
-          "notes": ""
-        },
-        "25010215": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010216": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010219": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010227": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010231": {
-          "status": "present",
-          "notes": ""
-        },
-        "25010232": {
-          "status": "absent",
-          "notes": ""
         }
       }
     }
-  }
+  },
+  "bonuses": [
+    {
+      "id": "bonus_dc_1",
+      "studentId": "25010304",
+      "studentName": "حازم سعيد مصطفى عبد العليم مصطفى",
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_2",
+      "studentId": "25010457",
+      "studentName": "محمد عزت جامع احمد",
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_3",
+      "studentId": "25010259",
+      "studentName": "احمد محمد عز الدين على",
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_4",
+      "studentId": "25010137",
+      "studentName": "فلوباتير يوحنا صبرى عطيه",
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_5",
+      "studentId": "25010459",
+      "studentName": "محمد عصام محمد جمال مصطفى",
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "3",
+      "points": 10,
+      "reason": "تفوق وتفاعل استثنائي في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_6",
+      "studentId": "25010016",
+      "studentName": "احمد ربيع احمد مرغنى جاد الله",
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_7",
+      "studentId": "25010145",
+      "studentName": "مارك جرجس عزت نصر سفين",
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_8",
+      "studentId": "25010517",
+      "studentName": "نوران ايمن محمد حسان",
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_9",
+      "studentId": "25010393",
+      "studentName": "عبد الله عمر محمد عوض إبراهيم",
+      "courseId": "data_communication",
+      "groupId": "GA",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_10",
+      "studentId": "25010325",
+      "studentName": "رؤيه ايمن محمد احمد",
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_11",
+      "studentId": "25010522",
+      "studentName": "هايدى محمد فوزى حسن امام",
+      "courseId": "data_communication",
+      "groupId": "GC",
+      "week": "3",
+      "points": 10,
+      "reason": "تفوق وتفاعل استثنائي في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_12",
+      "studentId": "25010072",
+      "studentName": "دينا عبد الله احمد بصرى",
+      "courseId": "data_communication",
+      "groupId": "GC",
+      "week": "3",
+      "points": 10,
+      "reason": "تفوق وتفاعل استثنائي في السكشن",
+      "date": "2026-10-09"
+    },
+    {
+      "id": "bonus_dc_13",
+      "studentId": "25010323",
+      "studentName": "داليا عبد الحليم احمد حفنى الطاهر",
+      "courseId": "data_communication",
+      "groupId": "GB",
+      "week": "3",
+      "points": 5,
+      "reason": "مشاركة وتفاعل متميز في السكشن",
+      "date": "2026-10-09"
+    }
+  ]
 };

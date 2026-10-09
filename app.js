@@ -33,6 +33,14 @@
     localStorage.setItem(BONUS_RESET_KEY, 'done');
   }
 
+  // تحميل وتحديث درجات البونص المعتمدة لمادة تراسل البيانات (13 طالباً)
+  const BONUS_DC_KEY = 'ATTENDANCE_BONUS_DC_13_STUDENTS_V1';
+  if (localStorage.getItem(BONUS_DC_KEY) !== 'done') {
+    const initialBonuses = (window.INITIAL_DATA && window.INITIAL_DATA.bonuses) ? window.INITIAL_DATA.bonuses : [];
+    localStorage.setItem(STORAGE_KEYS.BONUSES, JSON.stringify(initialBonuses));
+    localStorage.setItem(BONUS_DC_KEY, 'done');
+  }
+
   // تحميل وتحديث جلسات الحضور للأسابيع الأول والثاني والثالث (OS S15 ومجموعات Data Communication)
   let storedSessions = JSON.parse(localStorage.getItem(STORAGE_KEYS.SESSIONS) || '{}');
   const initialSessions = (window.INITIAL_DATA && window.INITIAL_DATA.sessions) ? window.INITIAL_DATA.sessions : {};
@@ -60,6 +68,7 @@
     bonuses: JSON.parse(localStorage.getItem(STORAGE_KEYS.BONUSES) || '[]'),
     config: Object.assign({}, DEFAULT_CONFIG, storedConfig),
     activeAdminTab: 'tabAttendance',
+    selectedStudentId: null,
     currentAdminSession: {
       courseId: '',
       groupId: '',
@@ -429,11 +438,29 @@
     const courseId = el.studentCourseSelect.value;
     const groupId = el.studentGroupSelect.value;
     const group = getGroup(courseId, groupId);
-    if (!group) return;
 
-    const matches = group.students.filter(s => 
-      s.id.toLowerCase().includes(query) || s.name.toLowerCase().includes(query)
-    );
+    let matches = [];
+    if (group) {
+      matches = group.students.filter(s => 
+        s.id.toLowerCase().includes(query) || s.name.toLowerCase().includes(query)
+      );
+    }
+
+    // If no match in current group, search across all groups in the course
+    if (matches.length === 0) {
+      state.courses.forEach(c => {
+        c.groups.forEach(g => {
+          const groupMatches = g.students.filter(s => 
+            s.id.toLowerCase().includes(query) || s.name.toLowerCase().includes(query)
+          );
+          groupMatches.forEach(st => {
+            if (!matches.some(x => x.id === st.id)) {
+              matches.push(Object.assign({}, st, { _groupName: g.name }));
+            }
+          });
+        });
+      });
+    }
 
     if (matches.length === 0) {
       dropdown.innerHTML = `<div class="search-dropdown-item"><span class="text-muted">لم يتم العثور على طالب مطابق</span></div>`;
@@ -444,7 +471,7 @@
     dropdown.innerHTML = matches.slice(0, 10).map(s => `
       <div class="search-dropdown-item" data-id="${s.id}">
         <span class="student-name">${s.name}</span>
-        <span class="student-id">${s.id}</span>
+        <span class="student-id">${s.id} ${s._groupName ? `<small style="color: var(--accent-light);">(${s._groupName})</small>` : ''}</span>
       </div>
     `).join('');
     dropdown.classList.remove('hidden');
@@ -462,12 +489,35 @@
   }
 
   function selectStudentAndRenderCard(studentId) {
-    const courseId = el.studentCourseSelect.value;
-    const groupId = el.studentGroupSelect.value;
-    const student = getStudent(courseId, groupId, studentId);
+    state.selectedStudentId = studentId;
+
+    let courseId = el.studentCourseSelect.value;
+    let groupId = el.studentGroupSelect.value;
+    let student = getStudent(courseId, groupId, studentId);
+
+    // If student belongs to a different course/group, auto-locate them
+    if (!student) {
+      for (const c of state.courses) {
+        for (const g of c.groups) {
+          const found = g.students.find(s => s.id === studentId);
+          if (found) {
+            student = found;
+            courseId = c.id;
+            groupId = g.id;
+            el.studentCourseSelect.value = courseId;
+            updateStudentGroupOptions();
+            el.studentGroupSelect.value = groupId;
+            break;
+          }
+        }
+        if (student) break;
+      }
+    }
+
     if (!student) return;
 
     el.studentSearchInput.value = `${student.name} (${student.id})`;
+    el.studentRecordCard.classList.remove('hidden');
     const stats = getStudentStats(courseId, groupId, studentId);
     const course = getCourse(courseId);
     const group = getGroup(courseId, groupId);
@@ -728,7 +778,38 @@
           state.currentAdminSession.records[studentId].status = newStatus;
         }
 
+        // --- REAL-TIME AUTO-PERSISTENCE ---
+        // Save immediately to state.sessions and localStorage so students see the change instantly!
+        const courseId = state.currentAdminSession.courseId;
+        const groupId = state.currentAdminSession.groupId;
+        const week = state.currentAdminSession.week;
+        const date = el.adminSessionDate.value || new Date().toISOString().split('T')[0];
+        const key = getSessionKey(courseId, groupId, week);
+
+        if (!state.sessions[key]) {
+          state.sessions[key] = {
+            courseId,
+            groupId,
+            week,
+            date,
+            records: {},
+            updatedAt: new Date().toISOString()
+          };
+        }
+        state.sessions[key].records[studentId] = {
+          status: newStatus,
+          notes: (state.currentAdminSession.records[studentId] && state.currentAdminSession.records[studentId].notes) || ''
+        };
+        state.sessions[key].date = date;
+        state.sessions[key].updatedAt = new Date().toISOString();
+        saveSessions();
+
         updateLiveAttendanceStatsOnly();
+
+        // If this student is currently being viewed in the Student Portal, refresh their view immediately!
+        if (state.selectedStudentId === studentId) {
+          selectStudentAndRenderCard(studentId);
+        }
       });
     });
 
@@ -740,6 +821,20 @@
           state.currentAdminSession.records[studentId] = { status: 'present', notes: input.value };
         } else {
           state.currentAdminSession.records[studentId].notes = input.value;
+        }
+
+        const courseId = state.currentAdminSession.courseId;
+        const groupId = state.currentAdminSession.groupId;
+        const week = state.currentAdminSession.week;
+        const key = getSessionKey(courseId, groupId, week);
+        if (state.sessions[key]) {
+          if (!state.sessions[key].records[studentId]) {
+            state.sessions[key].records[studentId] = { status: 'present', notes: input.value };
+          } else {
+            state.sessions[key].records[studentId].notes = input.value;
+          }
+          state.sessions[key].updatedAt = new Date().toISOString();
+          saveSessions();
         }
       });
     });
@@ -798,6 +893,7 @@
   function markAllPresent() {
     const courseId = state.currentAdminSession.courseId;
     const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
     const group = getGroup(courseId, groupId);
     if (!group) return;
 
@@ -809,13 +905,36 @@
       }
     });
 
+    // Real-time auto-persist
+    const key = getSessionKey(courseId, groupId, week);
+    state.sessions[key] = {
+      courseId,
+      groupId,
+      week,
+      date: el.adminSessionDate.value || new Date().toISOString().split('T')[0],
+      records: Object.assign({}, state.currentAdminSession.records),
+      updatedAt: new Date().toISOString()
+    };
+    saveSessions();
+
     renderAdminAttendanceTable();
     showToast('تم تحضير جميع الطلاب كحاضرين بنجاح ✅', 'success');
   }
 
   function resetCurrentSession() {
     if (!confirm('هل تريد تفريغ حالات الغياب للجلسة الحالية وإعادة تعيينها؟')) return;
+    const courseId = state.currentAdminSession.courseId;
+    const groupId = state.currentAdminSession.groupId;
+    const week = state.currentAdminSession.week;
+    const key = getSessionKey(courseId, groupId, week);
+
     state.currentAdminSession.records = {};
+    if (state.sessions[key]) {
+      state.sessions[key].records = {};
+      state.sessions[key].updatedAt = new Date().toISOString();
+      saveSessions();
+    }
+
     renderAdminAttendanceTable();
     showToast('تمت إعادة ضبط حالات الحضور للجلسة الحالية', 'info');
   }
@@ -1701,6 +1820,11 @@
     el.adminDashboardView.classList.remove('active');
     el.btnStudentView.classList.add('active');
     el.btnAdminView.classList.remove('active');
+
+    // Live refresh student record card with latest saved attendance
+    if (state.selectedStudentId) {
+      selectStudentAndRenderCard(state.selectedStudentId);
+    }
   }
 
   function showAdminView() {
