@@ -383,6 +383,7 @@
     btnScopeMySections: document.getElementById('btnScopeMySections'),
     btnScopeAllSections: document.getElementById('btnScopeAllSections'),
     btnLogoutInstructor: document.getElementById('btnLogoutInstructor'),
+    printInstructorName: document.getElementById('printInstructorName'),
     printSignInstructorName: document.getElementById('printSignInstructorName'),
     printFooterInstructorName: document.getElementById('printFooterInstructorName'),
 
@@ -1930,8 +1931,16 @@
     el.printGeneratedTimestamp.textContent = new Date().toLocaleString('ar-EG');
     const instructorName = group.instructor || 'م. أحمد الخطيب';
     if (el.printInstructorName) el.printInstructorName.textContent = instructorName;
+    const directInst = document.getElementById('printInstructorName');
+    if (directInst) directInst.textContent = instructorName;
+
     if (el.printSignInstructorName) el.printSignInstructorName.textContent = instructorName;
+    const directSign = document.getElementById('printSignInstructorName');
+    if (directSign) directSign.textContent = instructorName;
+
     if (el.printFooterInstructorName) el.printFooterInstructorName.textContent = instructorName;
+    const directFoot = document.getElementById('printFooterInstructorName');
+    if (directFoot) directFoot.textContent = instructorName;
 
     let totalStudents = group.students.length;
     let presentCount = 0;
@@ -2254,7 +2263,8 @@
     });
 
     if (reportType === 'formal_12weeks') {
-      let csvContent = "\uFEFFم,اسم الطالب,كود الطالب,البرنامج,";
+      let csvContent = `\uFEFFكشف الحضور الفصلي الرسمي (12 أسبوعاً) - مقرر: ${course.name} - السكشن: ${group.name} - معيد المادة: ${group.instructor || 'م. أحمد الخطيب'}\n`;
+      csvContent += "م,اسم الطالب,كود الطالب,البرنامج,";
       csvContent += weeks.map(w => `الأسبوع ${w}`).join(',') + ",إجمالي الحضور,إجمالي الغياب,درجات البونص,نسبة الحضور %\n";
 
       group.students.forEach((s, idx) => {
@@ -2289,7 +2299,8 @@
     const sessionKey = getSessionKey(courseId, groupId, week);
     const session = state.sessions[sessionKey];
 
-    let csvContent = "\uFEFFم,كود الطالب,اسم الطالب,البرنامج,الحالة,ملاحظات\n";
+    let csvContent = `\uFEFFكشف الغياب الأسبوعي - مقرر: ${course.name} - السكشن: ${group.name} - الأسبوع: ${week} - معيد المادة: ${group.instructor || 'م. أحمد الخطيب'}\n`;
+    csvContent += "م,كود الطالب,اسم الطالب,البرنامج,الحالة,ملاحظات\n";
 
     group.students.forEach((s, idx) => {
       const rec = session && session.records ? session.records[s.id] : null;
@@ -2382,8 +2393,10 @@
     const group = getGroup(courseId, groupId);
     if (!group) return;
 
+    const course = getCourse(courseId);
     const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
-    let csv = `\uFEFFم,كود الطالب,اسم الطالب,${weeks.map(w => `أسبوع ${w}`).join(',')},إجمالي الحضور,إجمالي الغياب,نسبة الحضور,رصيد البونص,التقييم\n`;
+    let csv = `\uFEFFكشف الحضور التراكمي للترم كاملاً - مقرر: ${course ? course.name : courseId} - السكشن: ${group.name} - معيد المادة: ${group.instructor || 'م. أحمد الخطيب'}\n`;
+    csv += `م,كود الطالب,اسم الطالب,${weeks.map(w => `أسبوع ${w}`).join(',')},إجمالي الحضور,إجمالي الغياب,نسبة الحضور,رصيد البونص,التقييم\n`;
 
     group.students.forEach((s, idx) => {
       const stats = getStudentStats(courseId, groupId, s.id);
