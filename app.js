@@ -270,6 +270,7 @@
     activeAdminTab: 'tabAttendance',
     selectedStudentId: null,
     appealsFilter: 'all',
+    showRiskOnly: false,
     activeQrSession: {
       active: false,
       isPaused: false,
@@ -332,6 +333,7 @@
     btnSaveAttendance: document.getElementById('btnSaveAttendance'),
     btnSyncCurrentSession: document.getElementById('btnSyncCurrentSession'),
     adminStudentFilter: document.getElementById('adminStudentFilter'),
+    btnToggleRiskFilter: document.getElementById('btnToggleRiskFilter'),
     attendanceTableBody: document.getElementById('attendanceTableBody'),
 
     // Stats Counters
@@ -362,6 +364,7 @@
     btnGenerateReportPreview: document.getElementById('btnGenerateReportPreview'),
     btnPrintReportPDF: document.getElementById('btnPrintReportPDF'),
     btnExportReportCSV: document.getElementById('btnExportReportCSV'),
+    btnBatchExportMySections: document.getElementById('btnBatchExportMySections'),
     printReportMainTitle: document.getElementById('printReportMainTitle'),
     printCourseName: document.getElementById('printCourseName'),
     printGroupName: document.getElementById('printGroupName'),
@@ -375,7 +378,7 @@
     printTableContainer: document.getElementById('printTableContainer'),
     printGeneratedTimestamp: document.getElementById('printGeneratedTimestamp'),
 
-        // Multi-Instructor Session Bar & Controls
+    // Multi-Instructor Session Bar & Controls
     instructorSessionBar: document.getElementById('instructorSessionBar'),
     activeInstructorName: document.getElementById('activeInstructorName'),
     activeInstructorRole: document.getElementById('activeInstructorRole'),
@@ -386,6 +389,11 @@
     printInstructorName: document.getElementById('printInstructorName'),
     printSignInstructorName: document.getElementById('printSignInstructorName'),
     printFooterInstructorName: document.getElementById('printFooterInstructorName'),
+    kpiTotalStudents: document.getElementById('kpiTotalStudents'),
+    kpiAvgAttendance: document.getElementById('kpiAvgAttendance'),
+    kpiPendingAppeals: document.getElementById('kpiPendingAppeals'),
+    kpiTotalBonuses: document.getElementById('kpiTotalBonuses'),
+    changePinInstructorName: document.getElementById('changePinInstructorName'),
 
     // Cumulative Matrix
     cumCourseSelect: document.getElementById('cumCourseSelect'),
@@ -393,6 +401,12 @@
     cumulativeMatrixTable: document.getElementById('cumulativeMatrixTable'),
     btnPrintCumulative: document.getElementById('btnPrintCumulative'),
     btnExportCumulativeCSV: document.getElementById('btnExportCumulativeCSV'),
+    cumPrintCourseName: document.getElementById('cumPrintCourseName'),
+    cumPrintGroupName: document.getElementById('cumPrintGroupName'),
+    cumPrintInstructorName: document.getElementById('cumPrintInstructorName'),
+    cumPrintSignInstructorName: document.getElementById('cumPrintSignInstructorName'),
+    cumPrintFooterInstructorName: document.getElementById('cumPrintFooterInstructorName'),
+    cumPrintGeneratedTimestamp: document.getElementById('cumPrintGeneratedTimestamp'),
 
     // Settings
     googleScriptUrlInput: document.getElementById('googleScriptUrlInput'),
@@ -946,6 +960,9 @@
   function updateInstructorHeaderUI() {
     if (!el.activeInstructorName || !state.currentInstructor) return;
     el.activeInstructorName.textContent = state.currentInstructor.name;
+    if (el.changePinInstructorName) {
+      el.changePinInstructorName.textContent = state.currentInstructor.name;
+    }
     if (el.activeInstructorRole) {
       el.activeInstructorRole.textContent = state.currentInstructor.role === 'admin' ? 'المشرف العام' : 'معيد المادة';
     }
@@ -959,6 +976,84 @@
     if (el.btnScopeMySections && el.btnScopeAllSections) {
       el.btnScopeMySections.classList.toggle('active', state.adminViewScope === 'instructor');
       el.btnScopeAllSections.classList.toggle('active', state.adminViewScope === 'all');
+    }
+
+    updateInstructorKpiBar();
+    updateAppealsBadge();
+  }
+
+  function updateInstructorKpiBar() {
+    if (!state.currentInstructor) return;
+    const courses = getActiveInstructorCourses();
+    let totalStudents = 0;
+    let totalAttended = 0;
+    let totalPossible = 0;
+    let totalBonuses = 0;
+
+    courses.forEach(c => {
+      const groups = getActiveInstructorGroups(c.id);
+      groups.forEach(g => {
+        totalStudents += (g.students ? g.students.length : 0);
+        if (g.students) {
+          g.students.forEach(s => {
+            const stats = getStudentStats(c.id, g.id, s.id);
+            totalAttended += stats.attendedCount;
+            totalPossible += stats.totalSessions;
+            totalBonuses += stats.totalBonusPoints;
+          });
+        }
+      });
+    });
+
+    const avgRate = totalPossible > 0 ? Math.round((totalAttended / totalPossible) * 100) : 100;
+    const instructorAppeals = getFilteredAppealsForCurrentInstructor();
+    const pendingAppeals = instructorAppeals.filter(a => a.status === 'pending').length;
+
+    if (el.kpiTotalStudents) el.kpiTotalStudents.textContent = totalStudents;
+    if (el.kpiAvgAttendance) el.kpiAvgAttendance.textContent = `${avgRate}%`;
+    if (el.kpiPendingAppeals) el.kpiPendingAppeals.textContent = pendingAppeals;
+    if (el.kpiTotalBonuses) el.kpiTotalBonuses.textContent = `+${totalBonuses}`;
+  }
+
+  function getInstructorCurrentPin(instId) {
+    if (instId === 'engy') return state.config.engyPin || '1234';
+    if (instId === 'nada') return state.config.nadaPin || '5678';
+    return state.config.pin || 'root';
+  }
+
+  function setInstructorNewPin(instId, newPin) {
+    if (instId === 'engy') {
+      state.config.engyPin = newPin;
+    } else if (instId === 'nada') {
+      state.config.nadaPin = newPin;
+    } else {
+      state.config.pin = newPin;
+    }
+    saveConfig();
+  }
+
+  function getFilteredAppealsForCurrentInstructor() {
+    const list = state.appeals || [];
+    if (!state.currentInstructor) return list;
+    if (state.currentInstructor.role === 'admin' && state.adminViewScope === 'all') {
+      return list;
+    }
+    return list.filter(a => {
+      const grp = getGroup(a.courseId, a.groupId);
+      return grp && grp.instructorId === state.currentInstructor.id;
+    });
+  }
+
+  function updateAppealsBadge() {
+    if (!el.appealsBadge) return;
+    const instructorAppeals = getFilteredAppealsForCurrentInstructor();
+    const pendingCount = instructorAppeals.filter(a => a.status === 'pending').length;
+    if (pendingCount > 0) {
+      el.appealsBadge.textContent = pendingCount;
+      el.appealsBadge.classList.remove('hidden');
+    } else {
+      el.appealsBadge.textContent = '0';
+      el.appealsBadge.classList.add('hidden');
     }
   }
 
@@ -1150,11 +1245,16 @@
       if (t.status === 'late') { badgeLabel = 'متأخر'; icon = 'fa-clock'; }
       if (t.status === 'excused') { badgeLabel = 'بعذر'; icon = 'fa-file-medical'; }
 
+      const appealBtn = t.status === 'absent'
+        ? `<button type="button" class="btn-chip-appeal" data-week="${t.week}" title="تقديم طلب مراجعة لغياب الأسبوع ${t.week}"><i class="fa-solid fa-pen-to-square"></i> تظلم</button>`
+        : '';
+
       return `
         <div class="timeline-week-chip ${t.status}">
           <span class="week-title">الأسبوع ${t.week}</span>
           <span class="week-badge"><i class="fa-solid ${icon}"></i> ${badgeLabel}</span>
           ${t.bonus > 0 ? `<span class="bonus-pill-mini">+${t.bonus} بونص</span>` : ''}
+          ${appealBtn}
         </div>
       `;
     }).join('');
@@ -1191,8 +1291,8 @@
         </div>
 
         <div class="student-instructor-stamp">
-          <small class="text-muted">المشرف الأكاديمي:</small>
-          <div style="font-weight: 700; color: var(--accent-primary);">${group.instructor || 'م. أحمد الخطيب'}</div>
+          <small class="text-muted">معيد السكشن المسؤول:</small>
+          <div style="font-weight: 700; color: var(--accent-primary);"><i class="fa-solid fa-user-tie"></i> ${group.instructor || 'م. أحمد الخطيب'}</div>
         </div>
       </div>
 
@@ -1268,6 +1368,14 @@
         openAppealModalForStudent(student, courseId, groupId, stats);
       });
     }
+
+    el.studentRecordCard.querySelectorAll('.btn-chip-appeal').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const weekNum = btn.getAttribute('data-week');
+        openAppealModalForStudent(student, courseId, groupId, stats, weekNum);
+      });
+    });
   }
 
   // --- 6. Admin Attendance Engine ---
@@ -1313,9 +1421,15 @@
     if (!group) return;
 
     const filterText = (el.adminStudentFilter.value || '').trim().toLowerCase();
-    const students = group.students.filter(s => 
-      !filterText || s.id.toLowerCase().includes(filterText) || s.name.toLowerCase().includes(filterText)
-    );
+    const students = group.students.filter(s => {
+      const matchText = !filterText || s.id.toLowerCase().includes(filterText) || s.name.toLowerCase().includes(filterText);
+      if (!matchText) return false;
+      if (state.showRiskOnly) {
+        const stats = getStudentStats(courseId, groupId, s.id);
+        return stats.absent >= 2;
+      }
+      return true;
+    });
 
     // Also include any guest students recorded in this session
     const nativeIds = new Set(group.students.map(s => s.id));
@@ -1382,12 +1496,22 @@
       );
       const totalBonus = studentBonuses.reduce((sum, b) => sum + Number(b.points), 0);
 
+      // Previous attendance stats for live risk badge
+      const stStats = getStudentStats(courseId, groupId, s.id);
+      let riskBadge = '';
+      if (stStats.absent >= 3) {
+        riskBadge = `<span class="badge-risk danger" title="غائب ${stStats.absent} أسابيع (خطر حرمان)"><i class="fa-solid fa-ban"></i> حرمان (${stStats.absent})</span>`;
+      } else if (stStats.absent === 2) {
+        riskBadge = `<span class="badge-risk warning" title="غائب أسبوعين (إنذار غياب)"><i class="fa-solid fa-triangle-exclamation"></i> إنذار (2)</span>`;
+      }
+
       return `
         <tr data-student-id="${s.id}">
           <td style="color: var(--text-muted); font-weight: bold;">${index + 1}</td>
           <td><span class="meta-pill id-pill">${s.id}</span></td>
           <td>
             <strong>${s.name}</strong>
+            ${riskBadge}
             ${s.isGuest ? `<span class="badge-indicator warning" style="margin-right: 6px; font-size: 0.75rem;"><i class="fa-solid fa-plane-arrival"></i> مستضاف من ${s.homeGroupName}</span>` : ''}
           </td>
           <td><small class="meta-pill">${s.program}</small></td>
@@ -2385,6 +2509,17 @@
     tbody += '</tbody>';
 
     el.cumulativeMatrixTable.innerHTML = thead + tbody;
+
+    const course = getCourse(courseId);
+    const instructorName = group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
+    if (el.cumPrintCourseName) el.cumPrintCourseName.textContent = course ? course.name : courseId;
+    if (el.cumPrintGroupName) el.cumPrintGroupName.textContent = group.name;
+    if (el.cumPrintInstructorName) el.cumPrintInstructorName.textContent = instructorName;
+    if (el.cumPrintSignInstructorName) el.cumPrintSignInstructorName.textContent = instructorName;
+    if (el.cumPrintFooterInstructorName) el.cumPrintFooterInstructorName.textContent = instructorName;
+    if (el.cumPrintGeneratedTimestamp) {
+      el.cumPrintGeneratedTimestamp.textContent = new Date().toLocaleString('ar-EG', { dateStyle: 'medium', timeStyle: 'short' });
+    }
   }
 
   function exportCumulativeToCSV() {
@@ -2418,6 +2553,61 @@
     showToast('تم تصدير الكشف التراكمي للترم كاملاً بنجاح! 📁', 'success');
   }
 
+  function batchExportAllMySectionsCSV() {
+    if (!state.currentInstructor) {
+      showToast('يرجى تسجيل الدخول كمعيد أولاً!', 'warning');
+      return;
+    }
+
+    const myCoursesAndGroups = [];
+    state.courses.forEach(c => {
+      c.groups.forEach(g => {
+        if (state.currentInstructor.role === 'admin' && state.adminViewScope === 'all') {
+          myCoursesAndGroups.push({ course: c, group: g });
+        } else if (g.instructorId === state.currentInstructor.id) {
+          myCoursesAndGroups.push({ course: c, group: g });
+        }
+      });
+    });
+
+    if (myCoursesAndGroups.length === 0) {
+      showToast('لا توجد سكاشن مسندة إليك للتصدير!', 'warning');
+      return;
+    }
+
+    const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
+    let combinedCsv = `\uFEFFكشف الحضور الشامل لجميع السكاشن - جامعة الأقصر الأهلية - كلية الحاسبات والمعلومات\n`;
+    combinedCsv += `معيد المادة: ${state.currentInstructor.name} | تاريخ الاستخراج: ${new Date().toLocaleDateString('ar-EG')}\n\n`;
+
+    myCoursesAndGroups.forEach(({ course, group }) => {
+      combinedCsv += `========================================================\n`;
+      combinedCsv += `المقرر: ${course.name} (${course.nameAr}) | السكشن: ${group.name} | معيد المادة: ${group.instructor || state.currentInstructor.name}\n`;
+      combinedCsv += `م,كود الطالب,اسم الطالب,البرنامج,${weeks.map(w => `أسبوع ${w}`).join(',')},إجمالي الحضور,إجمالي الغياب,نسبة الحضور,رصيد البونص,التقييم\n`;
+
+      group.students.forEach((s, idx) => {
+        const stats = getStudentStats(course.id, group.id, s.id);
+        const weekSymbols = weeks.map(w => {
+          const item = stats.timeline.find(t => t.week === w);
+          if (!item || item.status === 'unrecorded') return '-';
+          if (item.status === 'present') return 'حاضر';
+          if (item.status === 'absent') return 'غائب';
+          if (item.status === 'late') return 'متأخر';
+          if (item.status === 'excused') return 'بعذر';
+          return '-';
+        });
+
+        const statusDesc = stats.rate >= 75 ? 'ملتزم' : stats.rate >= 60 ? 'إنذار' : 'حرمان';
+        combinedCsv += `${idx + 1},"${s.id}","${s.name}","${s.program || ''}",${weekSymbols.map(ws => `"${ws}"`).join(',')},${stats.present},${stats.absent},"${stats.rate}%",${stats.totalBonusPoints},"${statusDesc}"\n`;
+      });
+
+      combinedCsv += `\n`;
+    });
+
+    const safeName = state.currentInstructor.name.replace(/\s+/g, '_');
+    downloadBlob(combinedCsv, `All_Sections_Report_${safeName}_${new Date().toISOString().split('T')[0]}.csv`, 'text/csv;charset=utf-8;');
+    showToast(`تم تصدير كشف الحضور الشامل لـ (${myCoursesAndGroups.length}) سكشن بنجاح! 📦`, 'success');
+  }
+
   // --- 10. Google Sheets Cloud Integration ---
   async function syncCurrentSessionToGoogleSheets() {
     const url = state.config.googleScriptUrl;
@@ -2433,12 +2623,16 @@
     const group = getGroup(courseId, groupId);
     if (!group) return;
 
+    const course = getCourse(courseId);
     saveCurrentAttendanceSession();
 
     const payload = {
       action: 'sync_session',
       courseId,
+      courseName: course ? course.name : courseId,
       groupId,
+      groupName: group.name,
+      instructorName: group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة'),
       week,
       date: el.adminSessionDate.value || new Date().toISOString().split('T')[0],
       records: group.students.map(s => {
@@ -2500,6 +2694,7 @@
       const week = sess.weekNumber || sess.week || '1';
       const group = getGroup(courseId, groupId);
       if (!group) continue;
+      const course = getCourse(courseId);
 
       const records = group.students.map(s => {
         const rec = (sess.records && sess.records[s.id]) || { status: 'absent', notes: '' };
@@ -2521,7 +2716,10 @@
       const payload = {
         action: 'sync_session',
         courseId,
+        courseName: course ? course.name : courseId,
         groupId,
+        groupName: group.name,
+        instructorName: group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة'),
         week,
         date: sess.date || new Date().toISOString().split('T')[0],
         records
@@ -2731,6 +2929,8 @@
 
     if (el.qrProjectorTitle) el.qrProjectorTitle.textContent = `${course.name} - ${group.name} (الأسبوع ${week})`;
     if (el.qrProjectorDate) el.qrProjectorDate.textContent = el.adminSessionDate.value || new Date().toISOString().split('T')[0];
+    const qrInstEl = document.getElementById('qrProjectorInstructor');
+    if (qrInstEl) qrInstEl.textContent = group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
     if (el.qrProjectorModal) el.qrProjectorModal.classList.remove('hidden');
 
     updateQrAttendeesDisplay();
@@ -2907,6 +3107,8 @@
         const todayStr = new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         el.checkinBannerDate.textContent = todayStr;
       }
+      const bannerInstEl = document.getElementById('checkinBannerInstructor');
+      if (bannerInstEl) bannerInstEl.textContent = group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
     }
 
     // Default to Direct Name/ID Lookup Tab
@@ -3530,7 +3732,7 @@
   // ============================================================
   // --- 17. Student Appeals & Resolution Engine ---
   // ============================================================
-  function openAppealModalForStudent(student, courseId, groupId, stats) {
+  function openAppealModalForStudent(student, courseId, groupId, stats, preselectedWeek) {
     if (el.appealModal) el.appealModal.classList.remove('hidden');
     const course = getCourse(courseId);
     const group = getGroup(courseId, groupId);
@@ -3549,8 +3751,12 @@
         if (t.status === 'absent') statusText = 'غائب ⚠️';
         if (t.status === 'late') statusText = 'متأخر';
         if (t.status === 'excused') statusText = 'عذر';
-        return `<option value="${t.week}" ${t.status === 'absent' ? 'selected' : ''}>الأسبوع ${t.week} (${statusText})</option>`;
+        const isSelected = preselectedWeek ? String(t.week) === String(preselectedWeek) : t.status === 'absent';
+        return `<option value="${t.week}" ${isSelected ? 'selected' : ''}>الأسبوع ${t.week} (${statusText})</option>`;
       }).join('');
+      if (preselectedWeek) {
+        el.appealWeekSelect.value = String(preselectedWeek);
+      }
     }
 
     if (el.appealNotesInput) el.appealNotesInput.value = '';
@@ -3606,22 +3812,26 @@
       } catch(err) {}
     }
 
-    showToast('تم إرسال طلب المراجعة بنجاح! سيتم مراجعته واعتماده من قبل م. أحمد الخطيب 📩', 'success');
+    const course = getCourse(courseId);
+    const group = getGroup(courseId, groupId);
+    const instName = (group && group.instructor) ? group.instructor : 'معيد المادة';
+    showToast(`تم إرسال طلب المراجعة بنجاح! سيتم مراجعته واعتماده من قبل ${instName} 📩`, 'success');
   }
 
   function renderAppealsTable() {
     updateAppealsBadge();
 
+    const instructorAppeals = getFilteredAppealsForCurrentInstructor();
     const filter = state.appealsFilter || 'all';
-    const list = state.appeals.filter(a => {
+    const list = instructorAppeals.filter(a => {
       if (filter === 'all') return true;
       return a.status === filter;
     });
 
-    const countAll = state.appeals.length;
-    const countPending = state.appeals.filter(a => a.status === 'pending').length;
-    const countApproved = state.appeals.filter(a => a.status === 'approved').length;
-    const countRejected = state.appeals.filter(a => a.status === 'rejected').length;
+    const countAll = instructorAppeals.length;
+    const countPending = instructorAppeals.filter(a => a.status === 'pending').length;
+    const countApproved = instructorAppeals.filter(a => a.status === 'approved').length;
+    const countRejected = instructorAppeals.filter(a => a.status === 'rejected').length;
 
     if (el.countAppealsAll) el.countAppealsAll.textContent = countAll;
     if (el.countAppealsPending) el.countAppealsPending.textContent = countPending;
@@ -3896,7 +4106,8 @@
             ? '<span class="status-chip rejected"><i class="fa-solid fa-ban"></i> خطر حرمان</span>'
             : '<span class="status-chip pending"><i class="fa-solid fa-triangle-exclamation"></i> إنذار أول</span>';
 
-          const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${group.name}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع، ونسبة حضوركم (${st.rate}%).\nيرجى الالتزام التام بالسكاشن القادمة تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nالمشرف: م. أحمد الخطيب`;
+          const instTitle = group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
+          const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${group.name}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع، ونسبة حضوركم (${st.rate}%).\nيرجى الالتزام التام بالسكاشن القادمة تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nمعيد المادة: ${instTitle}`;
           const encodedMsg = encodeURIComponent(msgTemplate);
 
           return `
@@ -3986,6 +4197,14 @@
     el.adminGroupSelect.addEventListener('change', loadCurrentAdminAttendanceSession);
     el.adminWeekSelect.addEventListener('change', loadCurrentAdminAttendanceSession);
     el.adminStudentFilter.addEventListener('input', renderAdminAttendanceTable);
+    if (el.btnToggleRiskFilter) {
+      el.btnToggleRiskFilter.addEventListener('click', () => {
+        state.showRiskOnly = !state.showRiskOnly;
+        el.btnToggleRiskFilter.classList.toggle('active', state.showRiskOnly);
+        renderAdminAttendanceTable();
+        showToast(state.showRiskOnly ? 'تم تصفية العرض لإظهار الطلاب المنذرين والمعرضين للحرمان فقط ⚠️' : 'تم استعادة عرض جميع طلاب السكشن', 'info');
+      });
+    }
 
     // Attendance Action Buttons
     el.btnMarkAllPresent.addEventListener('click', markAllPresent);
@@ -4031,6 +4250,9 @@
     el.btnGenerateReportPreview.addEventListener('click', generateOfficialReportPreview);
     el.btnPrintReportPDF.addEventListener('click', printOfficialPDF);
     el.btnExportReportCSV.addEventListener('click', exportReportToCSV);
+    if (el.btnBatchExportMySections) {
+      el.btnBatchExportMySections.addEventListener('click', batchExportAllMySectionsCSV);
+    }
 
     // Cumulative Actions
     el.cumCourseSelect.addEventListener('change', updateCumGroupOptions);
@@ -4056,15 +4278,17 @@
 
     el.changePinForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (el.currentPinInput.value !== state.config.pin) {
+      const currentInstId = state.currentInstructor ? state.currentInstructor.id : 'ahmed';
+      const expectedPin = getInstructorCurrentPin(currentInstId);
+      if (el.currentPinInput.value !== expectedPin) {
         showToast('كلمة المرور الحالية غير صحيحة!', 'error');
         return;
       }
-      state.config.pin = el.newPinInput.value;
-      saveConfig();
+      setInstructorNewPin(currentInstId, el.newPinInput.value);
       el.currentPinInput.value = '';
       el.newPinInput.value = '';
-      showToast('تم تحديث كلمة المرور للوحة التحكم بنجاح! 🔒', 'success');
+      const instName = state.currentInstructor ? state.currentInstructor.name : 'لوحة التحكم';
+      showToast(`تم تحديث كلمة المرور لـ (${instName}) بنجاح! 🔒`, 'success');
     });
 
     el.btnDownloadBackupJSON.addEventListener('click', downloadFullBackupJSON);
@@ -4094,11 +4318,15 @@
       const enteredPin = el.adminPinInput.value.trim();
       let matchedInst = null;
 
-      if (enteredPin.toLowerCase() === 'root' || enteredPin === (state.config.pin || 'root')) {
+      const ahmedPin = getInstructorCurrentPin('ahmed');
+      const engyPin = getInstructorCurrentPin('engy');
+      const nadaPin = getInstructorCurrentPin('nada');
+
+      if (enteredPin.toLowerCase() === 'root' || enteredPin === ahmedPin) {
         matchedInst = INSTRUCTORS['ahmed'];
-      } else if (enteredPin === '1234' || (state.config.engyPin && enteredPin === state.config.engyPin)) {
+      } else if (enteredPin === engyPin) {
         matchedInst = INSTRUCTORS['engy'];
-      } else if (enteredPin === '5678' || (state.config.nadaPin && enteredPin === state.config.nadaPin)) {
+      } else if (enteredPin === nadaPin) {
         matchedInst = INSTRUCTORS['nada'];
       }
 

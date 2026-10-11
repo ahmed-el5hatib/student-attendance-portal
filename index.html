@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="style.css?v=5.3">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -40,7 +40,7 @@
         <div class="brand-info">
           <h1 class="brand-title">منظومة الحضور والبونص الذكية</h1>
           <p class="brand-subtitle">
-            إشراف: <span class="instructor-highlight">م. أحمد الخطيب (Eng. Ahmed El-khatib)</span>
+            جامعة الأقصر الأهلية - كلية الحاسبات والمعلومات | <span class="instructor-highlight">إشراف وتطوير تقني: م. أحمد الخطيب</span>
           </p>
         </div>
       </div>
@@ -52,7 +52,7 @@
             <i class="fa-solid fa-user-graduate"></i>
             <span>بوابة الطلاب</span>
           </button>
-          <button id="btnAdminView" class="mode-btn" title="لوحة تحكم المعيد (م. أحمد)">
+          <button id="btnAdminView" class="mode-btn" title="لوحة تحكم المعيد">
             <i class="fa-solid fa-user-tie"></i>
             <span>لوحة المعيد</span>
           </button>
@@ -173,6 +173,38 @@
         </div>
       </div>
 
+      <!-- Instructor Quick KPI Bar -->
+      <div id="instructorKpiBar" class="instructor-kpi-bar mb-3">
+        <div class="kpi-card">
+          <div class="kpi-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+          <div class="kpi-body">
+            <span class="kpi-label">إجمالي الطلاب المسندين</span>
+            <span id="kpiTotalStudents" class="kpi-val">0</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon text-success"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="kpi-body">
+            <span class="kpi-label">متوسط نسبة الحضور</span>
+            <span id="kpiAvgAttendance" class="kpi-val">0%</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon text-warning"><i class="fa-solid fa-envelope-open-text"></i></div>
+          <div class="kpi-body">
+            <span class="kpi-label">تظلمات الطلاب المعلقة</span>
+            <span id="kpiPendingAppeals" class="kpi-val">0</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon text-gold"><i class="fa-solid fa-award"></i></div>
+          <div class="kpi-body">
+            <span class="kpi-label">إجمالي حركات البونص</span>
+            <span id="kpiTotalBonuses" class="kpi-val">0</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Admin Sub-Navigation Tabs -->
       <div class="admin-tabs-nav">
         <button class="admin-tab-btn active" data-tab="tabAttendance">
@@ -272,6 +304,9 @@
             <div class="search-filter-wrapper">
               <i class="fa-solid fa-magnifying-glass search-icon"></i>
               <input type="text" id="adminStudentFilter" class="form-control search-input" placeholder="تصفية بالاسم أو الكود...">
+              <button type="button" id="btnToggleRiskFilter" class="btn btn-outline-danger btn-risk-filter" title="إظهار الطلاب المنذرين والمعرضين للحرمان فقط">
+                <i class="fa-solid fa-triangle-exclamation"></i> المنذرون فقط
+              </button>
             </div>
           </div>
         </div>
@@ -515,6 +550,9 @@
             <button id="btnExportReportCSV" class="btn btn-success">
               <i class="fa-solid fa-file-excel"></i> تصدير Excel (CSV)
             </button>
+            <button id="btnBatchExportMySections" class="btn btn-purple" title="تصدير كشف حضور مجمع وشامل لجميع السكاشن المسندة للمعيد">
+              <i class="fa-solid fa-file-zipper"></i> تصدير كل سكاشني (Excel)
+            </button>
             <button id="btnOpenWarningsCenter" class="btn btn-warning">
               <i class="fa-solid fa-triangle-exclamation"></i> مركز الإنذارات والواتساب
             </button>
@@ -621,23 +659,78 @@
           </div>
         </div>
 
-        <div class="card mt-3">
-          <div class="card-header d-flex justify-between align-center">
-            <div>
-              <h3>مصفوفة الحضور والغياب التراكمية (كامل الترم)</h3>
-              <p>توزيع حضور كل طالب عبر الأسابيع مع إجمالي الغيابات، نسبة الالتزام، وإجمالي البونص</p>
+        <!-- Official Print Paper Container (A4 Printable Layout) -->
+        <div class="print-paper-wrapper">
+          <div id="printableCumulativeReport" class="official-report-sheet">
+            <!-- Official Header -->
+            <div class="official-header">
+              <div class="header-side">
+                <h4>وزارة التعليم العالي والبحث العلمي</h4>
+                <h4>جامعة الأقصر الأهلية - كلية الحاسبات والمعلومات</h4>
+              </div>
+              <div class="header-logo">
+                <div class="emblem-box">
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+              </div>
+              <div class="header-side text-left">
+                <h4>العام الجامعي: 2026 / 2027</h4>
+                <h4>الفصل الدراسي الأول</h4>
+                <h5>سجل الحضور والغياب التراكمي</h5>
+              </div>
             </div>
-            <div class="matrix-legend">
-              <span class="badge-indicator safe">ملتزم (&ge; 75%)</span>
-              <span class="badge-indicator warning">إنذار (60% - 74%)</span>
-              <span class="badge-indicator danger">معرض للحرمان (&lt; 60%)</span>
+
+            <div class="official-title-block">
+              <h2>مصفوفة الحضور والغياب التراكمية (كامل الترم - 12 أسبوعاً)</h2>
+              <div class="report-meta-tags">
+                <span class="meta-item"><strong>المقرر:</strong> <span id="cumPrintCourseName">-</span></span>
+                <span class="meta-item"><strong>المجموعة / السكشن:</strong> <span id="cumPrintGroupName">-</span></span>
+                <span class="meta-item"><strong>معيد المادة:</strong> <span class="badge-instructor" id="cumPrintInstructorName">م. أحمد الخطيب</span></span>
+              </div>
             </div>
-          </div>
-          <div class="card-body p-0">
-            <div class="table-responsive">
-              <table class="data-table matrix-table" id="cumulativeMatrixTable">
+
+            <!-- Legend Bar -->
+            <div class="d-flex justify-between align-center mb-2 matrix-legend-bar">
+              <div class="text-sm text-secondary">توزيع حضور كل طالب عبر الأسابيع مع إجمالي الغيابات، نسبة الالتزام، وإجمالي البونص</div>
+              <div class="matrix-legend">
+                <span class="badge-indicator safe">ملتزم (&ge; 75%)</span>
+                <span class="badge-indicator warning">إنذار (60% - 74%)</span>
+                <span class="badge-indicator danger">معرض للحرمان (&lt; 60%)</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Table Content -->
+            <div class="table-responsive official-table-wrapper">
+              <table class="data-table matrix-table formal-12w-table" id="cumulativeMatrixTable">
                 <!-- Dynamically populated -->
               </table>
+            </div>
+
+            <!-- Official Signatures Box -->
+            <div class="official-signatures">
+              <div class="sign-column">
+                <p>مُعِد الكشف والغياب:</p>
+                <div class="signature-line"></div>
+                <p><strong id="cumPrintSignInstructorName">م. أحمد الخطيب</strong></p>
+                <span class="sign-title">معيد المادة</span>
+              </div>
+              <div class="sign-column">
+                <p>ملاحظات السكشن:</p>
+                <div class="notes-box-dotted">
+                  <span>تم رصد الحضور التراكمي ونسب الالتزام بموجب اللائحة</span>
+                </div>
+              </div>
+              <div class="sign-column">
+                <p>يعتمد،،، أستاذ المقرر:</p>
+                <div class="signature-line"></div>
+                <p><strong>أ.د / أستاذ المادة</strong></p>
+                <span class="sign-title">أستاذ المقرر الدراسي</span>
+              </div>
+            </div>
+
+            <!-- Footer Stamp -->
+            <div class="official-footer">
+              <small>تم استخراج هذا البيان إلكترونياً من منصة الحضور الذكية | إشراف: <span id="cumPrintFooterInstructorName">م. أحمد الخطيب</span> | التاريخ: <span id="cumPrintGeneratedTimestamp"></span></small>
             </div>
           </div>
         </div>
@@ -729,7 +822,7 @@
           <div class="card">
             <div class="card-header">
               <h3><i class="fa-solid fa-lock text-accent"></i> حماية لوحة التحكم (الرقم السري)</h3>
-              <p>تأمين صلاحيات رصد الغياب وتعديل الدرجات عن الطلاب</p>
+              <p>تغيير رمز الـ PIN الخاص بك (<span id="changePinInstructorName" class="text-accent font-weight-bold">م. أحمد الخطيب</span>)</p>
             </div>
             <div class="card-body">
               <form id="changePinForm">
@@ -996,7 +1089,7 @@ function jsonResponse(data) {
         <div class="projector-meta">
           <div class="live-pill"><span class="pulse-dot"></span> جلسة حضور مباشرة</div>
           <h2 id="qrProjectorTitle">تراسل البيانات - Group A (الأسبوع 1)</h2>
-          <p id="qrProjectorSub">المشرف الأكاديمي: <span class="text-accent">م. أحمد الخطيب</span> | التاريخ: <span id="qrProjectorDate"></span></p>
+          <p id="qrProjectorSub">المشرف الأكاديمي: <span class="text-accent" id="qrProjectorInstructor">م. أحمد الخطيب</span> | التاريخ: <span id="qrProjectorDate"></span></p>
         </div>
         <div class="projector-actions">
           <button id="btnToggleFullscreen" class="icon-btn" title="ملء الشاشة للبروجيكتور"><i class="fa-solid fa-expand"></i></button>
@@ -1085,7 +1178,7 @@ function jsonResponse(data) {
           <h4 id="checkinBannerTitle" class="session-course-title">تراسل البيانات - Group A</h4>
           <div class="session-meta-row">
             <span><i class="fa-solid fa-calendar-day"></i> <span id="checkinBannerDate">اليوم</span></span>
-            <span><i class="fa-solid fa-user-tie"></i> المشرف: <strong class="text-accent">م. أحمد الخطيب</strong></span>
+            <span><i class="fa-solid fa-user-tie"></i> معيد المادة: <strong class="text-accent" id="checkinBannerInstructor">م. أحمد الخطيب</strong></span>
           </div>
         </div>
 
@@ -1229,7 +1322,7 @@ function jsonResponse(data) {
       <div class="modal-header d-flex justify-between align-center">
         <div>
           <h3><i class="fa-solid fa-envelope-open-text text-warning"></i> تقديم طلب مراجعة غياب / تظلم</h3>
-          <p>إرسال طلب رسمي لتصحيح حالة الحضور للمهندس أحمد الخطيب</p>
+          <p>إرسال طلب رسمي لتصحيح حالة الحضور لمعيد المادة المسؤول</p>
         </div>
         <button id="btnCloseAppealModal" class="close-btn">&times;</button>
       </div>
@@ -1334,7 +1427,7 @@ function jsonResponse(data) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=5.2"></script>
-  <script src="app.js?v=5.2"></script>
+  <script src="students_data.js?v=5.3"></script>
+  <script src="app.js?v=5.3"></script>
 </body>
 </html>
