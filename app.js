@@ -68,14 +68,14 @@
   }
 
   // ترحيل قسري فوري يضمن مسح أي كاش قديم ومزامنة جميع السجلات المصححة بنسبة 100%
-  const FORCE_SYNC_V8_KEY = 'ATTENDANCE_FORCE_SYNC_V8';
-  if (localStorage.getItem(FORCE_SYNC_V8_KEY) !== 'done') {
+  const FORCE_SYNC_V9_KEY = 'ATTENDANCE_FORCE_SYNC_V9';
+  if (localStorage.getItem(FORCE_SYNC_V9_KEY) !== 'done') {
     if (initialSessions && Object.keys(initialSessions).length > 0) {
       Object.keys(initialSessions).forEach(key => {
         storedSessions[key] = JSON.parse(JSON.stringify(initialSessions[key]));
       });
       localStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(storedSessions));
-      localStorage.setItem(FORCE_SYNC_V8_KEY, 'done');
+      localStorage.setItem(FORCE_SYNC_V9_KEY, 'done');
     }
   }
 

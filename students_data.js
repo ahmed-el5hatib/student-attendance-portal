@@ -3492,12 +3492,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010014": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010021": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010023": {
           "status": "absent",
@@ -3505,7 +3505,7 @@ window.INITIAL_DATA = {
         },
         "25010031": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010032": {
           "status": "present",
@@ -3553,7 +3553,7 @@ window.INITIAL_DATA = {
         },
         "25010060": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010063": {
           "status": "absent",
@@ -3572,16 +3572,16 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010097": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010103": {
           "status": "present",
           "notes": ""
         },
         "25010106": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010112": {
           "status": "present",
@@ -3596,12 +3596,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010129": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010137": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010138": {
           "status": "absent",
@@ -3624,12 +3624,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010178": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010179": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010190": {
           "status": "present",
@@ -3645,11 +3645,11 @@ window.INITIAL_DATA = {
         },
         "25010195": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010196": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010198": {
           "status": "present",
@@ -3688,8 +3688,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010242": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010243": {
           "status": "present",
@@ -3745,7 +3745,7 @@ window.INITIAL_DATA = {
         },
         "25010275": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010282": {
           "status": "absent",
@@ -3809,7 +3809,7 @@ window.INITIAL_DATA = {
         },
         "25010304": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010307": {
           "status": "absent",
@@ -3829,7 +3829,7 @@ window.INITIAL_DATA = {
         },
         "25010321": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010322": {
           "status": "present",
@@ -3880,8 +3880,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010364": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010366": {
           "status": "present",
@@ -3916,20 +3916,20 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010381": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010385": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010386": {
           "status": "present",
           "notes": ""
         },
         "25010387": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010388": {
           "status": "present",
@@ -3940,8 +3940,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010393": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010394": {
           "status": "absent",
@@ -3949,7 +3949,7 @@ window.INITIAL_DATA = {
         },
         "25010399": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010400": {
           "status": "present",
@@ -3960,8 +3960,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010402": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010403": {
           "status": "absent",
@@ -3985,7 +3985,7 @@ window.INITIAL_DATA = {
         },
         "25010416": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010420": {
           "status": "present",
@@ -4000,8 +4000,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010428": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010434": {
           "status": "present",
@@ -4060,12 +4060,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010480": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010481": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010483": {
           "status": "absent",
@@ -4093,11 +4093,11 @@ window.INITIAL_DATA = {
         },
         "25010499": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010502": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010504": {
           "status": "absent",
@@ -4113,7 +4113,7 @@ window.INITIAL_DATA = {
         },
         "25010516": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010526": {
           "status": "present",
@@ -4157,8 +4157,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010014": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010021": {
           "status": "present",
@@ -4169,8 +4169,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010031": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010032": {
           "status": "present",
@@ -4245,8 +4245,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010106": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010112": {
           "status": "present",
@@ -4262,7 +4262,7 @@ window.INITIAL_DATA = {
         },
         "25010129": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010137": {
           "status": "present",
@@ -4290,11 +4290,11 @@ window.INITIAL_DATA = {
         },
         "25010178": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010179": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010190": {
           "status": "present",
@@ -4310,11 +4310,11 @@ window.INITIAL_DATA = {
         },
         "25010195": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010196": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010198": {
           "status": "present",
@@ -4354,7 +4354,7 @@ window.INITIAL_DATA = {
         },
         "25010242": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010243": {
           "status": "absent",
@@ -4474,7 +4474,7 @@ window.INITIAL_DATA = {
         },
         "25010304": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010307": {
           "status": "present",
@@ -4493,8 +4493,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010321": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010322": {
           "status": "present",
@@ -4521,8 +4521,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010345": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010348": {
           "status": "present",
@@ -4546,7 +4546,7 @@ window.INITIAL_DATA = {
         },
         "25010364": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010366": {
           "status": "present",
@@ -4585,20 +4585,20 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010385": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010386": {
           "status": "present",
           "notes": ""
         },
         "25010387": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010388": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010391": {
           "status": "present",
@@ -4606,7 +4606,7 @@ window.INITIAL_DATA = {
         },
         "25010393": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010394": {
           "status": "present",
@@ -4614,7 +4614,7 @@ window.INITIAL_DATA = {
         },
         "25010399": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010400": {
           "status": "present",
@@ -4626,7 +4626,7 @@ window.INITIAL_DATA = {
         },
         "25010402": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010403": {
           "status": "present",
@@ -4650,11 +4650,11 @@ window.INITIAL_DATA = {
         },
         "25010416": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010420": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010422": {
           "status": "present",
@@ -4666,7 +4666,7 @@ window.INITIAL_DATA = {
         },
         "25010428": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010434": {
           "status": "present",
@@ -4682,7 +4682,7 @@ window.INITIAL_DATA = {
         },
         "25010442": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010443": {
           "status": "present",
@@ -4726,11 +4726,11 @@ window.INITIAL_DATA = {
         },
         "25010480": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010481": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010483": {
           "status": "present",
@@ -4746,7 +4746,7 @@ window.INITIAL_DATA = {
         },
         "25010489": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010492": {
           "status": "present",
@@ -4761,8 +4761,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010502": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010504": {
           "status": "absent",
@@ -4770,7 +4770,7 @@ window.INITIAL_DATA = {
         },
         "25010510": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010515": {
           "status": "present",
@@ -4851,7 +4851,7 @@ window.INITIAL_DATA = {
         },
         "25010043": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010046": {
           "status": "absent",
@@ -4918,8 +4918,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010110": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010113": {
           "status": "present",
@@ -4938,8 +4938,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010144": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010145": {
           "status": "present",
@@ -4959,23 +4959,23 @@ window.INITIAL_DATA = {
         },
         "25010153": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010155": {
           "status": "absent",
           "notes": ""
         },
         "25010158": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010160": {
           "status": "absent",
           "notes": ""
         },
         "25010161": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010162": {
           "status": "absent",
@@ -4998,8 +4998,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010177": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010180": {
           "status": "present",
@@ -5007,11 +5007,11 @@ window.INITIAL_DATA = {
         },
         "25010187": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010188": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010189": {
           "status": "present",
@@ -5051,7 +5051,7 @@ window.INITIAL_DATA = {
         },
         "25010228": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010229": {
           "status": "present",
@@ -5111,7 +5111,7 @@ window.INITIAL_DATA = {
         },
         "25010323": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010325": {
           "status": "present",
@@ -5135,7 +5135,7 @@ window.INITIAL_DATA = {
         },
         "25010349": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010351": {
           "status": "present",
@@ -5174,16 +5174,16 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010380": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010383": {
           "status": "present",
           "notes": ""
         },
         "25010384": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010389": {
           "status": "absent",
@@ -5218,8 +5218,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010415": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010418": {
           "status": "present",
@@ -5238,8 +5238,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010431": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010435": {
           "status": "absent",
@@ -5275,11 +5275,11 @@ window.INITIAL_DATA = {
         },
         "25010448": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010454": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010455": {
           "status": "absent",
@@ -5299,7 +5299,7 @@ window.INITIAL_DATA = {
         },
         "25010491": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010500": {
           "status": "absent",
@@ -5326,12 +5326,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010513": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010514": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010517": {
           "status": "present",
@@ -5408,7 +5408,7 @@ window.INITIAL_DATA = {
         },
         "25010018": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010019": {
           "status": "present",
@@ -5428,7 +5428,7 @@ window.INITIAL_DATA = {
         },
         "25010043": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010046": {
           "status": "present",
@@ -5495,12 +5495,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010110": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010113": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010114": {
           "status": "present",
@@ -5512,11 +5512,11 @@ window.INITIAL_DATA = {
         },
         "25010141": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010144": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010145": {
           "status": "present",
@@ -5536,7 +5536,7 @@ window.INITIAL_DATA = {
         },
         "25010153": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010155": {
           "status": "present",
@@ -5544,7 +5544,7 @@ window.INITIAL_DATA = {
         },
         "25010158": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010160": {
           "status": "absent",
@@ -5575,24 +5575,24 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010177": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010180": {
           "status": "present",
           "notes": ""
         },
         "25010187": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010188": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010189": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010193": {
           "status": "present",
@@ -5600,7 +5600,7 @@ window.INITIAL_DATA = {
         },
         "25010199": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010201": {
           "status": "absent",
@@ -5628,7 +5628,7 @@ window.INITIAL_DATA = {
         },
         "25010228": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010229": {
           "status": "present",
@@ -5652,7 +5652,7 @@ window.INITIAL_DATA = {
         },
         "25010263": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010267": {
           "status": "present",
@@ -5711,8 +5711,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010349": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010351": {
           "status": "present",
@@ -5751,8 +5751,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010380": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010383": {
           "status": "present",
@@ -5800,7 +5800,7 @@ window.INITIAL_DATA = {
         },
         "25010418": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010421": {
           "status": "present",
@@ -5852,11 +5852,11 @@ window.INITIAL_DATA = {
         },
         "25010448": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010454": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010455": {
           "status": "absent",
@@ -5876,7 +5876,7 @@ window.INITIAL_DATA = {
         },
         "25010491": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010500": {
           "status": "absent",
@@ -5932,7 +5932,7 @@ window.INITIAL_DATA = {
         },
         "25010534": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010538": {
           "status": "present",
@@ -5940,7 +5940,7 @@ window.INITIAL_DATA = {
         },
         "25010539": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010540": {
           "status": "present",
@@ -5965,7 +5965,7 @@ window.INITIAL_DATA = {
       "records": {
         "25010001": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010005": {
           "status": "present",
@@ -6000,24 +6000,24 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010027": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010036": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010039": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010040": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010042": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010044": {
           "status": "present",
@@ -6041,7 +6041,7 @@ window.INITIAL_DATA = {
         },
         "25010064": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010066": {
           "status": "present",
@@ -6049,15 +6049,15 @@ window.INITIAL_DATA = {
         },
         "25010068": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010069": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010071": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010072": {
           "status": "present",
@@ -6068,8 +6068,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010075": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010076": {
           "status": "present",
@@ -6096,8 +6096,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010091": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010092": {
           "status": "present",
@@ -6108,8 +6108,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010101": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010102": {
           "status": "absent",
@@ -6121,7 +6121,7 @@ window.INITIAL_DATA = {
         },
         "25010105": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010108": {
           "status": "present",
@@ -6129,7 +6129,7 @@ window.INITIAL_DATA = {
         },
         "25010109": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010115": {
           "status": "absent",
@@ -6157,11 +6157,11 @@ window.INITIAL_DATA = {
         },
         "25010123": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010126": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010127": {
           "status": "absent",
@@ -6224,12 +6224,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010165": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010167": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010169": {
           "status": "present",
@@ -6260,8 +6260,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010194": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010197": {
           "status": "present",
@@ -6301,7 +6301,7 @@ window.INITIAL_DATA = {
         },
         "25010213": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010214": {
           "status": "absent",
@@ -6340,8 +6340,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010255": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010256": {
           "status": "present",
@@ -6368,8 +6368,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010271": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010274": {
           "status": "absent",
@@ -6428,12 +6428,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010319": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010320": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010324": {
           "status": "present",
@@ -6472,8 +6472,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010344": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010346": {
           "status": "present",
@@ -6508,16 +6508,16 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010396": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010397": {
           "status": "present",
           "notes": ""
         },
         "25010407": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010413": {
           "status": "present",
@@ -6537,7 +6537,7 @@ window.INITIAL_DATA = {
         },
         "25010426": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010429": {
           "status": "present",
@@ -6652,8 +6652,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010521": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010522": {
           "status": "absent",
@@ -6673,7 +6673,7 @@ window.INITIAL_DATA = {
         },
         "25010529": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010536": {
           "status": "present",
@@ -6690,7 +6690,7 @@ window.INITIAL_DATA = {
       "records": {
         "25010001": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010005": {
           "status": "present",
@@ -6726,27 +6726,27 @@ window.INITIAL_DATA = {
         },
         "25010027": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010036": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010039": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010040": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010042": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010044": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010048": {
           "status": "present",
@@ -6774,15 +6774,15 @@ window.INITIAL_DATA = {
         },
         "25010068": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010069": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010071": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010072": {
           "status": "present",
@@ -6794,11 +6794,11 @@ window.INITIAL_DATA = {
         },
         "25010075": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010076": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010077": {
           "status": "present",
@@ -6822,7 +6822,7 @@ window.INITIAL_DATA = {
         },
         "25010091": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010092": {
           "status": "present",
@@ -6834,7 +6834,7 @@ window.INITIAL_DATA = {
         },
         "25010101": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010102": {
           "status": "present",
@@ -6846,7 +6846,7 @@ window.INITIAL_DATA = {
         },
         "25010105": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010108": {
           "status": "present",
@@ -6854,7 +6854,7 @@ window.INITIAL_DATA = {
         },
         "25010109": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010115": {
           "status": "present",
@@ -6870,7 +6870,7 @@ window.INITIAL_DATA = {
         },
         "25010118": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010119": {
           "status": "present",
@@ -6882,11 +6882,11 @@ window.INITIAL_DATA = {
         },
         "25010123": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010126": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010127": {
           "status": "present",
@@ -6950,11 +6950,11 @@ window.INITIAL_DATA = {
         },
         "25010165": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010167": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010169": {
           "status": "present",
@@ -6966,7 +6966,7 @@ window.INITIAL_DATA = {
         },
         "25010175": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010182": {
           "status": "present",
@@ -6985,8 +6985,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010194": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010197": {
           "status": "present",
@@ -7006,7 +7006,7 @@ window.INITIAL_DATA = {
         },
         "25010205": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010207": {
           "status": "present",
@@ -7026,7 +7026,7 @@ window.INITIAL_DATA = {
         },
         "25010213": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010214": {
           "status": "absent",
@@ -7094,7 +7094,7 @@ window.INITIAL_DATA = {
         },
         "25010271": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010274": {
           "status": "present",
@@ -7118,7 +7118,7 @@ window.INITIAL_DATA = {
         },
         "25010289": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010298": {
           "status": "present",
@@ -7154,11 +7154,11 @@ window.INITIAL_DATA = {
         },
         "25010319": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010320": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010324": {
           "status": "present",
@@ -7198,11 +7198,11 @@ window.INITIAL_DATA = {
         },
         "25010344": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010346": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010347": {
           "status": "present",
@@ -7214,7 +7214,7 @@ window.INITIAL_DATA = {
         },
         "25010355": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010365": {
           "status": "present",
@@ -7230,11 +7230,11 @@ window.INITIAL_DATA = {
         },
         "25010392": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010396": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010397": {
           "status": "present",
@@ -7242,7 +7242,7 @@ window.INITIAL_DATA = {
         },
         "25010407": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010413": {
           "status": "present",
@@ -7262,7 +7262,7 @@ window.INITIAL_DATA = {
         },
         "25010426": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010429": {
           "status": "present",
@@ -7273,8 +7273,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010433": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010438": {
           "status": "present",
@@ -7377,8 +7377,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010521": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010522": {
           "status": "present",
@@ -7386,7 +7386,7 @@ window.INITIAL_DATA = {
         },
         "25010523": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010524": {
           "status": "present",
@@ -7398,7 +7398,7 @@ window.INITIAL_DATA = {
         },
         "25010529": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010536": {
           "status": "present",
@@ -7440,7 +7440,7 @@ window.INITIAL_DATA = {
         },
         "25010031": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010032": {
           "status": "present",
@@ -7488,7 +7488,7 @@ window.INITIAL_DATA = {
         },
         "25010060": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010063": {
           "status": "present",
@@ -7508,15 +7508,15 @@ window.INITIAL_DATA = {
         },
         "25010097": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010103": {
           "status": "present",
           "notes": ""
         },
         "25010106": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010112": {
           "status": "absent",
@@ -7532,11 +7532,11 @@ window.INITIAL_DATA = {
         },
         "25010129": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010137": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010138": {
           "status": "present",
@@ -7563,8 +7563,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010179": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010190": {
           "status": "present",
@@ -7584,7 +7584,7 @@ window.INITIAL_DATA = {
         },
         "25010196": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010198": {
           "status": "absent",
@@ -7623,8 +7623,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010242": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010243": {
           "status": "absent",
@@ -7680,7 +7680,7 @@ window.INITIAL_DATA = {
         },
         "25010275": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010282": {
           "status": "present",
@@ -7756,15 +7756,15 @@ window.INITIAL_DATA = {
         },
         "25010310": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010313": {
           "status": "present",
           "notes": ""
         },
         "25010321": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010322": {
           "status": "present",
@@ -7776,7 +7776,7 @@ window.INITIAL_DATA = {
         },
         "25010328": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010329": {
           "status": "present",
@@ -7792,7 +7792,7 @@ window.INITIAL_DATA = {
         },
         "25010345": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010348": {
           "status": "present",
@@ -7816,7 +7816,7 @@ window.INITIAL_DATA = {
         },
         "25010364": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010366": {
           "status": "present",
@@ -7856,7 +7856,7 @@ window.INITIAL_DATA = {
         },
         "25010385": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010386": {
           "status": "present",
@@ -7864,11 +7864,11 @@ window.INITIAL_DATA = {
         },
         "25010387": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010388": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010391": {
           "status": "absent",
@@ -7876,7 +7876,7 @@ window.INITIAL_DATA = {
         },
         "25010393": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010394": {
           "status": "present",
@@ -7888,7 +7888,7 @@ window.INITIAL_DATA = {
         },
         "25010400": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010401": {
           "status": "present",
@@ -7896,7 +7896,7 @@ window.INITIAL_DATA = {
         },
         "25010402": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010403": {
           "status": "present",
@@ -7919,12 +7919,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010416": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010420": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010422": {
           "status": "present",
@@ -7952,7 +7952,7 @@ window.INITIAL_DATA = {
         },
         "25010442": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010443": {
           "status": "present",
@@ -7975,8 +7975,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010462": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010467": {
           "status": "present",
@@ -7995,8 +7995,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010480": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010481": {
           "status": "present",
@@ -8016,7 +8016,7 @@ window.INITIAL_DATA = {
         },
         "25010489": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010492": {
           "status": "absent",
@@ -8028,11 +8028,11 @@ window.INITIAL_DATA = {
         },
         "25010499": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010502": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010504": {
           "status": "absent",
@@ -8040,7 +8040,7 @@ window.INITIAL_DATA = {
         },
         "25010510": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010515": {
           "status": "absent",
@@ -8048,7 +8048,7 @@ window.INITIAL_DATA = {
         },
         "25010516": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010526": {
           "status": "absent",
@@ -8117,7 +8117,7 @@ window.INITIAL_DATA = {
         },
         "25010038": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010043": {
           "status": "present",
@@ -8189,11 +8189,11 @@ window.INITIAL_DATA = {
         },
         "25010110": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010113": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010114": {
           "status": "present",
@@ -8205,11 +8205,11 @@ window.INITIAL_DATA = {
         },
         "25010141": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010144": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010145": {
           "status": "present",
@@ -8228,16 +8228,16 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010153": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010155": {
           "status": "present",
           "notes": ""
         },
         "25010158": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010160": {
           "status": "present",
@@ -8245,7 +8245,7 @@ window.INITIAL_DATA = {
         },
         "25010161": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010162": {
           "status": "absent",
@@ -8264,28 +8264,28 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010174": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010177": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010180": {
           "status": "present",
           "notes": ""
         },
         "25010187": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010188": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010189": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010193": {
           "status": "present",
@@ -8293,7 +8293,7 @@ window.INITIAL_DATA = {
         },
         "25010199": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010201": {
           "status": "present",
@@ -8301,7 +8301,7 @@ window.INITIAL_DATA = {
         },
         "25010202": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010218": {
           "status": "absent",
@@ -8345,7 +8345,7 @@ window.INITIAL_DATA = {
         },
         "25010263": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010267": {
           "status": "present",
@@ -8381,7 +8381,7 @@ window.INITIAL_DATA = {
         },
         "25010323": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010325": {
           "status": "present",
@@ -8405,7 +8405,7 @@ window.INITIAL_DATA = {
         },
         "25010349": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010351": {
           "status": "present",
@@ -8445,15 +8445,15 @@ window.INITIAL_DATA = {
         },
         "25010380": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010383": {
           "status": "present",
           "notes": ""
         },
         "25010384": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010389": {
           "status": "absent",
@@ -8489,11 +8489,11 @@ window.INITIAL_DATA = {
         },
         "25010415": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010418": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010421": {
           "status": "present",
@@ -8509,7 +8509,7 @@ window.INITIAL_DATA = {
         },
         "25010431": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010435": {
           "status": "absent",
@@ -8520,8 +8520,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010440": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010441": {
           "status": "present",
@@ -8545,7 +8545,7 @@ window.INITIAL_DATA = {
         },
         "25010448": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010454": {
           "status": "present",
@@ -8568,8 +8568,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010491": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010500": {
           "status": "absent",
@@ -8597,11 +8597,11 @@ window.INITIAL_DATA = {
         },
         "25010513": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010514": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010517": {
           "status": "present",
@@ -8625,15 +8625,15 @@ window.INITIAL_DATA = {
         },
         "25010534": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010538": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010539": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010540": {
           "status": "present",
@@ -8698,11 +8698,11 @@ window.INITIAL_DATA = {
         },
         "25010036": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010039": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010040": {
           "status": "present",
@@ -8714,7 +8714,7 @@ window.INITIAL_DATA = {
         },
         "25010044": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010048": {
           "status": "present",
@@ -8734,7 +8734,7 @@ window.INITIAL_DATA = {
         },
         "25010064": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010066": {
           "status": "present",
@@ -8749,8 +8749,8 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010071": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010072": {
           "status": "present",
@@ -8761,12 +8761,12 @@ window.INITIAL_DATA = {
           "notes": "تم تصحيح الغياب بناءً على إفادة الطالب"
         },
         "25010075": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010076": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010077": {
           "status": "present",
@@ -8789,8 +8789,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010091": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010092": {
           "status": "present",
@@ -8821,8 +8821,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010109": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010115": {
           "status": "present",
@@ -8838,7 +8838,7 @@ window.INITIAL_DATA = {
         },
         "25010118": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010119": {
           "status": "present",
@@ -8918,7 +8918,7 @@ window.INITIAL_DATA = {
         },
         "25010165": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010167": {
           "status": "present",
@@ -8934,7 +8934,7 @@ window.INITIAL_DATA = {
         },
         "25010175": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010182": {
           "status": "absent",
@@ -8974,7 +8974,7 @@ window.INITIAL_DATA = {
         },
         "25010205": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010207": {
           "status": "absent",
@@ -9034,7 +9034,7 @@ window.INITIAL_DATA = {
         },
         "25010255": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010256": {
           "status": "present",
@@ -9062,7 +9062,7 @@ window.INITIAL_DATA = {
         },
         "25010271": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010274": {
           "status": "present",
@@ -9086,7 +9086,7 @@ window.INITIAL_DATA = {
         },
         "25010289": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010298": {
           "status": "present",
@@ -9121,8 +9121,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010319": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010320": {
           "status": "present",
@@ -9165,12 +9165,12 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010344": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010346": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010347": {
           "status": "present",
@@ -9182,7 +9182,7 @@ window.INITIAL_DATA = {
         },
         "25010355": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010365": {
           "status": "present",
@@ -9198,11 +9198,11 @@ window.INITIAL_DATA = {
         },
         "25010392": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010396": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010397": {
           "status": "present",
@@ -9210,7 +9210,7 @@ window.INITIAL_DATA = {
         },
         "25010407": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010413": {
           "status": "present",
@@ -9241,8 +9241,8 @@ window.INITIAL_DATA = {
           "notes": ""
         },
         "25010433": {
-          "status": "absent",
-          "notes": ""
+          "status": "present",
+          "notes": "تم اعتماد الحضور للأسبوع بالكامل"
         },
         "25010438": {
           "status": "present",
@@ -9262,7 +9262,7 @@ window.INITIAL_DATA = {
         },
         "25010458": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010460": {
           "status": "present",
@@ -9322,7 +9322,7 @@ window.INITIAL_DATA = {
         },
         "25010496": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010497": {
           "status": "present",
@@ -9346,7 +9346,7 @@ window.INITIAL_DATA = {
         },
         "25010521": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010522": {
           "status": "present",
@@ -9354,7 +9354,7 @@ window.INITIAL_DATA = {
         },
         "25010523": {
           "status": "present",
-          "notes": ""
+          "notes": "حاضر معتمد"
         },
         "25010524": {
           "status": "present",
