@@ -2792,3 +2792,207 @@ body.theme-light .print-paper-wrapper {
     size: A4 landscape;
   }
 }
+
+/* ============================================================
+   Multi-Instructor Session Bar & Isolation Styles
+   ============================================================ */
+.instructor-session-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: var(--radius-md, 12px);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.inst-info-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.inst-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-primary, #6366f1), #8b5cf6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+.inst-meta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inst-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inst-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.inst-role-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  width: fit-content;
+  font-weight: 600;
+}
+
+.inst-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-scope-toggle {
+  display: flex;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.scope-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scope-btn:hover {
+  color: #f1f5f9;
+}
+
+.scope-btn.active {
+  background: var(--accent-primary, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+}
+
+.btn-logout {
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  font-size: 0.82rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+/* Quick Instructor Selector in PIN Modal */
+.instructor-quick-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.inst-card-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 6px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  color: #cbd5e1;
+}
+
+.inst-card-select i {
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+  color: #94a3b8;
+}
+
+.inst-card-select span {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.inst-card-select small {
+  font-size: 0.68rem;
+  color: #64748b;
+}
+
+.inst-card-select:hover {
+  border-color: var(--accent-primary, #6366f1);
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+.inst-card-select.active {
+  border-color: var(--accent-primary, #6366f1);
+  background: rgba(99, 102, 241, 0.18);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+}
+
+.inst-card-select.active i {
+  color: var(--accent-primary, #6366f1);
+}
+
+@media (max-width: 640px) {
+  .instructor-session-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .inst-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .admin-scope-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+  .scope-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+

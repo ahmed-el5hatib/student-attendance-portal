@@ -147,6 +147,32 @@
     <!-- VIEW 2: INSTRUCTOR DASHBOARD (Eng. Ahmed)      -->
     <!-- ============================================== -->
     <section id="adminDashboardView" class="view-section">
+      <!-- Instructor Session & Scope Header Bar -->
+      <div class="instructor-session-bar" id="instructorSessionBar">
+        <div class="inst-info-badge">
+          <div class="inst-avatar"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <div class="inst-meta-text">
+            <span class="inst-label">المعيد المسجل:</span>
+            <strong id="activeInstructorName" class="inst-name">م. أحمد الخطيب</strong>
+            <span id="activeInstructorRole" class="inst-role-badge">المشرف العام</span>
+          </div>
+        </div>
+
+        <div class="inst-actions">
+          <div id="adminScopeToggleContainer" class="admin-scope-toggle">
+            <button type="button" id="btnScopeMySections" class="scope-btn active" title="عرض سكاشني فقط">
+              <i class="fa-solid fa-filter"></i> سكاشني فقط
+            </button>
+            <button type="button" id="btnScopeAllSections" class="scope-btn" title="عرض جميع سكاشن ومواد القسم (صلاحية المشرف)">
+              <i class="fa-solid fa-layer-group"></i> كل السكاشن
+            </button>
+          </div>
+          <button type="button" id="btnLogoutInstructor" class="btn btn-outline btn-sm btn-logout" title="تسجيل الخروج والتبديل لمعيد آخر">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> خروج / تبديل
+          </button>
+        </div>
+      </div>
+
       <!-- Admin Sub-Navigation Tabs -->
       <div class="admin-tabs-nav">
         <button class="admin-tab-btn active" data-tab="tabAttendance">
@@ -547,7 +573,7 @@
               <div class="sign-column">
                 <p>مُعِد الكشف والغياب:</p>
                 <div class="signature-line"></div>
-                <p><strong>م. أحمد الخطيب</strong></p>
+                <p><strong id="printSignInstructorName">م. أحمد الخطيب</strong></p>
                 <span class="sign-title">معيد المادة</span>
               </div>
               <div class="sign-column">
@@ -566,7 +592,7 @@
 
             <!-- Footer Stamp -->
             <div class="official-footer">
-              <small>تم استخراج هذا البيان إلكترونياً من منصة الحضور الذكية للمهندس أحمد الخطيب | التاريخ: <span id="printGeneratedTimestamp"></span></small>
+              <small>تم استخراج هذا البيان إلكترونياً من منصة الحضور الذكية | إشراف: <span id="printFooterInstructorName">م. أحمد الخطيب</span> | التاريخ: <span id="printGeneratedTimestamp"></span></small>
             </div>
           </div>
         </div>
@@ -762,21 +788,38 @@
   </main>
 
   <!-- ============================================== -->
-  <!-- MODAL: PIN VERIFICATION (Admin Lock)           -->
+  <!-- MODAL: PIN VERIFICATION (Multi-Instructor Lock)-->
   <!-- ============================================== -->
   <div id="pinModal" class="modal-overlay hidden">
     <div class="modal-card">
       <div class="modal-header">
         <div class="lock-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3>تسجيل الدخول - لوحة المعيد</h3>
-        <p>يرجى إدخال كلمة المرور الخاصة بالمهندس أحمد الخطيب</p>
+        <h3>تسجيل الدخول - لوحة المعيدين</h3>
+        <p>يرجى إدخال كود الـ PIN المخصص لك للوصول لسكاشنك وموادك</p>
       </div>
       <div class="modal-body">
         <form id="pinVerificationForm">
-          <div class="pin-input-group">
-            <input type="password" id="adminPinInput" class="form-control pin-input" maxlength="30" placeholder="أدخل كلمة المرور..." autofocus required>
+          <div class="instructor-quick-selector mb-3">
+            <div class="inst-card-select active" data-inst="ahmed">
+              <i class="fa-solid fa-user-tie"></i>
+              <span>م. أحمد الخطيب</span>
+              <small>المشرف العام</small>
+            </div>
+            <div class="inst-card-select" data-inst="engy">
+              <i class="fa-solid fa-chalkboard-user"></i>
+              <span>م. إنجي</span>
+              <small>معيد المادة</small>
+            </div>
+            <div class="inst-card-select" data-inst="nada">
+              <i class="fa-solid fa-chalkboard-user"></i>
+              <span>م. ندى</span>
+              <small>معيد المادة</small>
+            </div>
           </div>
-          <div id="pinErrorMessage" class="error-msg hidden">كلمة المرور غير صحيحة، يرجى المحاولة ثانية!</div>
+          <div class="pin-input-group">
+            <input type="password" id="adminPinInput" class="form-control pin-input" maxlength="30" placeholder="أدخل كود الـ PIN الخاص بك..." autofocus required>
+          </div>
+          <div id="pinErrorMessage" class="error-msg hidden">كود الـ PIN غير صحيح، يرجى المحاولة ثانية!</div>
           <div class="modal-buttons">
             <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-arrow-left"></i> دخول</button>
             <button type="button" id="btnCancelPinModal" class="btn btn-outline btn-block">إلغاء والعودة للطلاب</button>
@@ -1292,7 +1335,7 @@ function jsonResponse(data) {
   <div id="toastContainer" class="toast-container"></div>
 
   <!-- Load Student Data & App Script -->
-  <script src="students_data.js?v=4.7"></script>
-  <script src="app.js?v=4.7"></script>
+  <script src="students_data.js?v=5.0"></script>
+  <script src="app.js?v=5.0"></script>
 </body>
 </html>

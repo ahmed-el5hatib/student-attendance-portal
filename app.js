@@ -15,6 +15,31 @@
     APPEALS: 'ATTENDANCE_APPEALS_V1'
   };
 
+  
+  const INSTRUCTORS = {
+    'ahmed': {
+      id: 'ahmed',
+      name: 'م. أحمد الخطيب',
+      pin: 'root',
+      role: 'admin',
+      title: 'المشرف العام & معيد المادة'
+    },
+    'engy': {
+      id: 'engy',
+      name: 'م. إنجي',
+      pin: '1234',
+      role: 'instructor',
+      title: 'معيد المادة'
+    },
+    'nada': {
+      id: 'nada',
+      name: 'م. ندى',
+      pin: '5678',
+      role: 'instructor',
+      title: 'معيد المادة'
+    }
+  };
+
   const DEFAULT_CONFIG = {
     pin: 'root',
     googleScriptUrl: 'https://script.google.com/macros/s/AKfycbxO4oxiOk9ZhOY77c9A_wKeJjdllAggt0Yo5x12-PtWH2Y71Ypbnr-xM6kIBCeRQa1LFA/exec',
@@ -235,6 +260,8 @@
 
   let state = {
     isAdminAuthenticated: false,
+    currentInstructor: null,
+    adminViewScope: 'instructor',
     courses: window.INITIAL_DATA ? window.INITIAL_DATA.courses : [],
     sessions: storedSessions,
     bonuses: JSON.parse(localStorage.getItem(STORAGE_KEYS.BONUSES) || '[]'),
@@ -347,6 +374,17 @@
     printAttendanceRate: document.getElementById('printAttendanceRate'),
     printTableContainer: document.getElementById('printTableContainer'),
     printGeneratedTimestamp: document.getElementById('printGeneratedTimestamp'),
+
+        // Multi-Instructor Session Bar & Controls
+    instructorSessionBar: document.getElementById('instructorSessionBar'),
+    activeInstructorName: document.getElementById('activeInstructorName'),
+    activeInstructorRole: document.getElementById('activeInstructorRole'),
+    adminScopeToggleContainer: document.getElementById('adminScopeToggleContainer'),
+    btnScopeMySections: document.getElementById('btnScopeMySections'),
+    btnScopeAllSections: document.getElementById('btnScopeAllSections'),
+    btnLogoutInstructor: document.getElementById('btnLogoutInstructor'),
+    printSignInstructorName: document.getElementById('printSignInstructorName'),
+    printFooterInstructorName: document.getElementById('printFooterInstructorName'),
 
     // Cumulative Matrix
     cumCourseSelect: document.getElementById('cumCourseSelect'),
@@ -743,6 +781,16 @@
     el.adminSessionDate.value = state.currentAdminSession.date;
 
     // Populate Course Selectors
+    
+    // Restore authenticated instructor from sessionStorage
+    const savedInstId = sessionStorage.getItem('ATTENDANCE_ACTIVE_INSTRUCTOR');
+    if (savedInstId && INSTRUCTORS[savedInstId]) {
+      state.currentInstructor = INSTRUCTORS[savedInstId];
+      state.isAdminAuthenticated = true;
+      state.adminViewScope = 'instructor';
+      updateInstructorHeaderUI();
+    }
+
     populateCourseDropdowns();
 
     // Set Initial Admin Session
@@ -872,19 +920,63 @@
       : '<i class="fa-solid fa-moon"></i>';
   }
 
+  
+  // ============================================================
+  // --- Multi-Instructor Isolation & Scoping Engine ---
+  // ============================================================
+  function getActiveInstructorCourses() {
+    if (!state.currentInstructor || state.adminViewScope === 'all') {
+      return state.courses;
+    }
+    return state.courses.filter(c => {
+      return c.groups && c.groups.some(g => g.instructorId === state.currentInstructor.id);
+    });
+  }
+
+  function getActiveInstructorGroups(courseId) {
+    const course = getCourse(courseId);
+    if (!course) return [];
+    if (!state.currentInstructor || state.adminViewScope === 'all') {
+      return course.groups;
+    }
+    return course.groups.filter(g => g.instructorId === state.currentInstructor.id);
+  }
+
+  function updateInstructorHeaderUI() {
+    if (!el.activeInstructorName || !state.currentInstructor) return;
+    el.activeInstructorName.textContent = state.currentInstructor.name;
+    if (el.activeInstructorRole) {
+      el.activeInstructorRole.textContent = state.currentInstructor.role === 'admin' ? 'المشرف العام' : 'معيد المادة';
+    }
+    if (el.adminScopeToggleContainer) {
+      if (state.currentInstructor.role === 'admin') {
+        el.adminScopeToggleContainer.style.display = 'flex';
+      } else {
+        el.adminScopeToggleContainer.style.display = 'none';
+      }
+    }
+    if (el.btnScopeMySections && el.btnScopeAllSections) {
+      el.btnScopeMySections.classList.toggle('active', state.adminViewScope === 'instructor');
+      el.btnScopeAllSections.classList.toggle('active', state.adminViewScope === 'all');
+    }
+  }
+
   function populateCourseDropdowns() {
-    const courseOptions = state.courses.map(c => `<option value="${c.id}">${c.name} (${c.nameAr})</option>`).join('');
-    el.studentCourseSelect.innerHTML = courseOptions;
-    el.adminCourseSelect.innerHTML = courseOptions;
-    el.reportCourseSelect.innerHTML = courseOptions;
-    el.cumCourseSelect.innerHTML = courseOptions;
+    const allCourseOptions = state.courses.map(c => `<option value="${c.id}">${c.name} (${c.nameAr})</option>`).join('');
+    el.studentCourseSelect.innerHTML = allCourseOptions;
+
+    const activeCourses = getActiveInstructorCourses();
+    const adminCourseOptions = activeCourses.map(c => `<option value="${c.id}">${c.name} (${c.nameAr})</option>`).join('');
+    el.adminCourseSelect.innerHTML = adminCourseOptions;
+    el.reportCourseSelect.innerHTML = adminCourseOptions;
+    el.cumCourseSelect.innerHTML = adminCourseOptions;
   }
 
   function updateStudentGroupOptions() {
     const courseId = el.studentCourseSelect.value;
     const course = getCourse(courseId);
     if (!course) return;
-    el.studentGroupSelect.innerHTML = course.groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    el.studentGroupSelect.innerHTML = course.groups.map(g => `<option value="${g.id}">${g.name} (${g.instructor || 'م. أحمد الخطيب'})</option>`).join('');
     el.studentSearchInput.value = '';
     el.studentSearchResultsDropdown.classList.add('hidden');
     el.studentRecordCard.classList.add('hidden');
@@ -892,18 +984,19 @@
 
   function updateAdminGroupOptions() {
     const courseId = el.adminCourseSelect.value;
-    const course = getCourse(courseId);
-    if (!course) return;
-    el.adminGroupSelect.innerHTML = course.groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    const groups = getActiveInstructorGroups(courseId);
+    el.adminGroupSelect.innerHTML = groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
     state.currentAdminSession.courseId = courseId;
     state.currentAdminSession.groupId = el.adminGroupSelect.value;
   }
 
   function updateBonusCourseGroupOptions() {
     let options = [];
-    state.courses.forEach(c => {
-      c.groups.forEach(g => {
-        options.push(`<option value="${c.id}:::${g.id}">${c.name} - ${g.name}</option>`);
+    const activeCourses = getActiveInstructorCourses();
+    activeCourses.forEach(c => {
+      const groups = getActiveInstructorGroups(c.id);
+      groups.forEach(g => {
+        options.push(`<option value="${c.id}:::${g.id}">${c.name} - ${g.name} (${g.instructor || ''})</option>`);
       });
     });
     el.bonusCourseGroupSelect.innerHTML = options.join('');
@@ -924,17 +1017,15 @@
 
   function updateReportsGroupOptions() {
     const courseId = el.reportCourseSelect.value;
-    const course = getCourse(courseId);
-    if (!course) return;
-    el.reportGroupSelect.innerHTML = course.groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    const groups = getActiveInstructorGroups(courseId);
+    el.reportGroupSelect.innerHTML = groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
     generateOfficialReportPreview();
   }
 
   function updateCumGroupOptions() {
     const courseId = el.cumCourseSelect.value;
-    const course = getCourse(courseId);
-    if (!course) return;
-    el.cumGroupSelect.innerHTML = course.groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    const groups = getActiveInstructorGroups(courseId);
+    el.cumGroupSelect.innerHTML = groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
     renderCumulativeMatrix();
   }
 
@@ -1100,7 +1191,7 @@
 
         <div class="student-instructor-stamp">
           <small class="text-muted">المشرف الأكاديمي:</small>
-          <div style="font-weight: 700; color: var(--accent-primary);">م. أحمد الخطيب</div>
+          <div style="font-weight: 700; color: var(--accent-primary);">${group.instructor || 'م. أحمد الخطيب'}</div>
         </div>
       </div>
 
@@ -1837,6 +1928,10 @@
     el.printCourseName.textContent = `${course.name} (${course.nameAr})`;
     el.printGroupName.textContent = group.name;
     el.printGeneratedTimestamp.textContent = new Date().toLocaleString('ar-EG');
+    const instructorName = group.instructor || 'م. أحمد الخطيب';
+    if (el.printInstructorName) el.printInstructorName.textContent = instructorName;
+    if (el.printSignInstructorName) el.printSignInstructorName.textContent = instructorName;
+    if (el.printFooterInstructorName) el.printFooterInstructorName.textContent = instructorName;
 
     let totalStudents = group.students.length;
     let presentCount = 0;
@@ -2537,6 +2632,9 @@
     el.adminDashboardView.classList.add('active');
     el.btnStudentView.classList.remove('active');
     el.btnAdminView.classList.add('active');
+    updateInstructorHeaderUI();
+    populateCourseDropdowns();
+    updateAdminGroupOptions();
     loadCurrentAdminAttendanceSession();
   }
 
@@ -3977,27 +4075,84 @@
       }
     });
 
-    // PIN Verification Modal
+    // PIN Verification Modal (Multi-Instructor Authentication)
     el.pinVerificationForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const enteredPin = el.adminPinInput.value.trim();
-      const isRootMatch = enteredPin.toLowerCase() === 'root';
-      
-      if (isRootMatch || enteredPin === state.config.pin) {
-        if (isRootMatch && state.config.pin !== 'root') {
-          state.config.pin = 'root';
-          saveConfig();
-        }
+      let matchedInst = null;
+
+      if (enteredPin.toLowerCase() === 'root' || enteredPin === (state.config.pin || 'root')) {
+        matchedInst = INSTRUCTORS['ahmed'];
+      } else if (enteredPin === '1234' || (state.config.engyPin && enteredPin === state.config.engyPin)) {
+        matchedInst = INSTRUCTORS['engy'];
+      } else if (enteredPin === '5678' || (state.config.nadaPin && enteredPin === state.config.nadaPin)) {
+        matchedInst = INSTRUCTORS['nada'];
+      }
+
+      if (matchedInst) {
+        state.currentInstructor = matchedInst;
         state.isAdminAuthenticated = true;
+        state.adminViewScope = 'instructor';
+        sessionStorage.setItem('ATTENDANCE_ACTIVE_INSTRUCTOR', matchedInst.id);
         closePinModal();
+        updateInstructorHeaderUI();
+        populateCourseDropdowns();
+        updateAdminGroupOptions();
         showAdminView();
-        showToast('مرحباً بك يا بشمهندس أحمد 👋 تم الدخول للوحة التحكم بنجاح', 'success');
+        showToast(`مرحباً ${matchedInst.name} 👋 تم تسجيل الدخول بنجاح`, 'success');
       } else {
         el.pinErrorMessage.classList.remove('hidden');
         el.adminPinInput.value = '';
         el.adminPinInput.focus();
       }
     });
+
+    // Instructor Quick Pill Selection in PIN Modal
+    document.querySelectorAll('.inst-card-select').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.inst-card-select').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const instId = card.getAttribute('data-inst');
+        const inst = INSTRUCTORS[instId];
+        if (inst) {
+          el.adminPinInput.placeholder = `أدخل كود الـ PIN الخاص بـ ${inst.name}...`;
+          el.adminPinInput.focus();
+        }
+      });
+    });
+
+    // Multi-Instructor Scope Toggles & Logout
+    if (el.btnScopeMySections) {
+      el.btnScopeMySections.addEventListener('click', () => {
+        state.adminViewScope = 'instructor';
+        updateInstructorHeaderUI();
+        populateCourseDropdowns();
+        updateAdminGroupOptions();
+        loadCurrentAdminAttendanceSession();
+        showToast('تم تفعيل عرض سكاشنك الخاصة فقط 🎯', 'info');
+      });
+    }
+
+    if (el.btnScopeAllSections) {
+      el.btnScopeAllSections.addEventListener('click', () => {
+        state.adminViewScope = 'all';
+        updateInstructorHeaderUI();
+        populateCourseDropdowns();
+        updateAdminGroupOptions();
+        loadCurrentAdminAttendanceSession();
+        showToast('تم تفعيل عرض جميع سكاشن ومواد القسم (المشرف العام) 🌐', 'info');
+      });
+    }
+
+    if (el.btnLogoutInstructor) {
+      el.btnLogoutInstructor.addEventListener('click', () => {
+        sessionStorage.removeItem('ATTENDANCE_ACTIVE_INSTRUCTOR');
+        state.isAdminAuthenticated = false;
+        state.currentInstructor = null;
+        showStudentView();
+        showToast('تم تسجيل الخروج بنجاح 👋', 'info');
+      });
+    }
 
     el.btnCancelPinModal.addEventListener('click', () => {
       closePinModal();
