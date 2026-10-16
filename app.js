@@ -2246,12 +2246,15 @@
               badgeClass = 'badge-indicator safe';
             }
 
+            const absentNotes = absentTimeline.map(t => t.notes).filter(Boolean).join(' | ');
+
             warnedStudents.push({
               student: s,
               group: tg,
               stats: stats,
               missedWeeksSummary: missedWeeksSummary || '-',
               missedWeeksList,
+              absentNotes,
               dangerLevel,
               levelText,
               badgeClass
@@ -2289,11 +2292,8 @@
           <div class="warning-report-banner no-print" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 16px; margin: 1rem 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
             <div style="display: flex; align-items: center; gap: 10px; color: #991b1b; font-size: 0.92rem;">
               <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.3rem;"></i>
-              <span>تم حصر <strong>${warnedStudents.length}</strong> طالباً منذرين بالغياب (تجاوزوا حد <strong>${threshold}</strong> سكشن فأكثر). يمكنك طباعة الكشف أو تصديره إلى Excel أو إرسال تنبيه واتساب مباشر.</span>
+              <span>تم حصر <strong>${warnedStudents.length}</strong> طالباً منذرين بالغياب (تجاوزوا حد <strong>${threshold}</strong> سكشن فأكثر). يمكنك مراجعة الكشف وطباعته أو تصديره إلى Excel.</span>
             </div>
-            <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.__openWhatsAppBatchWarnings()" title="فتح مركز رسائل التنبيه والواتساب">
-              <i class="fa-brands fa-whatsapp"></i> مركز إنذارات الواتساب
-            </button>
           </div>
 
           <table class="warning-report-table">
@@ -2309,8 +2309,7 @@
                 <th style="width: 65px; text-align: center;">الحضور</th>
                 <th style="width: 65px; text-align: center;">النسبة</th>
                 <th style="width: 95px; text-align: center;">الموقف الأكاديمي</th>
-                <th style="width: 85px; text-align: center;" class="no-print">إجراء</th>
-                <th style="min-width: 110px;" class="print-only">توقيع الطالب بالعلم / ملاحظات</th>
+                <th style="min-width: 140px; text-align: center;">ملاحظات</th>
               </tr>
             </thead>
             <tbody>
@@ -2318,9 +2317,6 @@
                 const s = w.student;
                 const st = w.stats;
                 const g = w.group;
-                const instTitle = g.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
-                const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${g.name}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع [${w.missedWeeksSummary}]، ونسبة حضوركم (${st.rate}%).\nيرجى مراجعة معيد المادة والالتزام بالسكاشن تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nمعيد المادة: ${instTitle}`;
-                const encodedMsg = encodeURIComponent(msgTemplate);
 
                 return `
                   <tr class="${w.dangerLevel === 'danger' ? 'row-danger' : 'row-warning'}">
@@ -2342,12 +2338,9 @@
                     <td style="text-align: center; font-weight: 600; color: #059669;">${st.attendedCount} / ${st.totalSessions}</td>
                     <td style="text-align: center; font-weight: 800; color: ${st.rate < 60 ? '#dc2626' : '#d97706'};">${st.rate}%</td>
                     <td style="text-align: center;"><span class="${w.badgeClass}">${w.levelText}</span></td>
-                    <td style="text-align: center;" class="no-print">
-                      <a href="https://wa.me/?text=${encodedMsg}" target="_blank" class="btn btn-sm btn-outline-success" title="إرسال تنبيه بالواتساب" style="padding: 2px 7px; font-size: 0.75rem;">
-                        <i class="fa-brands fa-whatsapp"></i> واتساب
-                      </a>
+                    <td style="font-size: 0.84rem; color: #334155; min-width: 140px;">
+                      ${w.absentNotes ? `<span style="font-weight: 600;">${w.absentNotes}</span>` : '<span class="text-muted">-</span>'}
                     </td>
-                    <td class="print-only signature-cell" style="border: 1px solid #cbd5e1; height: 26px;"></td>
                   </tr>
                 `;
               }).join('')}
@@ -2581,7 +2574,7 @@
 
       let csvContent = `\uFEFFكشف إنذارات الغياب الرسمي (${thresholdDesc}) - مقرر: ${course.name} (${course.nameAr}) - ${group.name} - معيد المادة: ${group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'م. أحمد الخطيب')}\n`;
       csvContent += `تاريخ الاستخراج: ${new Date().toLocaleDateString('ar-EG')} | حد الغياب: ${thresholdDesc}\n\n`;
-      csvContent += `م,كود الطالب,اسم الطالب,المجموعة / السكشن,البرنامج الأكاديمي,عدد مرات الغياب,الأسابيع المتغيب فيها,حضور,إجمالي الجلسات,نسبة الحضور %,الموقف الأكاديمي / حالة الإنذار\n`;
+      csvContent += `م,كود الطالب,اسم الطالب,المجموعة / السكشن,البرنامج الأكاديمي,عدد مرات الغياب,الأسابيع المتغيب فيها,حضور,إجمالي الجلسات,نسبة الحضور %,الموقف الأكاديمي / حالة الإنذار,ملاحظات\n`;
 
       const warnedStudents = [];
       targetGroups.forEach(tg => {
@@ -2590,12 +2583,14 @@
           if (stats.absent >= threshold) {
             const absentTimeline = stats.timeline.filter(t => t.status === 'absent');
             const missedWeeksSummary = absentTimeline.map(t => `أسبوع ${t.week}`).join(' ، ');
+            const absentNotes = absentTimeline.map(t => t.notes).filter(Boolean).join(' | ');
             const statusDesc = stats.absent >= 3 ? 'خطر حرمان' : stats.absent === 2 ? 'إنذار أول' : 'تنبيه غياب';
             warnedStudents.push({
               student: s,
               group: tg,
               stats: stats,
               missedWeeksSummary: missedWeeksSummary || '-',
+              notes: absentNotes,
               statusDesc
             });
           }
@@ -2611,7 +2606,7 @@
       warnedStudents.forEach((w, idx) => {
         const s = w.student;
         const st = w.stats;
-        csvContent += `${idx + 1},"${s.id}","${s.name}","${w.group.name}","${s.program || ''}",${st.absent},"${w.missedWeeksSummary}",${st.attendedCount},${st.totalSessions},"${st.rate}%","${w.statusDesc}"\n`;
+        csvContent += `${idx + 1},"${s.id}","${s.name}","${w.group.name}","${s.program || ''}",${st.absent},"${w.missedWeeksSummary}",${st.attendedCount},${st.totalSessions},"${st.rate}%","${w.statusDesc}","${w.notes || ''}"\n`;
       });
 
       const safeCourseName = course.id;
