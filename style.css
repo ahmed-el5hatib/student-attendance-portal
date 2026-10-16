@@ -1471,6 +1471,71 @@ body.theme-light .print-paper-wrapper {
 }
 
 
+/* --- Absence Warning Official Report Table --- */
+.warning-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  line-height: 1.4;
+  border: 1px solid #334155;
+  margin-top: 0.5rem;
+}
+
+.warning-report-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #64748b;
+  padding: 6px 8px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.warning-report-table td {
+  border: 1px solid #cbd5e1;
+  padding: 5px 8px;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.warning-report-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.warning-report-table tr.row-danger td {
+  background: #fef2f2;
+}
+
+.warning-report-table tr.row-danger:hover td {
+  background: #fee2e2;
+}
+
+.warning-report-table tr.row-warning td {
+  background: #fffbeb;
+}
+
+.warning-report-table tr.row-warning:hover td {
+  background: #fef3c7;
+}
+
+.missed-weeks-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.no-print {
+  display: block;
+}
+
+.print-only {
+  display: none !important;
+}
+
 .official-signatures {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -2779,6 +2844,38 @@ body.theme-light .print-paper-wrapper {
 
   .formal-mark.future {
     color: #64748b !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: table-cell !important;
+  }
+
+  .warning-report-table {
+    font-size: 10.5px !important;
+  }
+
+  .warning-report-table th {
+    background: #e2e8f0 !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .warning-report-table td,
+  .warning-report-table th {
+    border: 1px solid #000 !important;
+  }
+
+  .warning-report-table thead {
+    display: table-header-group !important;
+  }
+
+  .warning-report-table tr {
+    page-break-inside: avoid !important;
   }
 
   .official-signatures {

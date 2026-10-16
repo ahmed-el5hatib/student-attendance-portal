@@ -27,7 +27,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=5.3">
+  <link rel="stylesheet" href="style.css?v=5.4">
 </head>
 <body class="theme-dark">
   <!-- Top Navbar -->
@@ -515,9 +515,20 @@
               <label for="reportTypeSelect">نوع التقرير:</label>
               <select id="reportTypeSelect" class="form-control">
                 <option value="formal_12weeks" selected>كشف الحضور الرسمي الفصلي (12 أسبوعاً - معتمد للطباعة و PDF)</option>
+                <option value="absence_warning">⚠️ تقرير المنذرين ومتعددي الغياب (غياب سكشنين فأكثر / حرمان)</option>
                 <option value="weekly">تقرير الغياب الأسبوعي (كشف رسمي للغائبين فقط)</option>
                 <option value="attendance_sheet">كشف الحضور الكامل لأسبوع محدد</option>
                 <option value="bonus_report">تقرير درجات البونص التراكمي</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="reportThresholdGroup" style="display: none;">
+              <label for="reportThresholdSelect"><i class="fa-solid fa-triangle-exclamation text-warning"></i> حد الغياب الأدنى:</label>
+              <select id="reportThresholdSelect" class="form-control">
+                <option value="2" selected>⚠️ غياب سكشنين فأكثر (إنذار غياب رسمي - افتراضي)</option>
+                <option value="3">⛔ غياب 3 سكاشن فأكثر (خطر الحرمان النهائي من العملي)</option>
+                <option value="1">📌 غياب سكشن واحد فأكثر (أي غياب مسجل)</option>
+                <option value="4">🚫 غياب 4 سكاشن فأكثر (حرمان مؤكد)</option>
               </select>
             </div>
 

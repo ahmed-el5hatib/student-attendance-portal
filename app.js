@@ -359,6 +359,8 @@
     reportCourseSelect: document.getElementById('reportCourseSelect'),
     reportGroupSelect: document.getElementById('reportGroupSelect'),
     reportTypeSelect: document.getElementById('reportTypeSelect'),
+    reportThresholdGroup: document.getElementById('reportThresholdGroup'),
+    reportThresholdSelect: document.getElementById('reportThresholdSelect'),
     reportWeekGroup: document.getElementById('reportWeekGroup'),
     reportWeekSelect: document.getElementById('reportWeekSelect'),
     btnGenerateReportPreview: document.getElementById('btnGenerateReportPreview'),
@@ -1114,7 +1116,12 @@
   function updateReportsGroupOptions() {
     const courseId = el.reportCourseSelect.value;
     const groups = getActiveInstructorGroups(courseId);
-    el.reportGroupSelect.innerHTML = groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    let options = '';
+    if (groups.length > 1) {
+      options += `<option value="all_groups">كل المجموعات والسكاشن (كشف موحد)</option>`;
+    }
+    options += groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+    el.reportGroupSelect.innerHTML = options;
     generateOfficialReportPreview();
   }
 
@@ -2026,10 +2033,22 @@
     const groupId = el.reportGroupSelect.value;
     const reportType = el.reportTypeSelect.value;
     const week = el.reportWeekSelect.value;
+    const threshold = el.reportThresholdSelect ? parseInt(el.reportThresholdSelect.value, 10) || 2 : 2;
 
     const course = getCourse(courseId);
-    const group = getGroup(courseId, groupId);
-    if (!course || !group) return;
+    if (!course) return;
+
+    const isAllGroups = (groupId === 'all_groups');
+    const activeGroups = getActiveInstructorGroups(courseId);
+    const targetGroups = isAllGroups ? activeGroups : [getGroup(courseId, groupId)].filter(Boolean);
+    if (targetGroups.length === 0) return;
+
+    const group = isAllGroups ? {
+      id: 'all_groups',
+      name: `جميع المجموعات والسكاشن (${targetGroups.map(g => g.name).join(' ، ')})`,
+      instructor: state.currentInstructor ? state.currentInstructor.name : 'م. أحمد الخطيب',
+      students: targetGroups.flatMap(g => g.students)
+    } : targetGroups[0];
 
     const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
 
@@ -2037,23 +2056,27 @@
     const activeWeeks = [];
     const weekAttendanceCounts = {};
     weeks.forEach(w => {
-      const key = getSessionKey(courseId, groupId, w);
-      const sess = state.sessions[key];
-      if (sess && sess.records && Object.keys(sess.records).length > 0) {
-        activeWeeks.push(w);
-      }
+      let hasData = false;
+      targetGroups.forEach(tg => {
+        const key = getSessionKey(courseId, tg.id, w);
+        const sess = state.sessions[key];
+        if (sess && sess.records && Object.keys(sess.records).length > 0) {
+          hasData = true;
+        }
+      });
+      if (hasData) activeWeeks.push(w);
       weekAttendanceCounts[w] = 0;
     });
 
-    const sessionKey = getSessionKey(courseId, groupId, week);
+    const sessionKey = getSessionKey(courseId, isAllGroups ? targetGroups[0].id : groupId, week);
     const session = state.sessions[sessionKey];
     const sessionDate = session ? session.date : new Date().toLocaleDateString('ar-EG');
 
     // Populate Report Header Meta
     el.printCourseName.textContent = `${course.name} (${course.nameAr})`;
-    el.printGroupName.textContent = group.name;
+    el.printGroupName.textContent = isAllGroups ? `جميع المجموعات والسكاشن (${targetGroups.map(g => g.name).join(' ، ')})` : group.name;
     el.printGeneratedTimestamp.textContent = new Date().toLocaleString('ar-EG');
-    const instructorName = group.instructor || 'م. أحمد الخطيب';
+    const instructorName = group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'م. أحمد الخطيب');
     if (el.printInstructorName) el.printInstructorName.textContent = instructorName;
     const directInst = document.getElementById('printInstructorName');
     if (directInst) directInst.textContent = instructorName;
@@ -2184,6 +2207,154 @@
       el.printAbsentStudents.textContent = `${totalGroupAbsences} غياب`;
       el.printExcusedStudents.textContent = `${activeWeeks.length} / 12 أسبوع`;
       el.printAttendanceRate.textContent = `${overallGroupRate}%`;
+
+    } else if (reportType === 'absence_warning') {
+      const thresholdDesc = threshold === 1 ? '1 سكشن فأكثر (كافة المتغيبين)' :
+                            threshold === 2 ? '2 سكشن فأكثر (إنذار رسمي أول)' :
+                            threshold === 3 ? '3 سكاشن فأكثر (خطر الحرمان النهائي)' :
+                            `${threshold} سكاشن فأكثر`;
+
+      el.printReportMainTitle.textContent = `كشف إنذارات الغياب التراكمي (${thresholdDesc})`;
+      el.printWeekNumber.textContent = activeWeeks.length > 0 ? `الأسابيع المرصودة: (1 - ${Math.max(...activeWeeks)})` : 'الفصل الدراسي الأول';
+      el.printSessionDate.textContent = new Date().toLocaleDateString('ar-EG');
+
+      const warnedStudents = [];
+      let totalSurveyed = 0;
+      let totalAbsentCount = 0;
+
+      targetGroups.forEach(tg => {
+        tg.students.forEach(s => {
+          totalSurveyed++;
+          const stats = getStudentStats(courseId, tg.id, s.id);
+          if (stats.absent >= threshold) {
+            totalAbsentCount += stats.absent;
+            const absentTimeline = stats.timeline.filter(t => t.status === 'absent');
+            const missedWeeksSummary = absentTimeline.map(t => `أ${t.week}`).join(' ، ');
+            const missedWeeksList = absentTimeline.map(t => `الأسبوع ${t.week}${t.date ? ` (${t.date})` : ''}`);
+
+            let dangerLevel = 'warning';
+            let levelText = 'إنذار أول';
+            let badgeClass = 'badge-indicator warning';
+
+            if (stats.absent >= 3) {
+              dangerLevel = 'danger';
+              levelText = 'خطر حرمان';
+              badgeClass = 'badge-indicator danger';
+            } else if (stats.absent === 1) {
+              dangerLevel = 'info';
+              levelText = 'تنبيه غياب';
+              badgeClass = 'badge-indicator safe';
+            }
+
+            warnedStudents.push({
+              student: s,
+              group: tg,
+              stats: stats,
+              missedWeeksSummary: missedWeeksSummary || '-',
+              missedWeeksList,
+              dangerLevel,
+              levelText,
+              badgeClass
+            });
+          }
+        });
+      });
+
+      // Sort: highest absences first, then group, then name
+      warnedStudents.sort((a, b) => {
+        if (b.stats.absent !== a.stats.absent) return b.stats.absent - a.stats.absent;
+        if (a.group.id !== b.group.id) return a.group.id.localeCompare(b.group.id);
+        return a.student.name.localeCompare(b.student.name, 'ar');
+      });
+
+      const safeCount = totalSurveyed - warnedStudents.length;
+      const safeRate = totalSurveyed > 0 ? Math.round((safeCount / totalSurveyed) * 100) : 100;
+
+      el.printTotalStudents.textContent = totalSurveyed;
+      el.printPresentStudents.textContent = `${safeCount} طالب ملتزم`;
+      el.printAbsentStudents.textContent = `${warnedStudents.length} طالب منذر`;
+      el.printExcusedStudents.textContent = `الحد: ${threshold} فأكثر`;
+      el.printAttendanceRate.textContent = `${safeRate}% نسبة الالتزام`;
+
+      if (warnedStudents.length === 0) {
+        tableHtml = `
+          <div style="padding: 3.5rem 2rem; text-align: center; background: #f0fdf4; border: 2px dashed #86efac; border-radius: 8px; margin: 1.5rem 0;">
+            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #16a34a; margin-bottom: 0.75rem; display: block;"></i>
+            <h3 style="color: #15803d; font-weight: 800; margin-bottom: 0.5rem;">سجل ممتاز! لا يوجد أي طالب تجاوز حد الغياب (${thresholdDesc})</h3>
+            <p style="color: #166534; font-size: 0.95rem;">جميع طلاب ${el.printGroupName.textContent} ملتزمون بنسب الحضور المقررة ولم يسجل أي طالب غياب ${thresholdDesc}.</p>
+          </div>
+        `;
+      } else {
+        tableHtml = `
+          <div class="warning-report-banner no-print" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 16px; margin: 1rem 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px; color: #991b1b; font-size: 0.92rem;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.3rem;"></i>
+              <span>تم حصر <strong>${warnedStudents.length}</strong> طالباً منذرين بالغياب (تجاوزوا حد <strong>${threshold}</strong> سكشن فأكثر). يمكنك طباعة الكشف أو تصديره إلى Excel أو إرسال تنبيه واتساب مباشر.</span>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="window.__openWhatsAppBatchWarnings()" title="فتح مركز رسائل التنبيه والواتساب">
+              <i class="fa-brands fa-whatsapp"></i> مركز إنذارات الواتساب
+            </button>
+          </div>
+
+          <table class="warning-report-table">
+            <thead>
+              <tr>
+                <th style="width: 36px;">م</th>
+                <th style="width: 90px;">كود الطالب</th>
+                <th class="col-name" style="min-width: 175px;">اسم الطالب رباعي</th>
+                ${isAllGroups ? '<th style="width: 110px;">المجموعة / السكشن</th>' : ''}
+                <th style="width: 120px;">البرنامج الأكاديمي</th>
+                <th style="width: 90px; text-align: center;">عدد الغيابات</th>
+                <th style="min-width: 130px; text-align: center;">الأسابيع المتغيب فيها</th>
+                <th style="width: 65px; text-align: center;">الحضور</th>
+                <th style="width: 65px; text-align: center;">النسبة</th>
+                <th style="width: 95px; text-align: center;">الموقف الأكاديمي</th>
+                <th style="width: 85px; text-align: center;" class="no-print">إجراء</th>
+                <th style="min-width: 110px;" class="print-only">توقيع الطالب بالعلم / ملاحظات</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${warnedStudents.map((w, idx) => {
+                const s = w.student;
+                const st = w.stats;
+                const g = w.group;
+                const instTitle = g.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
+                const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${g.name}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع [${w.missedWeeksSummary}]، ونسبة حضوركم (${st.rate}%).\nيرجى مراجعة معيد المادة والالتزام بالسكاشن تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nمعيد المادة: ${instTitle}`;
+                const encodedMsg = encodeURIComponent(msgTemplate);
+
+                return `
+                  <tr class="${w.dangerLevel === 'danger' ? 'row-danger' : 'row-warning'}">
+                    <td style="text-align: center; font-weight: 800;">${idx + 1}</td>
+                    <td><span class="meta-pill id-pill">${s.id}</span></td>
+                    <td class="col-name"><strong>${s.name}</strong></td>
+                    ${isAllGroups ? `<td><span class="meta-pill">${g.name}</span></td>` : ''}
+                    <td><small>${s.program || '-'}</small></td>
+                    <td style="text-align: center;">
+                      <strong style="color: ${st.absent >= 3 ? '#dc2626' : '#d97706'}; font-size: 1.05rem;">
+                        ${st.absent} ${st.absent === 1 ? 'سكشن' : st.absent === 2 ? 'سكشنين' : 'سكاشن'}
+                      </strong>
+                    </td>
+                    <td style="text-align: center;">
+                      <span class="missed-weeks-pill" title="${w.missedWeeksList.join(' - ')}">
+                        ${w.missedWeeksSummary}
+                      </span>
+                    </td>
+                    <td style="text-align: center; font-weight: 600; color: #059669;">${st.attendedCount} / ${st.totalSessions}</td>
+                    <td style="text-align: center; font-weight: 800; color: ${st.rate < 60 ? '#dc2626' : '#d97706'};">${st.rate}%</td>
+                    <td style="text-align: center;"><span class="${w.badgeClass}">${w.levelText}</span></td>
+                    <td style="text-align: center;" class="no-print">
+                      <a href="https://wa.me/?text=${encodedMsg}" target="_blank" class="btn btn-sm btn-outline-success" title="إرسال تنبيه بالواتساب" style="padding: 2px 7px; font-size: 0.75rem;">
+                        <i class="fa-brands fa-whatsapp"></i> واتساب
+                      </a>
+                    </td>
+                    <td class="print-only signature-cell" style="border: 1px solid #cbd5e1; height: 26px;"></td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        `;
+      }
 
     } else if (reportType === 'weekly') {
       el.printReportMainTitle.textContent = `كشف غياب الطلاب الأسبوعي - الأسبوع ${week}`;
@@ -2373,18 +2544,82 @@
     const reportType = el.reportTypeSelect.value;
     const week = el.reportWeekSelect.value;
     const course = getCourse(courseId);
-    const group = getGroup(courseId, groupId);
-    if (!course || !group) return;
+    if (!course) return;
+
+    const isAllGroups = (groupId === 'all_groups');
+    const activeGroups = getActiveInstructorGroups(courseId);
+    const targetGroups = isAllGroups ? activeGroups : [getGroup(courseId, groupId)].filter(Boolean);
+    if (targetGroups.length === 0) return;
+
+    const group = isAllGroups ? {
+      id: 'all_groups',
+      name: `جميع المجموعات والسكاشن (${targetGroups.map(g => g.name).join(' ، ')})`,
+      instructor: state.currentInstructor ? state.currentInstructor.name : 'م. أحمد الخطيب',
+      students: targetGroups.flatMap(g => g.students)
+    } : targetGroups[0];
 
     const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
     const activeWeeks = [];
     weeks.forEach(w => {
-      const key = getSessionKey(courseId, groupId, w);
-      const sess = state.sessions[key];
-      if (sess && sess.records && Object.keys(sess.records).length > 0) {
-        activeWeeks.push(w);
-      }
+      let hasData = false;
+      targetGroups.forEach(tg => {
+        const key = getSessionKey(courseId, tg.id, w);
+        const sess = state.sessions[key];
+        if (sess && sess.records && Object.keys(sess.records).length > 0) {
+          hasData = true;
+        }
+      });
+      if (hasData) activeWeeks.push(w);
     });
+
+    if (reportType === 'absence_warning') {
+      const threshold = el.reportThresholdSelect ? parseInt(el.reportThresholdSelect.value, 10) || 2 : 2;
+      const thresholdDesc = threshold === 1 ? '1 سكشن فأكثر' :
+                            threshold === 2 ? '2 سكشن فأكثر (إنذار رسمي)' :
+                            threshold === 3 ? '3 سكاشن فأكثر (خطر الحرمان)' :
+                            `${threshold} سكشن فأكثر`;
+
+      let csvContent = `\uFEFFكشف إنذارات الغياب الرسمي (${thresholdDesc}) - مقرر: ${course.name} (${course.nameAr}) - ${group.name} - معيد المادة: ${group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'م. أحمد الخطيب')}\n`;
+      csvContent += `تاريخ الاستخراج: ${new Date().toLocaleDateString('ar-EG')} | حد الغياب: ${thresholdDesc}\n\n`;
+      csvContent += `م,كود الطالب,اسم الطالب,المجموعة / السكشن,البرنامج الأكاديمي,عدد مرات الغياب,الأسابيع المتغيب فيها,حضور,إجمالي الجلسات,نسبة الحضور %,الموقف الأكاديمي / حالة الإنذار\n`;
+
+      const warnedStudents = [];
+      targetGroups.forEach(tg => {
+        tg.students.forEach(s => {
+          const stats = getStudentStats(courseId, tg.id, s.id);
+          if (stats.absent >= threshold) {
+            const absentTimeline = stats.timeline.filter(t => t.status === 'absent');
+            const missedWeeksSummary = absentTimeline.map(t => `أسبوع ${t.week}`).join(' ، ');
+            const statusDesc = stats.absent >= 3 ? 'خطر حرمان' : stats.absent === 2 ? 'إنذار أول' : 'تنبيه غياب';
+            warnedStudents.push({
+              student: s,
+              group: tg,
+              stats: stats,
+              missedWeeksSummary: missedWeeksSummary || '-',
+              statusDesc
+            });
+          }
+        });
+      });
+
+      warnedStudents.sort((a, b) => {
+        if (b.stats.absent !== a.stats.absent) return b.stats.absent - a.stats.absent;
+        if (a.group.id !== b.group.id) return a.group.id.localeCompare(b.group.id);
+        return a.student.name.localeCompare(b.student.name, 'ar');
+      });
+
+      warnedStudents.forEach((w, idx) => {
+        const s = w.student;
+        const st = w.stats;
+        csvContent += `${idx + 1},"${s.id}","${s.name}","${w.group.name}","${s.program || ''}",${st.absent},"${w.missedWeeksSummary}",${st.attendedCount},${st.totalSessions},"${st.rate}%","${w.statusDesc}"\n`;
+      });
+
+      const safeCourseName = course.id;
+      const safeGroupName = groupId;
+      downloadBlob(csvContent, `Absence_Warning_${safeCourseName}_${safeGroupName}_min${threshold}.csv`, 'text/csv;charset=utf-8;');
+      showToast(`تم تصدير كشف إنذارات الغياب (${warnedStudents.length} طالباً) إلى Excel بنجاح! 📊`, 'success');
+      return;
+    }
 
     if (reportType === 'formal_12weeks') {
       let csvContent = `\uFEFFكشف الحضور الفصلي الرسمي (12 أسبوعاً) - مقرر: ${course.name} - السكشن: ${group.name} - معيد المادة: ${group.instructor || 'م. أحمد الخطيب'}\n`;
@@ -4060,9 +4295,16 @@
     const courseId = el.reportCourseSelect ? el.reportCourseSelect.value : state.currentAdminSession.courseId;
     const groupId = el.reportGroupSelect ? el.reportGroupSelect.value : state.currentAdminSession.groupId;
     const course = getCourse(courseId);
-    const group = getGroup(courseId, groupId);
-    if (!course || !group) {
-      showToast('يرجى اختيار المقرر والمجموعة أولاً', 'error');
+    if (!course) {
+      showToast('يرجى اختيار المقرر أولاً', 'error');
+      return;
+    }
+
+    const isAllGroups = (groupId === 'all_groups');
+    const activeGroups = getActiveInstructorGroups(courseId);
+    const targetGroups = isAllGroups ? activeGroups : [getGroup(courseId, groupId)].filter(Boolean);
+    if (targetGroups.length === 0) {
+      showToast('يرجى اختيار المجموعة أولاً', 'error');
       return;
     }
 
@@ -4070,17 +4312,20 @@
     let countFirst = 0;
     let countDanger = 0;
 
-    group.students.forEach(s => {
-      const stats = getStudentStats(courseId, groupId, s.id);
-      if (stats.absent >= 2) {
-        if (stats.absent === 2) countFirst++;
-        if (stats.absent >= 3) countDanger++;
-        warnedStudents.push({
-          student: s,
-          stats: stats,
-          dangerLevel: stats.absent >= 3 ? 'danger' : 'warning'
-        });
-      }
+    targetGroups.forEach(tg => {
+      tg.students.forEach(s => {
+        const stats = getStudentStats(courseId, tg.id, s.id);
+        if (stats.absent >= 2) {
+          if (stats.absent === 2) countFirst++;
+          if (stats.absent >= 3) countDanger++;
+          warnedStudents.push({
+            student: s,
+            group: tg,
+            stats: stats,
+            dangerLevel: stats.absent >= 3 ? 'danger' : 'warning'
+          });
+        }
+      });
     });
 
     warnedStudents.sort((a, b) => b.stats.absent - a.stats.absent);
@@ -4102,19 +4347,20 @@
         el.warningsTableBody.innerHTML = warnedStudents.map(w => {
           const s = w.student;
           const st = w.stats;
+          const grp = w.group;
           const statusBadge = w.dangerLevel === 'danger' 
             ? '<span class="status-chip rejected"><i class="fa-solid fa-ban"></i> خطر حرمان</span>'
             : '<span class="status-chip pending"><i class="fa-solid fa-triangle-exclamation"></i> إنذار أول</span>';
 
-          const instTitle = group.instructor || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
-          const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${group.name}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع، ونسبة حضوركم (${st.rate}%).\nيرجى الالتزام التام بالسكاشن القادمة تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nمعيد المادة: ${instTitle}`;
+          const instTitle = (grp && grp.instructor) || (state.currentInstructor ? state.currentInstructor.name : 'معيد المادة');
+          const msgTemplate = `تنبيه غياب رسمي - كلية الحاسبات والمعلومات\nالمقرر: ${course.name} | السكشن: ${grp ? grp.name : ''}\nالطالب/ـة: ${s.name} (كود: ${s.id})\nنحيطكم علماً بأن عدد مرات غيابكم قد بلغ (${st.absent}) أسابيع، ونسبة حضوركم (${st.rate}%).\nيرجى الالتزام التام بالسكاشن القادمة تجنباً للحرمان من الامتحان العملي وأعمال السنة.\nمعيد المادة: ${instTitle}`;
           const encodedMsg = encodeURIComponent(msgTemplate);
 
           return `
             <tr>
               <td><span class="meta-pill id-pill">${s.id}</span></td>
               <td><strong>${s.name}</strong></td>
-              <td><small class="meta-pill">${group.name}</small></td>
+              <td><small class="meta-pill">${grp ? grp.name : '-'}</small></td>
               <td style="text-align: center; color: var(--color-absent); font-weight: 800;">${st.absent} غيابات</td>
               <td style="text-align: center;">${st.rate}%</td>
               <td style="text-align: center;">${statusBadge}</td>
@@ -4144,6 +4390,7 @@
 
     if (el.whatsappWarningModal) el.whatsappWarningModal.classList.remove('hidden');
   }
+  window.__openWhatsAppBatchWarnings = openWarningsCenter;
 
   // --- 13. Event Listeners Setup ---
   function setupEventHandlers() {
@@ -4241,11 +4488,19 @@
       const val = el.reportTypeSelect.value;
       if (val === 'formal_12weeks' || val === 'bonus_report') {
         el.reportWeekGroup.style.display = 'none';
+        if (el.reportThresholdGroup) el.reportThresholdGroup.style.display = 'none';
+      } else if (val === 'absence_warning') {
+        el.reportWeekGroup.style.display = 'none';
+        if (el.reportThresholdGroup) el.reportThresholdGroup.style.display = '';
       } else {
         el.reportWeekGroup.style.display = '';
+        if (el.reportThresholdGroup) el.reportThresholdGroup.style.display = 'none';
       }
       generateOfficialReportPreview();
     });
+    if (el.reportThresholdSelect) {
+      el.reportThresholdSelect.addEventListener('change', () => generateOfficialReportPreview());
+    }
     el.reportWeekSelect.addEventListener('change', generateOfficialReportPreview);
     el.btnGenerateReportPreview.addEventListener('click', generateOfficialReportPreview);
     el.btnPrintReportPDF.addEventListener('click', printOfficialPDF);
